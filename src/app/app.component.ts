@@ -1,13 +1,22 @@
-import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { RouterLink, RouterOutlet } from '@angular/router';
+import { FooterComponent } from './footer/footer.component';
+import { HeaderComponent } from './header/header.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
+  encapsulation: ViewEncapsulation.Emulated,
+  imports: [
+    CommonModule,
+    RouterOutlet,
+    RouterLink,
+    HeaderComponent,
+    FooterComponent,
+  ],
 })
 export class AppComponent {
   title = 'artisan';

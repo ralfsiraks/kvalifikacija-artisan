@@ -1,1 +1,102 @@
-/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Crima";
+  src: url("./assets/fonts/Crima.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: Mont;
+  src: url("./assets/fonts/Montserrat-VariableFont_wght.ttf") format("truetype");
+}
+
+@layer base {
+  html,
+  body {
+    min-height: 100vh;
+    height: auto;
+    margin: 0;
+    font-family: "Mont";
+    @apply bg-[#F9FAFB] text-white min-h-screen scroll-smooth;
+    scrollbar-color: #52525b #f9fafb;
+  }
+  .main {
+    flex: 1;
+  }
+  a {
+    cursor: pointer;
+  }
+  .material-symbols-outlined {
+    cursor: pointer;
+    user-select: none;
+  }
+  h1 {
+    @apply text-5xl;
+  }
+  h2 {
+    @apply text-4xl;
+  }
+  h3 {
+    @apply text-2xl;
+  }
+  h4 {
+    @apply text-lg;
+  }
+  h5 {
+    @apply text-sm;
+  }
+  h6 {
+    @apply text-xs;
+  }
+  /* width */
+  ::-webkit-scrollbar {
+    @apply w-3.5;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    @apply bg-zinc-400;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-zinc-600 transition-colors duration-1000;
+  }
+}
+
+.white-text-shadow:hover {
+  text-shadow: -1px -1px 17px rgba(255, 255, 255, 0.51);
+}
+
+.black-text-shadow:hover {
+  text-shadow: -1px -1px 21px rgba(139, 139, 139, 0.41);
+}
+
+.hover-underline {
+  display: inline-block;
+  position: relative;
+}
+
+.hover-underline::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 3px;
+  bottom: 0;
+  left: 0;
+  transform-origin: bottom left;
+  transition: transform 0.4s ease-in-out;
+}
+
+.hover-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}

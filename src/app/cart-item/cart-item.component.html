@@ -1,0 +1,20 @@
+<div class="flex flex-col w-full border-b-4 border-black mb-6">
+  <div class="flex w-full justify-between items-center h-23vmin">
+    <div class="flex h-full gap-4">
+      <img
+        class="max-w-20vmin max-h-20vmin rounded-xl"
+        [src]="imageUrl"
+        alt=""
+      />
+      <div>
+        <h3 class="font-semibold">{{ artworkName }}</h3>
+        <h3>{{ size }}</h3>
+        <h3>{{ artistName }}</h3>
+      </div>
+    </div>
+    <div class="h-25vmin p-6 text-right">
+      <h3 class="font-semibold">{{ price }} €</h3>
+      <h4 class="underline cursor-pointer">Remove</h4>
+    </div>
+  </div>
+</div>
