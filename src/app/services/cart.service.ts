@@ -6,7 +6,7 @@ import { DiscountCode } from '../interfaces/discount-code';
   providedIn: 'root',
 })
 export class CartService {
-  readonly ROOT_URL = 'https://kvalifikacija-artisan.000webhostapp.com';
+  readonly ROOT_URL = 'https://kvalifikacija.frb.io';
   constructor(private http: HttpClient) {}
 
   checkCode(code: string): any {
