@@ -33,7 +33,10 @@
         [artistName]="'Artist name 3'"
         [price]="'XX,XX'"
       ></app-cart-item>
-      <div></div>
+      <div class="w-full flex justify-between">
+        <h3></h3>
+        <h3>XX,XX €</h3>
+      </div>
     </div>
     <div>
       <div
@@ -66,20 +69,23 @@
             trending_flat
           </span>
         </button>
-        <div
+        <form
+          (ngSubmit)="onSubmit()"
+          [formGroup]="discountCodeForm"
           class="border-4 border-black rounded-lg w-full h-5vmin flex justify-between items-center p-3"
         >
           <input
-            type="text"
+            formControlName="code"
             placeholder="Discount code"
             class="bg-transparent focus:outline-none w-full font-semibold"
           />
-          <span
+          <button
             class="material-symbols-outlined text-4xl group-hover:text-white hover:translate-x-2 transition-all duration-200 outline-4"
+            type="submit"
           >
             trending_flat
-          </span>
-        </div>
+          </button>
+        </form>
       </div>
     </div>
   </div>

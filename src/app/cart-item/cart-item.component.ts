@@ -13,4 +13,8 @@ export class CartItemComponent {
   @Input() size: string = ``;
   @Input() artistName: string = ``;
   @Input() price: string = ``;
+
+  onRemove(bagItem: HTMLElement): void {
+    bagItem.remove();
+  }
 }

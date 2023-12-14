@@ -1,4 +1,4 @@
-<div class="flex flex-col w-full border-b-4 border-black mb-6">
+<div #bagItem class="flex flex-col w-full border-b-4 border-black mb-6">
   <div class="flex w-full justify-between items-center h-23vmin">
     <div class="flex h-full gap-4">
       <img
@@ -14,7 +14,9 @@
     </div>
     <div class="h-25vmin p-6 text-right">
       <h3 class="font-semibold">{{ price }} €</h3>
-      <h4 class="underline cursor-pointer">Remove</h4>
+      <h4 class="underline cursor-pointer" (click)="onRemove(bagItem)">
+        Remove
+      </h4>
     </div>
   </div>
 </div>
