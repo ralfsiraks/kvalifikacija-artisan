@@ -15,8 +15,17 @@ module.exports = {
         15: "15",
         16: "16",
       },
+      fontSize: {
+        sm: "0.8rem",
+        base: "1rem",
+        xl: "1.25rem",
+        "2xl": "1.463rem",
+        "3xl": "1.953rem",
+        "4xl": "1.941rem",
+        "5xl": "3.052rem",
+      },
       spacing: {
-        sides: "26vmin",
+        sides: "10vmin",
         "cart-sides": "20vmin",
         "5vmin": "5vmin",
         "10vmin": "10vmin",
@@ -75,7 +84,7 @@ module.exports = {
         "100vmin": "100vmin",
       },
       boxShadow: {
-        xl: "0 0 25px -5px rgba(0, 0, 0, 0.3)",
+        xl: "0 0 25px 0 rgba(0, 0, 0, 0.3)",
       },
     },
   },

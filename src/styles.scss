@@ -12,16 +12,19 @@
   src: url("./assets/fonts/Montserrat-VariableFont_wght.ttf") format("truetype");
 }
 
-@layer base {
+@layer tailwind-base {
+  @tailwind base;
   html,
   body {
-    min-height: 100vh;
     height: auto;
     margin: 0;
     font-family: "Mont";
-    @apply bg-[#F9FAFB] text-white min-h-screen scroll-smooth;
-    scrollbar-color: #52525b #f9fafb;
+    @apply bg-white text-white min-h-screen scroll-smooth;
+    scrollbar-color: #52525b;
   }
+  /* ::selection {
+    background-color: rgb(211, 211, 211);
+  } */
   .main {
     flex: 1;
   }
@@ -50,25 +53,24 @@
   h6 {
     @apply text-xs;
   }
-  /* width */
   ::-webkit-scrollbar {
-    @apply w-3.5;
+    width: 15px;
   }
 
-  /* Track */
   ::-webkit-scrollbar-track {
     background: #f1f1f1;
   }
 
-  /* Handle */
   ::-webkit-scrollbar-thumb {
     @apply bg-zinc-400;
   }
-
-  /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-zinc-600 transition-colors duration-1000;
+    @apply bg-zinc-600 transition-colors;
   }
+}
+
+input {
+  outline: none;
 }
 
 .white-text-shadow:hover {
@@ -89,7 +91,7 @@
   position: absolute;
   width: 100%;
   transform: scaleX(0);
-  height: 3px;
+  height: 4px;
   bottom: 0;
   left: 0;
   transform-origin: bottom left;
@@ -99,4 +101,89 @@
 .hover-underline:hover::after {
   transform: scaleX(1);
   transform-origin: bottom left;
+}
+
+.container-transition {
+  transition: height 0.3s ease;
+}
+
+.bottom-shadow {
+  box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.45);
+}
+
+.fade-in {
+  animation: fadeIn 0.5s;
+}
+
+.scale-up {
+  animation: scaleUp 0.5s;
+}
+
+.fade-out {
+  animation: fadeOut 0.5s;
+}
+
+.toast-fade {
+  animation: toastFade 4s;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleUp {
+  0% {
+    scale: 0.95;
+  }
+  100% {
+    scale: 1;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes toastFade {
+  0% {
+    visibility: visible;
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+.static-underline {
+  display: inline-block;
+  position: relative;
+}
+
+.static-underline::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  transform: scaleX(1);
+  height: 7px;
+  bottom: 0;
+  left: 0;
+  transform-origin: bottom left;
+  animation: fadeIn 0.5s;
 }

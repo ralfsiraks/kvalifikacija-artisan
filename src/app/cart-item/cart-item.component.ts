@@ -14,7 +14,7 @@ export class CartItemComponent {
   @Input() artistName: string = ``;
   @Input() price: string = ``;
 
-  onRemove(bagItem: HTMLElement): void {
+  onItemRemove(bagItem: HTMLElement): void {
     bagItem.remove();
   }
 }
