@@ -24,8 +24,8 @@ export class LoginModalComponent implements OnInit {
 
   registerForm: FormGroup = new FormGroup({
     name: new FormControl('Deez', [Validators.required]),
-    surname: new FormControl('nuts', [Validators.required]),
-    email: new FormControl('randomasfuck@nuts.com', [
+    surname: new FormControl('Nuts', [Validators.required]),
+    email: new FormControl('random@email.com', [
       Validators.required,
       Validators.email,
     ]),
@@ -36,7 +36,7 @@ export class LoginModalComponent implements OnInit {
   });
 
   loginForm: FormGroup = new FormGroup({
-    email: new FormControl('randomasfuck@nuts.com', [
+    email: new FormControl('random@email.com', [
       Validators.required,
       Validators.email,
     ]),

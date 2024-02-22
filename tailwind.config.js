@@ -21,7 +21,7 @@ module.exports = {
         xl: "1.25rem",
         "2xl": "1.463rem",
         "3xl": "1.953rem",
-        "4xl": "1.941rem",
+        "4xl": "2.4rem",
         "5xl": "3.052rem",
       },
       spacing: {
@@ -50,6 +50,7 @@ module.exports = {
         "90vmin": "90vmin",
         "95vmin": "95vmin",
         "100vmin": "100vmin",
+        "1/10": "10%",
       },
       scale: {
         1005: "1.005",

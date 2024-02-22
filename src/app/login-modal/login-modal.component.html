@@ -55,13 +55,20 @@
     <form
       (ngSubmit)="onRegisterSubmit()"
       [formGroup]="registerForm"
-      class="w-full flex justify-center items-center flex-col text-2xl gap-4 fade-in"
+      class="w-full flex justify-center items-start flex-col text-2xl gap-4 fade-in"
     >
       <div
         name="input"
-        class="flex justify-start items-center gap-1 bg-zinc-300 p-3 rounded-xl w-full"
+        class="flex justify-start items-center gap-3 border-4 border-black p-2 rounded-xl w-full"
       >
-        <span class="material-symbols-outlined cursor-default"> person </span>
+        <div class="w-1/10 flex justify-center items-center">
+          <span
+            class="material-symbols-outlined cursor-default text-4xl icon-shadow"
+          >
+            person
+          </span>
+        </div>
+
         <input
           formControlName="name"
           type="text"
@@ -71,38 +78,57 @@
       </div>
       <div
         name="input"
-        class="flex justify-start items-center gap-1 bg-zinc-300 p-3 rounded-xl w-full"
+        class="flex justify-start items-center gap-3 border-4 border-black p-2 rounded-xl w-full"
       >
-        <span class="material-symbols-outlined cursor-default"> person </span>
+        <div class="w-1/10 flex justify-center items-center">
+          <span
+            class="material-symbols-outlined cursor-default text-4xl icon-shadow"
+          >
+            person
+          </span>
+        </div>
+
         <input
-          type="text"
           formControlName="surname"
+          type="text"
           placeholder="Surname"
           class="bg-transparent w-full"
         />
       </div>
       <div
         name="input"
-        class="flex justify-start items-center gap-1 bg-zinc-300 p-3 rounded-xl w-full"
+        class="flex justify-start items-center gap-3 border-4 border-black p-2 rounded-xl w-full"
       >
-        <span class="material-symbols-outlined cursor-default">
-          alternate_email
-        </span>
+        <div class="w-1/10 flex justify-center items-center">
+          <span
+            class="material-symbols-outlined cursor-default text-3xl icon-shadow"
+          >
+            alternate_email
+          </span>
+        </div>
+
         <input
-          type="email"
           formControlName="email"
+          type="text"
           placeholder="Email"
           class="bg-transparent w-full"
         />
       </div>
       <div
         name="input"
-        class="flex justify-start items-center gap-1 bg-zinc-300 p-3 rounded-xl w-full"
+        class="flex justify-start items-center gap-3 border-4 border-black p-2 rounded-xl w-full"
       >
-        <span class="material-symbols-outlined cursor-default"> lock </span>
+        <div class="w-1/10 flex justify-center items-center">
+          <span
+            class="material-symbols-outlined cursor-default text-3xl icon-shadow"
+          >
+            lock
+          </span>
+        </div>
+
         <input
-          type="password"
           formControlName="password"
+          type="text"
           placeholder="Password"
           class="bg-transparent w-full"
         />
@@ -125,26 +151,38 @@
     >
       <div
         name="input"
-        class="flex justify-start items-center gap-1 bg-zinc-300 p-3 rounded-xl w-full"
+        class="flex justify-start items-center gap-3 border-4 border-black p-2 rounded-xl w-full"
       >
-        <span class="material-symbols-outlined cursor-default">
-          alternate_email
-        </span>
+        <div class="w-1/10 flex justify-center items-center">
+          <span
+            class="material-symbols-outlined cursor-default text-4xl icon-shadow"
+          >
+            alternate_email
+          </span>
+        </div>
+
         <input
-          type="email"
           formControlName="email"
-          placeholder="E-mail"
+          type="text"
+          placeholder="Email"
           class="bg-transparent w-full"
         />
       </div>
       <div
         name="input"
-        class="flex justify-start items-center gap-1 bg-zinc-300 p-3 rounded-xl w-full"
+        class="flex justify-start items-center gap-3 border-4 border-black p-2 rounded-xl w-full"
       >
-        <span class="material-symbols-outlined cursor-default"> lock </span>
+        <div class="w-1/10 flex justify-center items-center">
+          <span
+            class="material-symbols-outlined cursor-default text-4xl icon-shadow"
+          >
+            lock
+          </span>
+        </div>
+
         <input
-          type="password"
           formControlName="password"
+          type="text"
           placeholder="Password"
           class="bg-transparent w-full"
         />

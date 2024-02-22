@@ -6,8 +6,8 @@ import { BehaviorSubject, tap } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
-  readonly ROOT_URL = 'https://artisan-backend.frb.io/api';
-  // readonly ROOT_URL = 'http://127.0.0.1:8000/api';
+  // readonly ROOT_URL = 'https://artisan-backend.frb.io/api';
+  readonly ROOT_URL = 'http://127.0.0.1:8000/api';
   private tokenSubject = new BehaviorSubject<string>(``);
   public token = this.tokenSubject.asObservable();
   headers: object = {
