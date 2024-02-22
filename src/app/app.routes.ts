@@ -6,7 +6,7 @@ import { LoginModalComponent } from './login-modal/login-modal.component';
 export const routes: Routes = [
   {
     path: '',
-    title: 'Artisan - digital art and design',
+    title: 'Artisan - Digital Art and Design',
     component: HomePageComponent,
   },
   { path: 'cart', title: 'My Cart', component: CartPageComponent },
