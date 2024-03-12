@@ -14,7 +14,7 @@ export class CartService {
   private cartSubject = new BehaviorSubject<[]>(null);
   public cart$ = this.cartSubject.asObservable();
   private cartCountSubject = new BehaviorSubject<number>(
-    JSON.parse(localStorage.getItem(`cart`)).length
+    JSON.parse(localStorage.getItem(`cart`))?.length
   );
   public cartCount$ = this.cartCountSubject.asObservable();
 

@@ -49,7 +49,7 @@ export class CartPageComponent implements OnInit {
       this.cart = JSON.parse(localStorage.getItem(`cart`));
     });
 
-    if (this.cart.length > 0) {
+    if (this.cart?.length > 0) {
       this.loading = true;
       this.cartService
         .getCart(this.cart)
@@ -82,7 +82,7 @@ export class CartPageComponent implements OnInit {
       .subscribe({
         next: (value: DiscountCode[]) => {
           form.controls[`code`].reset(``);
-          if (value.length > 0) {
+          if (value?.length > 0) {
             this.toastService.onShowAlert(
               `check_circle`,
               `${value[0].amount}% discount added!`,
