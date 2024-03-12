@@ -1,15 +1,15 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, tap } from 'rxjs';
-import { CartService } from './cart.service';
 import { User } from '../interfaces/user';
+import { CartService } from './cart.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  // readonly ROOT_URL = 'https://artisan-backend.frb.io/api';
-  readonly ROOT_URL = 'http://127.0.0.1:8000/api';
+  readonly ROOT_URL = 'https://artisan-backend.frb.io/api';
+  // readonly ROOT_URL = 'http://127.0.0.1:8000/api';
   private tokenSubject = new BehaviorSubject<object>(null);
   public token = this.tokenSubject.asObservable();
   headers = new HttpHeaders({

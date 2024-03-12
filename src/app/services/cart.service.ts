@@ -9,8 +9,8 @@ import { ToastService } from './toast.service';
   providedIn: 'root',
 })
 export class CartService {
-  // readonly ROOT_URL = 'https://artisan-backend.frb.io/api';
-  readonly ROOT_URL = 'http://127.0.0.1:8000/api';
+  readonly ROOT_URL = 'https://artisan-backend.frb.io/api';
+  // readonly ROOT_URL = 'http://127.0.0.1:8000/api';
   private cartSubject = new BehaviorSubject<[]>(null);
   public cart$ = this.cartSubject.asObservable();
   private cartCountSubject = new BehaviorSubject<number>(
