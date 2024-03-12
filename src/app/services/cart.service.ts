@@ -37,7 +37,10 @@ export class CartService {
   }
 
   addItem(id: number) {
-    const cart = JSON.parse(localStorage.getItem(`cart`));
+    let cart = JSON.parse(localStorage.getItem(`cart`));
+    if (cart === null) {
+      cart = [];
+    }
     const index = cart.indexOf(id);
     if (index === -1) {
       cart.push(id);
