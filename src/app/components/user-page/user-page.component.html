@@ -1,0 +1,146 @@
+<div class="text-gray-900 flex gap-8 w-full px-cart-sides fade-in">
+  <div class="flex flex-col gap-4 w-1/4">
+    <button
+      (click)="mode = 'profile'"
+      class="border-2 border-gray-900 rounded-lg p-0.5 w-full text-2xl font-semibold flex justify-center gap-4 items-center group hover:bg-gray-900 active:bg-gray-900 transition-colors duration-200"
+      [ngClass]="{ 'bg-gray-900': mode === 'profile' }"
+    >
+      <span
+        class="group-hover:text-white group-active:text-white transition-colors duration-200"
+        [ngClass]="{ 'text-white': mode === 'profile' }"
+        >My profile</span
+      >
+      <span
+        class="material-symbols-outlined text-3xl group-hover:text-white group-active:text-white transition-all duration-200"
+        [ngClass]="{ 'text-white': mode === 'profile' }"
+      >
+        account_circle
+      </span>
+    </button>
+    <button
+      (click)="mode = 'history'"
+      class="border-2 border-gray-900 rounded-lg p-0.5 w-full text-2xl font-semibold flex justify-center gap-4 items-center group hover:bg-gray-900 transition-colors duration-200"
+      [ngClass]="{ 'bg-gray-900': mode === 'history' }"
+    >
+      <span
+        class="group-hover:text-white transition-colors duration-200"
+        [ngClass]="{ 'text-white': mode === 'history' }"
+        >Purchase history</span
+      >
+      <span
+        class="material-symbols-outlined text-3xl group-hover:text-white transition-all duration-200"
+        [ngClass]="{ 'text-white': mode === 'history' }"
+      >
+        history
+      </span>
+    </button>
+  </div>
+
+  <div class="flex flex-col border-2 border-gray-900 rounded-lg w-full">
+    <div class="w-full px-8 py-4">
+      @if(mode === "profile") {
+      <h2 class="font-semibold fade-in">My profile</h2>
+      } @else {
+      <h2 class="font-semibold fade-in">Purchase history</h2>
+      }
+    </div>
+
+    <hr />
+    <div class="flex justify-around gap-8 p-8">
+      @if(mode === "profile") {
+      <div class="w-full fade-in">
+        <h3 class="font-medium mb-4">Profile information</h3>
+        <form
+          (ngSubmit)="onUserFormSubmit()"
+          [formGroup]="userForm"
+          class="w-full flex justify-center items-center flex-col text-2xl gap-4"
+        >
+          <div
+            name="input"
+            class="flex justify-start items-center gap-3 border-2 border-gray-900 p-2 rounded-xl w-full"
+          >
+            <div class="w-1/10 flex justify-center items-center">
+              <span
+                class="material-symbols-outlined cursor-default text-4xl icon-shadow"
+              >
+                person
+              </span>
+            </div>
+
+            <input
+              formControlName="name"
+              type="text"
+              placeholder="Name"
+              class="bg-transparent w-full"
+            />
+          </div>
+          <div
+            name="input"
+            class="flex justify-start items-center gap-3 border-2 border-gray-900 p-2 rounded-xl w-full"
+          >
+            <div class="w-1/10 flex justify-center items-center">
+              <span
+                class="material-symbols-outlined cursor-default text-4xl icon-shadow"
+              >
+                person
+              </span>
+            </div>
+
+            <input
+              formControlName="surname"
+              type="text"
+              placeholder="Surname"
+              class="bg-transparent w-full"
+            />
+          </div>
+          <div
+            name="input"
+            class="flex justify-start items-center gap-3 border-2 border-gray-900 p-2 rounded-xl w-full"
+          >
+            <div class="w-1/10 flex justify-center items-center">
+              <span
+                class="material-symbols-outlined cursor-default text-3xl icon-shadow"
+              >
+                alternate_email
+              </span>
+            </div>
+
+            <input
+              formControlName="email"
+              type="email"
+              placeholder="Email"
+              class="bg-transparent w-full"
+            />
+          </div>
+
+          <button
+            class="border-2 border-gray-900 rounded-lg p-0.5 w-full text-2xl font-semibold flex justify-center items-center group hover:bg-gray-900 transition-colors duration-200"
+          >
+            <span
+              class="group-hover:text-white transition-colors duration-200 select-none"
+              >Save changes</span
+            >
+          </button>
+        </form>
+      </div>
+      <div class="w-full flex flex-col gap-4 px-20 fade-in">
+        <h3 class="font-medium">Other options</h3>
+        <button
+          class="border-2 border-gray-900 rounded-lg p-0.5 w-full text-2xl font-semibold flex justify-center gap-4 items-center group hover:bg-gray-900 transition-colors duration-200"
+        >
+          <span class="group-hover:text-white transition-colors duration-200"
+            >Change password</span
+          >
+        </button>
+        <button
+          class="border-2 border-red-600 rounded-lg p-0.5 w-full text-red-600 text-2xl font-semibold flex justify-center gap-4 items-center group hover:bg-red-600 transition-colors duration-200"
+        >
+          <span class="group-hover:text-white transition-colors duration-200"
+            >Delete account</span
+          >
+        </button>
+      </div>
+      } @else { }
+    </div>
+  </div>
+</div>

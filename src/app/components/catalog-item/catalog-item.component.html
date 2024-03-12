@@ -1,0 +1,15 @@
+<div
+  class="flex flex-col cursor-pointer rounded-md shadow-md hover:shadow-lg duration-200"
+  [id]="id"
+  [routerLink]="['/product', id]"
+>
+  <div>
+    <img class="max-h-70vmin w-full object-contain" [src]="imageUrl" alt="" />
+  </div>
+  <div class="p-4">
+    <p class="text-lg font-bold truncate">{{ title }}</p>
+    <p>{{ category }}</p>
+    <p>{{ width }} x {{ height }} px</p>
+    <p class="text-lg font-bold">${{ price }}</p>
+  </div>
+</div>

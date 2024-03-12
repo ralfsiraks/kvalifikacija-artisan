@@ -1,15 +1,15 @@
-import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-import { FooterComponent } from './footer/footer.component';
-import { HeaderComponent } from './header/header.component';
-import { LoginModalComponent } from './login-modal/login-modal.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { HeaderComponent } from './components/header/header.component';
+import { LoginModalComponent } from './components/login-modal/login-modal.component';
+import { ToastComponent } from './components/toast/toast.component';
 import { AuthService } from './services/auth.service';
 import { CartService } from './services/cart.service';
+import { ProductService } from './services/product.service';
 import { ToastService } from './services/toast.service';
-import { ToastComponent } from './toast/toast.component';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +18,6 @@ import { ToastComponent } from './toast/toast.component';
   styleUrl: './app.component.scss',
   encapsulation: ViewEncapsulation.Emulated,
   imports: [
-    CommonModule,
     RouterOutlet,
     RouterLink,
     HeaderComponent,
@@ -27,7 +26,13 @@ import { ToastComponent } from './toast/toast.component';
     HttpClientModule,
     ToastComponent,
   ],
-  providers: [CookieService, CartService, AuthService, ToastService],
+  providers: [
+    CookieService,
+    CartService,
+    AuthService,
+    ToastService,
+    ProductService,
+  ],
 })
 export class AppComponent {
   title = 'artisan';

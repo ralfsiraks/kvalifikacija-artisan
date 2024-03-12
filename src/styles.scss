@@ -14,6 +14,9 @@
 
 @layer tailwind-base {
   @tailwind base;
+  * {
+    @apply box-border;
+  }
   html,
   body {
     height: auto;
@@ -62,10 +65,10 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-zinc-400;
+    @apply bg-gray-400;
   }
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-zinc-600 transition-colors;
+    @apply bg-gray-600 transition-colors;
   }
 }
 
@@ -189,5 +192,16 @@ input {
 }
 
 .icon-shadow {
-  text-shadow: 0 0 15px rgba(0, 0, 0, 0.35);
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+}
+
+hr {
+  border: 0; /* Remove default border */
+  height: 2px; /* Set the height of the line */
+  background-color: black;
+  opacity: 0.5; /* Set the color of the line */
+}
+
+hr:last-child {
+  height: 0;
 }

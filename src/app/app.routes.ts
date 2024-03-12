@@ -1,7 +1,11 @@
 import { Routes } from '@angular/router';
-import { CartPageComponent } from './cart-page/cart-page.component';
-import { HomePageComponent } from './home-page/home-page.component';
-import { LoginModalComponent } from './login-modal/login-modal.component';
+import { CartPageComponent } from './components/cart-page/cart-page.component';
+import { CatalogComponent } from './components/catalog/catalog.component';
+import { HelpPageComponent } from './components/help-page/help-page.component';
+import { HomePageComponent } from './components/home-page/home-page.component';
+import { LoginModalComponent } from './components/login-modal/login-modal.component';
+import { ProductPageComponent } from './components/product-page/product-page.component';
+import { UserPageComponent } from './components/user-page/user-page.component';
 
 export const routes: Routes = [
   {
@@ -14,6 +18,24 @@ export const routes: Routes = [
     path: 'auth/:method',
     component: LoginModalComponent,
     outlet: 'modals',
+  },
+  {
+    path: 'catalog/:category/:page',
+    title: 'Catalog',
+    component: CatalogComponent,
+  },
+  {
+    path: 'product/:id',
+    component: ProductPageComponent,
+  },
+  {
+    path: 'user',
+    component: UserPageComponent,
+  },
+  {
+    path: 'help',
+    title: 'Help',
+    component: HelpPageComponent,
   },
   { path: '**', redirectTo: '' },
 ];
