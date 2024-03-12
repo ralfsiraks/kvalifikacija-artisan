@@ -41,6 +41,7 @@ export class CartService {
     if (cart === null) {
       cart = [];
     }
+    // komentars
     const index = cart.indexOf(id);
     if (index === -1) {
       cart.push(id);
