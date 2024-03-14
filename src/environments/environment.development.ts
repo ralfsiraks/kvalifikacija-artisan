@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiUrl: 'https://artisan-backend.frb.io/api', // Production URL
+  apiUrl: 'http://localhost:8000/api', // Production URL
 };
