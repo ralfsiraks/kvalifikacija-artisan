@@ -4,13 +4,13 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { DiscountCode } from '../interfaces/discount-code';
 import { Product } from '../interfaces/product';
 import { ToastService } from './toast.service';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
-  readonly ROOT_URL = 'https://artisan-backend.frb.io/api';
-  // readonly ROOT_URL = 'http://127.0.0.1:8000/api';
+  readonly ROOT_URL = environment.apiUrl;
   private cartSubject = new BehaviorSubject<[]>(null);
   public cart$ = this.cartSubject.asObservable();
   private cartCountSubject = new BehaviorSubject<number>(

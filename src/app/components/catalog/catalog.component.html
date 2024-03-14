@@ -1,3 +1,19 @@
+<div class="w-full flex justify-end text-gray-900 px-cart-sides my-6">
+  <div>
+    <label>Sort By</label
+    ><select
+      #sort_by
+      class="outline-none px-2"
+      (change)="onSortChange(sort_by.value)"
+    >
+      <option value="new">Newset</option>
+      <option value="a-z">A-Z</option>
+      <option value="z-a">Z-A</option>
+      <option value="low-high">Price: Low to High</option>
+      <option value="high-low">Price: High to Low</option>
+    </select>
+  </div>
+</div>
 <div
   class="flex flex-row gap-6 justify-start items-start text-gray-900 w-full px-cart-sides fade-in"
 >

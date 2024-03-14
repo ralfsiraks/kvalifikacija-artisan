@@ -22,6 +22,8 @@ export class CatalogComponent implements OnInit {
   loading: boolean = true;
   pagination: number[] = [];
   lastPagePagination: boolean;
+  sortBy: string = `id`;
+  sortOrder: string = `desc`;
 
   constructor(
     private productService: ProductService,
@@ -40,9 +42,10 @@ export class CatalogComponent implements OnInit {
   }
 
   onGetCatalog() {
+    this.catalogItems = [[], [], [], []];
     this.loading = true;
     this.productService
-      .getCatalog(this.category, this.page)
+      .getCatalog(this.category, this.page, this.sortBy, this.sortOrder)
       .pipe(take(1))
       .subscribe({
         next: (value: Pagination) => {
@@ -61,14 +64,12 @@ export class CatalogComponent implements OnInit {
       if (this.page < this.lastPage) {
         this.page++;
         this.router.navigate([`/catalog/${this.category}`, this.page]);
-        this.catalogItems = [[], [], [], []];
         this.onGetCatalog();
       }
     } else if (changeTo === `previous`) {
       if (this.page > 1) {
         this.page--;
         this.router.navigate([`/catalog/${this.category}`, this.page]);
-        this.catalogItems = [[], [], [], []];
         this.onGetCatalog();
       }
     } else {
@@ -98,5 +99,27 @@ export class CatalogComponent implements OnInit {
     }
 
     console.log(this.pagination);
+  }
+
+  onSortChange(sort: string) {
+    if (sort === `new`) {
+      this.sortBy = `id`;
+      this.sortOrder = `desc`;
+    } else if (sort === `a-z`) {
+      this.sortBy = `title`;
+      this.sortOrder = `asc`;
+    } else if (sort === `z-a`) {
+      this.sortBy = `title`;
+      this.sortOrder = `desc`;
+    } else if (sort === `low-high`) {
+      this.sortBy = `price`;
+      this.sortOrder = `asc`;
+    } else if (sort === `high-low`) {
+      this.sortBy = `price`;
+      this.sortOrder = `desc`;
+    }
+
+    console.log(`${this.sortBy}, ${this.sortOrder}`);
+    this.onGetCatalog();
   }
 }

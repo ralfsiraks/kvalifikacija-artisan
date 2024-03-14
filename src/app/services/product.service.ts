@@ -2,18 +2,25 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Pagination } from '../interfaces/pagination';
 import { Product } from '../interfaces/product';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
-  readonly ROOT_URL = 'https://artisan-backend.frb.io/api';
-  // readonly ROOT_URL = 'http://127.0.0.1:8000/api';
+  readonly ROOT_URL = environment.apiUrl;
   constructor(private http: HttpClient) {}
 
-  getCatalog(category: string, page: number) {
+  getCatalog(
+    category: string,
+    page: number,
+    sortBy: string,
+    sortOrder: string
+  ) {
+    console.log(`${sortBy}, ${sortOrder}`);
     return this.http.get<Pagination>(
-      this.ROOT_URL + `/catalog/${category}?page=${page}`
+      this.ROOT_URL +
+        `/catalog/${category}?page=${page}&sort_by=${sortBy}&sort_order=${sortOrder}`
     );
   }
 
