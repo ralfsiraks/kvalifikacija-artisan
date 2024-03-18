@@ -49,11 +49,17 @@ export class CatalogComponent implements OnInit {
       .pipe(take(1))
       .subscribe({
         next: (value: Pagination) => {
-          value.data.forEach((item, i) => {
-            const columnIndex = i % 4;
-            this.catalogItems[columnIndex].push(item);
-          });
-          this.onConfigurePagination(value);
+          if (value.data.length > 0) {
+            value.data.forEach((item, i) => {
+              const columnIndex = i % 4;
+              this.catalogItems[columnIndex].push(item);
+            });
+            this.onConfigurePagination(value);
+            console.log(`happens`);
+          } else {
+            console.log(`no product found`);
+          }
+
           this.loading = false;
         },
       });
