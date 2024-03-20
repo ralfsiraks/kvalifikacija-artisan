@@ -7,8 +7,10 @@ import {
   Validators,
 } from '@angular/forms';
 import { take } from 'rxjs';
+import { OrderHistory } from '../../interfaces/order-history';
 import { User } from '../../interfaces/user';
 import { AuthService } from '../../services/auth.service';
+import { HistoryService } from '../../services/history.service';
 
 @Component({
   selector: 'app-user-page',
@@ -29,8 +31,13 @@ export class UserPageComponent implements OnInit {
     surname: new FormControl(``, [Validators.required]),
     email: new FormControl(``, [Validators.required, Validators.email]),
   });
+  orders: OrderHistory[];
+  orderPrices: number[] = [];
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private historyService: HistoryService
+  ) {}
 
   ngOnInit(): void {
     if (this.mode === `profile`) {
@@ -69,4 +76,30 @@ export class UserPageComponent implements OnInit {
   }
 
   onUserFormSubmit() {}
+
+  onOrderHistory() {
+    this.mode = `history`;
+    this.historyService
+      .getOrderHistory(localStorage.getItem(`token`))
+      .pipe(take(1))
+      .subscribe({
+        next: (data: any) => {
+          console.log(data);
+          this.orders = data;
+          this.getOrderPrices(data);
+        },
+        error: (error: any) => {},
+      });
+  }
+
+  getOrderPrices(orders: OrderHistory[]) {
+    orders.forEach((e) => {
+      let totalPrice: number = 0;
+      e.ordered_products.forEach((e) => {
+        totalPrice += e.price;
+      });
+      this.orderPrices.push(totalPrice);
+    });
+    console.log(this.orderPrices);
+  }
 }

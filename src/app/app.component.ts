@@ -8,6 +8,8 @@ import { LoginModalComponent } from './components/login-modal/login-modal.compon
 import { ToastComponent } from './components/toast/toast.component';
 import { AuthService } from './services/auth.service';
 import { CartService } from './services/cart.service';
+import { CheckoutService } from './services/checkout.service';
+import { HistoryService } from './services/history.service';
 import { ProductService } from './services/product.service';
 import { ToastService } from './services/toast.service';
 
@@ -32,6 +34,8 @@ import { ToastService } from './services/toast.service';
     AuthService,
     ToastService,
     ProductService,
+    CheckoutService,
+    HistoryService,
   ],
 })
 export class AppComponent {

@@ -23,8 +23,8 @@ export class LoginModalComponent implements OnInit {
   method: string = ``;
 
   registerForm: FormGroup = new FormGroup({
-    name: new FormControl('Deez', [Validators.required]),
-    surname: new FormControl('Nuts', [Validators.required]),
+    name: new FormControl('John', [Validators.required]),
+    surname: new FormControl('Doe', [Validators.required]),
     email: new FormControl('random@email.com', [
       Validators.required,
       Validators.email,

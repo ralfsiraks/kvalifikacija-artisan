@@ -11,6 +11,7 @@ import { take } from 'rxjs';
 import { DiscountCode } from '../../interfaces/discount-code';
 import { Product } from '../../interfaces/product';
 import { CartService } from '../../services/cart.service';
+import { CheckoutService } from '../../services/checkout.service';
 import { ToastService } from '../../services/toast.service';
 import { CartItemComponent } from '../cart-item/cart-item.component';
 
@@ -38,10 +39,12 @@ export class CartPageComponent implements OnInit {
   cart: number[] = JSON.parse(localStorage.getItem(`cart`));
   cartItems: Product[];
   loading: boolean = true;
+  discountId: number = null;
 
   constructor(
     private cartService: CartService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private checkoutService: CheckoutService
   ) {}
 
   ngOnInit(): void {
@@ -74,6 +77,7 @@ export class CartPageComponent implements OnInit {
     const form = this.discountCodeForm;
     if (form.get('code')?.value.trim() === ``) {
       this.toastService.onShowAlert(`error`, `Please enter a code!`, `#FF8333`);
+      this.discountId = null;
       return;
     }
     this.cartService
@@ -83,6 +87,7 @@ export class CartPageComponent implements OnInit {
         next: (value: DiscountCode[]) => {
           form.controls[`code`].reset(``);
           if (value?.length > 0) {
+            this.discountId = value[0].id;
             this.toastService.onShowAlert(
               `check_circle`,
               `${value[0].amount}% discount added!`,
@@ -97,6 +102,20 @@ export class CartPageComponent implements OnInit {
               `red`
             );
           }
+        },
+      });
+  }
+
+  onCheckout() {
+    this.checkoutService
+      .onCheckout(JSON.parse(localStorage.getItem(`cart`)), this.discountId)
+      .pipe(take(1))
+      .subscribe({
+        next: (value: DiscountCode[]) => {
+          console.log(value);
+        },
+        error: (error: any) => {
+          console.log(error);
         },
       });
   }

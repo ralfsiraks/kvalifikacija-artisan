@@ -61,12 +61,10 @@ export class AuthService {
   }
 
   getUser(token: string) {
-    // Create a new HttpHeaders object with the content type and authorization header
     const authHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     });
-
     return this.http.get<User>(`${this.ROOT_URL}/user`, {
       headers: authHeaders,
     });

@@ -18,7 +18,7 @@
       </span>
     </button>
     <button
-      (click)="mode = 'history'"
+      (click)="onOrderHistory()"
       class="border-2 border-gray-900 rounded-lg p-0.5 w-full text-2xl font-semibold flex justify-center gap-4 items-center group hover:bg-gray-900 transition-colors duration-200"
       [ngClass]="{ 'bg-gray-900': mode === 'history' }"
     >
@@ -46,8 +46,8 @@
     </div>
 
     <hr />
+    @if(mode === "profile") {
     <div class="flex justify-around gap-8 p-8">
-      @if(mode === "profile") {
       <div class="w-full fade-in">
         <h3 class="font-medium mb-4">Profile information</h3>
         <form
@@ -140,7 +140,32 @@
           >
         </button>
       </div>
-      } @else { }
     </div>
+    } @else {
+    <table class="table-auto w-full border-collapse">
+      <tr>
+        <th class="px-8 py-4 text-left">Order</th>
+        <th class="px-8 py-4 text-left">Date</th>
+        <th class="px-8 py-4 text-left">Price</th>
+        <th class="px-8 py-4 text-left">4</th>
+      </tr>
+
+      @for (item of orders; track $index) {
+      <tr>
+        <td class="px-8 py-4">{{ item.id }}</td>
+        <td class="px-8 py-4">{{ item.created_at }}</td>
+        <td class="px-8 py-4">{{ this.orderPrices[$index] }}€</td>
+        <td class="px-8 py-4">
+          <button
+            class="material-symbols-outlined text-4xl group-hover:text-white hover:translate-x-2 transition-all duration-200 outline-4"
+            type="submit"
+          >
+            trending_flat
+          </button>
+        </td>
+      </tr>
+      }
+    </table>
+    }
   </div>
 </div>
