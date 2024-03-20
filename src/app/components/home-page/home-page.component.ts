@@ -7,17 +7,10 @@ import { SaleBannerComponent } from '../sale-banner/sale-banner.component';
 import { ToastComponent } from '../toast/toast.component';
 
 @Component({
-  selector: 'app-home-page',
-  standalone: true,
-  imports: [
-    CommonModule,
-    CategoryCardComponent,
-    MainBannerComponent,
-    SaleBannerComponent,
-    ToastComponent,
-    RouterLink,
-  ],
-  templateUrl: './home-page.component.html',
-  styleUrl: './home-page.component.scss',
+	selector: 'app-home-page',
+	standalone: true,
+	imports: [CommonModule, CategoryCardComponent, MainBannerComponent, SaleBannerComponent, ToastComponent, RouterLink],
+	templateUrl: './home-page.component.html',
+	styleUrl: './home-page.component.scss',
 })
 export class HomePageComponent {}

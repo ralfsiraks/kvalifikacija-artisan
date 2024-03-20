@@ -2,19 +2,15 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root',
+	providedIn: 'root',
 })
 export class ToastService {
-  private toastSubject = new BehaviorSubject<[string, string, string]>([
-    ``,
-    ``,
-    ``,
-  ]);
-  public toast = this.toastSubject.asObservable();
+	private toastSubject = new BehaviorSubject<[string, string, string]>([``, ``, ``]);
+	public toast = this.toastSubject.asObservable();
 
-  constructor() {}
+	constructor() {}
 
-  onShowAlert(icon: string, message: string, color: string) {
-    this.toastSubject.next([icon, message, color]);
-  }
+	onShowAlert(icon: string, message: string, color: string): void {
+		this.toastSubject.next([icon, message, color]);
+	}
 }

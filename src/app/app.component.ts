@@ -14,30 +14,22 @@ import { ProductService } from './services/product.service';
 import { ToastService } from './services/toast.service';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
-  encapsulation: ViewEncapsulation.Emulated,
-  imports: [
-    RouterOutlet,
-    RouterLink,
-    HeaderComponent,
-    FooterComponent,
-    LoginModalComponent,
-    HttpClientModule,
-    ToastComponent,
-  ],
-  providers: [
-    CookieService,
-    CartService,
-    AuthService,
-    ToastService,
-    ProductService,
-    CheckoutService,
-    HistoryService,
-  ],
+	selector: 'app-root',
+	standalone: true,
+	templateUrl: './app.component.html',
+	styleUrl: './app.component.scss',
+	encapsulation: ViewEncapsulation.Emulated,
+	imports: [
+		RouterOutlet,
+		RouterLink,
+		HeaderComponent,
+		FooterComponent,
+		LoginModalComponent,
+		HttpClientModule,
+		ToastComponent,
+	],
+	providers: [CookieService, CartService, AuthService, ToastService, ProductService, CheckoutService, HistoryService],
 })
 export class AppComponent {
-  title = 'artisan';
+	title = 'artisan';
 }

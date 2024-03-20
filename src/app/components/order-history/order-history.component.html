@@ -1,0 +1,50 @@
+<table class="table-auto w-full border-collapse">
+	<tr class="border-b">
+		<th class="px-8 py-4 text-left">Order Nr.</th>
+		<th class="px-8 py-4 text-left">Date</th>
+		<th class="px-8 py-4 text-left">Price</th>
+		<th class="px-8 py-4 text-left">Status</th>
+		<th class="px-8 py-4 text-left"></th>
+	</tr>
+
+	@if (loading) {
+	<tr class="border-b animate-pulse">
+		<td class="px-8"><div class="bg-gray-400 rounded-lg w-1/2 h-5"></div></td>
+		<td class="px-8"><div class="bg-gray-400 rounded-lg w-1/2 h-5"></div></td>
+		<td class="px-8"><div class="bg-gray-400 rounded-lg w-1/2 h-5"></div></td>
+		<td class="px-8"><div class="bg-gray-400 rounded-lg w-1/2 h-5"></div></td>
+		<td class="px-8 py-4 text-left"></td>
+	</tr>
+	<tr class="animate-pulse">
+		<td class="px-8"><div class="bg-gray-400 rounded-lg w-1/2 h-5"></div></td>
+		<td class="px-8"><div class="bg-gray-400 rounded-lg w-1/2 h-5"></div></td>
+		<td class="px-8"><div class="bg-gray-400 rounded-lg w-1/2 h-5"></div></td>
+		<td class="px-8"><div class="bg-gray-400 rounded-lg w-1/2 h-5"></div></td>
+		<td class="px-8 py-4 text-left"></td>
+	</tr>
+	} @for (item of orders; track $index) {
+	<tr
+		class="border-b hover:bg-gray-900 group hover:text-white transition-all duration-200 cursor-pointer last:border-none"
+		id="item.id"
+	>
+		<td class="px-8 py-4">#{{ item.id }}</td>
+		<td class="px-8 py-4">{{ item.created_at | dateFormat }}</td>
+		<td class="px-8 py-4">{{ this.orderPrices[$index] }}€</td>
+		<td class="px-8 py-4">{{ item.status }}</td>
+		<td class="px-8 py-4">
+			<button
+				class="material-symbols-outlined text-4xl group-hover:translate-x-2 transition-all outline-4"
+				type="submit"
+			>
+				trending_flat
+			</button>
+		</td>
+	</tr>
+	}
+</table>
+@if (orders.length === 0 && !loading) {
+<div class="w-full flex flex-col items-center gap-4 my-3">
+	<span class="material-symbols-outlined text-7xl opacity-50 cursor-default"> folder_open </span>
+	<h2 class="opacity-50">You currently don't have any orders</h2>
+</div>
+}

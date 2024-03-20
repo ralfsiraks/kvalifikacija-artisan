@@ -1,204 +1,116 @@
-<div
-  class="flex fixed z-20 justify-center items-center w-screen h-screen fade-in"
-  #modalContainer
->
-  <div
-    class="fixed z-20 bg-gray-900 bg-opacity-60 w-screen h-screen"
-    (click)="onCloseModal(modalContainer)"
-  ></div>
-  <div
-    class="z-30 justify-center items-center flex-col bg-white w-1/3 scale-up text-gray-900 rounded-2xl p-10 transition-all duration-1000"
-  >
-    <div class="flex w-full flex-col mb-2">
-      <div class="w-full flex justify-end">
-        <span
-          class="material-symbols-outlined black-text-shadow duration-200 text-gray-900 text-5xl -mt-5 -mr-5"
-          (click)="onCloseModal(modalContainer)"
-        >
-          close
-        </span>
-      </div>
-      <div
-        class="flex w-full justify-between font-bold p-2 bg-gray-900 rounded-xl my-4"
-      >
-        <div
-          class="w-full flex justify-center rounded-lg cursor-pointer"
-          [ngClass]="{ 'bg-white': method === 'login' }"
-          (click)="onChangeMethod('login')"
-        >
-          <h2
-            [ngClass]="{
-              'text-gray-900': method === 'login',
-              'text-white': method !== 'login'
-            }"
-          >
-            {{ "login" | uppercase }}
-          </h2>
-        </div>
-        <div
-          class="w-full flex justify-center rounded-lg cursor-pointer"
-          [ngClass]="{ 'bg-white': method === 'register' }"
-          (click)="onChangeMethod('register')"
-        >
-          <h2
-            [ngClass]="{
-              'text-gray-900': method === 'register',
-              'text-white': method !== 'register'
-            }"
-          >
-            {{ "register" | uppercase }}
-          </h2>
-        </div>
-      </div>
-    </div>
-    @if (method === 'register') {
-    <form
-      (ngSubmit)="onRegisterSubmit()"
-      [formGroup]="registerForm"
-      class="w-full flex justify-center items-start flex-col text-2xl gap-4 fade-in"
-    >
-      <div
-        name="input"
-        class="flex justify-start items-center gap-3 border-2 border-gray-900 p-2 rounded-xl w-full"
-      >
-        <div class="w-1/10 flex justify-center items-center">
-          <span
-            class="material-symbols-outlined cursor-default text-4xl icon-shadow"
-          >
-            person
-          </span>
-        </div>
+<div class="flex fixed z-20 justify-center items-center w-screen h-screen fade-in" #modalContainer>
+	<div class="fixed z-20 bg-gray-900 bg-opacity-60 w-screen h-screen" (click)="onCloseModal(modalContainer)"></div>
+	<div
+		class="z-30 justify-center items-center flex-col bg-white w-1/3 scale-up text-gray-900 rounded-2xl p-10 transition-all duration-1000"
+	>
+		<div class="flex w-full flex-col mb-2">
+			<div class="w-full flex justify-end">
+				<span
+					class="material-symbols-outlined black-text-shadow duration-200 text-gray-900 text-5xl -mt-5 -mr-5"
+					(click)="onCloseModal(modalContainer)"
+				>
+					close
+				</span>
+			</div>
+			<div class="flex w-full justify-between font-bold p-2 bg-gray-900 rounded-xl my-4">
+				<div
+					class="w-full flex justify-center rounded-lg cursor-pointer"
+					[ngClass]="{ 'bg-white': method === 'login' }"
+					(click)="onChangeMethod('login')"
+				>
+					<h2
+						[ngClass]="{
+							'text-gray-900': method === 'login',
+							'text-white': method !== 'login'
+						}"
+					>
+						{{ "login" | uppercase }}
+					</h2>
+				</div>
+				<div
+					class="w-full flex justify-center rounded-lg cursor-pointer"
+					[ngClass]="{ 'bg-white': method === 'register' }"
+					(click)="onChangeMethod('register')"
+				>
+					<h2
+						[ngClass]="{
+							'text-gray-900': method === 'register',
+							'text-white': method !== 'register'
+						}"
+					>
+						{{ "register" | uppercase }}
+					</h2>
+				</div>
+			</div>
+		</div>
+		@if (method === 'register') {
+		<form
+			(ngSubmit)="onRegisterSubmit()"
+			[formGroup]="registerForm"
+			class="w-full flex justify-center items-start flex-col text-2xl gap-4 fade-in"
+		>
+			<div name="input" class="flex justify-start items-center gap-3 border-2 border-gray-900 p-2 rounded-xl w-full">
+				<div class="w-1/10 flex justify-center items-center">
+					<span class="material-symbols-outlined cursor-default text-4xl icon-shadow"> person </span>
+				</div>
 
-        <input
-          formControlName="name"
-          type="text"
-          placeholder="Name"
-          class="bg-transparent w-full"
-        />
-      </div>
-      <div
-        name="input"
-        class="flex justify-start items-center gap-3 border-2 border-gray-900 p-2 rounded-xl w-full"
-      >
-        <div class="w-1/10 flex justify-center items-center">
-          <span
-            class="material-symbols-outlined cursor-default text-4xl icon-shadow"
-          >
-            person
-          </span>
-        </div>
+				<input formControlName="name" type="text" placeholder="Name" class="bg-transparent w-full" />
+			</div>
+			<div name="input" class="flex justify-start items-center gap-3 border-2 border-gray-900 p-2 rounded-xl w-full">
+				<div class="w-1/10 flex justify-center items-center">
+					<span class="material-symbols-outlined cursor-default text-4xl icon-shadow"> person </span>
+				</div>
 
-        <input
-          formControlName="surname"
-          type="text"
-          placeholder="Surname"
-          class="bg-transparent w-full"
-        />
-      </div>
-      <div
-        name="input"
-        class="flex justify-start items-center gap-3 border-2 border-gray-900 p-2 rounded-xl w-full"
-      >
-        <div class="w-1/10 flex justify-center items-center">
-          <span
-            class="material-symbols-outlined cursor-default text-3xl icon-shadow"
-          >
-            alternate_email
-          </span>
-        </div>
+				<input formControlName="surname" type="text" placeholder="Surname" class="bg-transparent w-full" />
+			</div>
+			<div name="input" class="flex justify-start items-center gap-3 border-2 border-gray-900 p-2 rounded-xl w-full">
+				<div class="w-1/10 flex justify-center items-center">
+					<span class="material-symbols-outlined cursor-default text-3xl icon-shadow"> alternate_email </span>
+				</div>
 
-        <input
-          formControlName="email"
-          type="email"
-          placeholder="Email"
-          class="bg-transparent w-full"
-        />
-      </div>
-      <div
-        name="input"
-        class="flex justify-start items-center gap-3 border-2 border-gray-900 p-2 rounded-xl w-full"
-      >
-        <div class="w-1/10 flex justify-center items-center">
-          <span
-            class="material-symbols-outlined cursor-default text-3xl icon-shadow"
-          >
-            lock
-          </span>
-        </div>
+				<input formControlName="email" type="email" placeholder="Email" class="bg-transparent w-full" />
+			</div>
+			<div name="input" class="flex justify-start items-center gap-3 border-2 border-gray-900 p-2 rounded-xl w-full">
+				<div class="w-1/10 flex justify-center items-center">
+					<span class="material-symbols-outlined cursor-default text-3xl icon-shadow"> lock </span>
+				</div>
 
-        <input
-          formControlName="password"
-          type="password"
-          placeholder="Password"
-          class="bg-transparent w-full"
-        />
-      </div>
-      <button
-        class="border-2 border-gray-900 rounded-lg h-5vmin p-3 w-full text-slate-800 text-2xl font-bold flex justify-center items-center group hover:bg-gray-900 transition-colors duration-200"
-      >
-        <span
-          class="group-hover:text-white transition-colors duration-200 select-none"
-          >Register</span
-        >
-      </button>
-    </form>
+				<input formControlName="password" type="password" placeholder="Password" class="bg-transparent w-full" />
+			</div>
+			<button
+				class="border-2 border-gray-900 rounded-lg h-5vmin p-3 w-full text-slate-800 text-2xl font-bold flex justify-center items-center group hover:bg-gray-900 transition-colors duration-200"
+			>
+				<span class="group-hover:text-white transition-colors duration-200 select-none">Register</span>
+			</button>
+		</form>
 
-    } @else {
-    <form
-      (ngSubmit)="onLoginSubmit()"
-      [formGroup]="loginForm"
-      class="w-full flex justify-center items-center flex-col text-2xl gap-4 fade-in"
-    >
-      <div
-        name="input"
-        class="flex justify-start items-center gap-3 border-2 border-gray-900 p-2 rounded-xl w-full"
-      >
-        <div class="w-1/10 flex justify-center items-center">
-          <span
-            class="material-symbols-outlined cursor-default text-3xl icon-shadow"
-          >
-            alternate_email
-          </span>
-        </div>
+		} @else {
+		<form
+			(ngSubmit)="onLoginSubmit()"
+			[formGroup]="loginForm"
+			class="w-full flex justify-center items-center flex-col text-2xl gap-4 fade-in"
+		>
+			<div name="input" class="flex justify-start items-center gap-3 border-2 border-gray-900 p-2 rounded-xl w-full">
+				<div class="w-1/10 flex justify-center items-center">
+					<span class="material-symbols-outlined cursor-default text-3xl icon-shadow"> alternate_email </span>
+				</div>
 
-        <input
-          formControlName="email"
-          type="email"
-          placeholder="Email"
-          class="bg-transparent w-full"
-        />
-      </div>
-      <div
-        name="input"
-        class="flex justify-start items-center gap-3 border-2 border-gray-900 p-2 rounded-xl w-full"
-      >
-        <div class="w-1/10 flex justify-center items-center">
-          <span
-            class="material-symbols-outlined cursor-default text-3xl icon-shadow"
-          >
-            lock
-          </span>
-        </div>
+				<input formControlName="email" type="email" placeholder="Email" class="bg-transparent w-full" />
+			</div>
+			<div name="input" class="flex justify-start items-center gap-3 border-2 border-gray-900 p-2 rounded-xl w-full">
+				<div class="w-1/10 flex justify-center items-center">
+					<span class="material-symbols-outlined cursor-default text-3xl icon-shadow"> lock </span>
+				</div>
 
-        <input
-          formControlName="password"
-          type="password"
-          placeholder="Password"
-          class="bg-transparent w-full"
-        />
-      </div>
-      <button
-        class="border-2 border-gray-900 rounded-lg h-5vmin p-3 w-full text-2xl font-semibold flex justify-center items-center group hover:bg-gray-900 transition-colors duration-200"
-      >
-        <span
-          class="group-hover:text-white transition-colors duration-200 select-none"
-          >Log In</span
-        >
-      </button>
-      <h4 class="font-bold text-gray-900 cursor-pointer mb-0">
-        Forgot you password?
-      </h4>
-    </form>
-    }
-  </div>
+				<input formControlName="password" type="password" placeholder="Password" class="bg-transparent w-full" />
+			</div>
+			<button
+				class="border-2 border-gray-900 rounded-lg h-5vmin p-3 w-full text-2xl font-semibold flex justify-center items-center group hover:bg-gray-900 transition-colors duration-200"
+			>
+				<span class="group-hover:text-white transition-colors duration-200 select-none">Log In</span>
+			</button>
+			<h4 class="font-bold text-gray-900 cursor-pointer mb-0">Forgot you password?</h4>
+		</form>
+		}
+	</div>
 </div>

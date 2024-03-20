@@ -1,235 +1,212 @@
 <div class="w-full flex justify-end text-gray-900 px-cart-sides my-6">
-  <div class="text-lg font-semibold">
-    <label>Sort By</label
-    ><select
-      #sort_by
-      class="outline-none px-2"
-      (change)="onSortChange(sort_by.value)"
-    >
-      <option value="new">Newest</option>
-      <option value="a-z">A-Z</option>
-      <option value="z-a">Z-A</option>
-      <option value="low-high">Price: Low to High</option>
-      <option value="high-low">Price: High to Low</option>
-    </select>
-  </div>
+	<div class="text-lg font-semibold">
+		<label>Sort By</label
+		><select #sort_by class="outline-none px-2" (change)="onSortChange(sort_by.value)">
+			<option value="new">Newest</option>
+			<option value="a-z">A-Z</option>
+			<option value="z-a">Z-A</option>
+			<option value="low-high">Price: Low to High</option>
+			<option value="high-low">Price: High to Low</option>
+		</select>
+	</div>
 </div>
-<div
-  class="flex flex-row gap-6 justify-start items-start text-gray-900 w-full px-cart-sides fade-in"
->
-  <div class="border-2 border-gray-900 rounded-xl flex flex-col">
-    <h2>Filter</h2>
-    <div class="flex flex-col p-4">
-      <label for="price">Price range</label>
-      <input type="range" name="price" id="" />
-    </div>
-    <hr />
-    <div class="flex flex-col p-4">
-      <h2>Height</h2>
-      <div class="flex w-full justify-around gap-10">
-        <p class="border-2 border-gray-900 rounded-md aspect-square w-10 h-10">
-          S
-        </p>
-        <p class="border-2 border-gray-900 rounded-xl aspect-square">M</p>
-        <p class="border-2 border-gray-900 rounded-xl aspect-square">L</p>
-        <p class="border-2 border-gray-900 rounded-xl aspect-square">XL</p>
-      </div>
-    </div>
-    <hr />
-    <div class="flex flex-col p-4">
-      <h2>Width</h2>
-      <div class="flex w-full justify-around">
-        <p class="border-2 border-gray-900 rounded-xl aspect-square">S</p>
-        <p class="border-2 border-gray-900 rounded-xl aspect-square">M</p>
-        <p class="border-2 border-gray-900 rounded-xl aspect-square">L</p>
-        <p class="border-2 border-gray-900 rounded-xl aspect-square">XL</p>
-      </div>
-    </div>
-  </div>
-  <div class="flex flex-col items-center gap-10 w-full">
-    @if(loading) {
-    <div class="grid grid-cols-4 w-full gap-6 animate-pulse p-6">
-      @for (item of [1,1,1,1,1,1,1,8]; track $index) {
-      <div class="w-full">
-        <div class="flex flex-col gap-4 full">
-          <div class="bg-gray-400 w-full rounded-xl aspect-square"></div>
-          <div class="flex flex-col w-3/5 gap-4 h-full p-2">
-            <div class="bg-gray-400 w-full h-5 rounded-lg"></div>
-            <div class="bg-gray-400 w-2/3 h-5 rounded-lg"></div>
-            <div class="bg-gray-400 w-3/5 h-5 rounded-lg"></div>
-            <div class="bg-gray-400 w-1/2 h-5 rounded-lg"></div>
-          </div>
-        </div>
-      </div>
-      }
-    </div>
-    }
-    <div class="grid grid-cols-4 w-full gap-6">
-      <div class="flex flex-col gap-6">
-        @for (item of catalogItems[0]; track $index) {
-        <app-catalog-item
-          class="fade-in"
-          [id]="item.id"
-          [title]="item.title"
-          [height]="item.height"
-          [width]="item.width"
-          [price]="item.price"
-          [imageUrl]="item.image_url"
-          [category]="item.category_title"
-        >
-        </app-catalog-item>
-        }
-      </div>
-      <div class="flex flex-col gap-6">
-        @for (item of catalogItems[1]; track $index) {
-        <app-catalog-item
-          class="fade-in"
-          [id]="item.id"
-          [title]="item.title"
-          [height]="item.height"
-          [width]="item.width"
-          [price]="item.price"
-          [imageUrl]="item.image_url"
-          [category]="item.category_title"
-        >
-        </app-catalog-item>
-        }
-      </div>
-      <div class="flex flex-col gap-6">
-        @for (item of catalogItems[2]; track $index) {
-        <app-catalog-item
-          class="fade-in"
-          [id]="item.id"
-          [title]="item.title"
-          [height]="item.height"
-          [width]="item.width"
-          [price]="item.price"
-          [imageUrl]="item.image_url"
-          [category]="item.category_title"
-        >
-        </app-catalog-item>
-        }
-      </div>
-      <div class="flex flex-col gap-6">
-        @for (item of catalogItems[3]; track $index) {
-        <app-catalog-item
-          class="fade-in"
-          [id]="item.id"
-          [title]="item.title"
-          [height]="item.height"
-          [width]="item.width"
-          [price]="item.price"
-          [imageUrl]="item.image_url"
-          [category]="item.category_title"
-        >
-        </app-catalog-item>
-        }
-      </div>
-    </div>
-    @if (catalogItems[0].length > 0) {
-    <div class="flex items-center gap-4">
-      <button
-        [disabled]="page === 1"
-        (click)="onChangePage('previous')"
-        class="flex items-center gap-2 px-6 py-3 font-sans text-xs font-bold text-center text-gray-900 uppercase align-middle transition-all rounded-lg select-none hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-        type="button"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="2"
-          stroke="currentColor"
-          aria-hidden="true"
-          class="w-4 h-4"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
-          ></path>
-        </svg>
-      </button>
-      <div class="flex items-center gap-2 fade-in">
-        @if (page === lastPage && lastPage > 3 || page === lastPage - 1 &&
-        lastPage > 3) {
+<div class="flex flex-row gap-6 justify-start items-start text-gray-900 w-full px-cart-sides fade-in">
+	<div class="border-2 border-gray-900 rounded-xl flex flex-col">
+		<h2>Filter</h2>
+		<div class="flex flex-col p-4">
+			<label for="price">Price range</label>
+			<input type="range" name="price" id="" />
+		</div>
+		<hr />
+		<div class="flex flex-col p-4">
+			<h2>Height</h2>
+			<div class="flex w-full justify-around gap-10">
+				<p class="border-2 border-gray-900 rounded-md aspect-square w-10 h-10">S</p>
+				<p class="border-2 border-gray-900 rounded-xl aspect-square">M</p>
+				<p class="border-2 border-gray-900 rounded-xl aspect-square">L</p>
+				<p class="border-2 border-gray-900 rounded-xl aspect-square">XL</p>
+			</div>
+		</div>
+		<hr />
+		<div class="flex flex-col p-4">
+			<h2>Width</h2>
+			<div class="flex w-full justify-around">
+				<p class="border-2 border-gray-900 rounded-xl aspect-square">S</p>
+				<p class="border-2 border-gray-900 rounded-xl aspect-square">M</p>
+				<p class="border-2 border-gray-900 rounded-xl aspect-square">L</p>
+				<p class="border-2 border-gray-900 rounded-xl aspect-square">XL</p>
+			</div>
+		</div>
+	</div>
+	<div class="flex flex-col items-center gap-10 w-full">
+		@if(loading) {
+		<div class="grid grid-cols-4 w-full gap-6 animate-pulse p-6">
+			@for (item of [1,1,1,1,1,1,1,8]; track $index) {
+			<div class="w-full">
+				<div class="flex flex-col gap-4 full">
+					<div class="bg-gray-400 w-full rounded-xl aspect-square"></div>
+					<div class="flex flex-col w-3/5 gap-4 h-full p-2">
+						<div class="bg-gray-400 w-full h-5 rounded-lg"></div>
+						<div class="bg-gray-400 w-2/3 h-5 rounded-lg"></div>
+						<div class="bg-gray-400 w-3/5 h-5 rounded-lg"></div>
+						<div class="bg-gray-400 w-1/2 h-5 rounded-lg"></div>
+					</div>
+				</div>
+			</div>
+			}
+		</div>
+		}
+		<div class="grid grid-cols-4 w-full gap-6">
+			<div class="flex flex-col gap-6">
+				@for (item of catalogItems[0]; track $index) {
+				<app-catalog-item
+					class="fade-in"
+					[id]="item.id"
+					[title]="item.title"
+					[height]="item.height"
+					[width]="item.width"
+					[price]="item.price"
+					[imageUrl]="item.image_url"
+					[category]="item.category_title"
+				>
+				</app-catalog-item>
+				}
+			</div>
+			<div class="flex flex-col gap-6">
+				@for (item of catalogItems[1]; track $index) {
+				<app-catalog-item
+					class="fade-in"
+					[id]="item.id"
+					[title]="item.title"
+					[height]="item.height"
+					[width]="item.width"
+					[price]="item.price"
+					[imageUrl]="item.image_url"
+					[category]="item.category_title"
+				>
+				</app-catalog-item>
+				}
+			</div>
+			<div class="flex flex-col gap-6">
+				@for (item of catalogItems[2]; track $index) {
+				<app-catalog-item
+					class="fade-in"
+					[id]="item.id"
+					[title]="item.title"
+					[height]="item.height"
+					[width]="item.width"
+					[price]="item.price"
+					[imageUrl]="item.image_url"
+					[category]="item.category_title"
+				>
+				</app-catalog-item>
+				}
+			</div>
+			<div class="flex flex-col gap-6">
+				@for (item of catalogItems[3]; track $index) {
+				<app-catalog-item
+					class="fade-in"
+					[id]="item.id"
+					[title]="item.title"
+					[height]="item.height"
+					[width]="item.width"
+					[price]="item.price"
+					[imageUrl]="item.image_url"
+					[category]="item.category_title"
+				>
+				</app-catalog-item>
+				}
+			</div>
+		</div>
+		@if (catalogItems[0].length > 0) {
+		<div class="flex items-center gap-4">
+			<button
+				[disabled]="page === 1"
+				(click)="onChangePage('previous')"
+				class="flex items-center gap-2 px-6 py-3 font-sans text-xs font-bold text-center text-gray-900 uppercase align-middle transition-all rounded-lg select-none hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+				type="button"
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke-width="2"
+					stroke="currentColor"
+					aria-hidden="true"
+					class="w-4 h-4"
+				>
+					<path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"></path>
+				</svg>
+			</button>
+			<div class="flex items-center gap-2 fade-in">
+				@if (page === lastPage && lastPage > 3 || page === lastPage - 1 && lastPage > 3) {
 
-        <button
-          (click)="onChangePage(1)"
-          class="relative h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-lg text-center align-middle font-sans text-xs font-medium uppercase text-gray-900 transition-all hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-          type="button"
-        >
-          <span
-            class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-          >
-            {{ 1 }}
-          </span>
-        </button>
-        <h3>...</h3>
-        } @for (item of pagination; track $index) {
-        <button
-          (click)="onChangePage(item)"
-          class="relative h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-lg text-center align-middle font-sans text-xs font-medium uppercase disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-          [ngClass]="
-            item === page
-              ? 'bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none'
-              : 'text-gray-900  hover:bg-gray-900/10 active:bg-gray-900/20'
-          "
-          type="button"
-        >
-          <span
-            class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-          >
-            {{ item }}
-          </span>
-        </button>
-        } @if (lastPage > 3 && lastPage > page + 1) {
-        <h3>...</h3>
-        <button
-          (click)="onChangePage(lastPage)"
-          class="relative h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-lg text-center align-middle font-sans text-xs font-medium uppercase text-gray-900 transition-all hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-          type="button"
-        >
-          <span
-            class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-          >
-            {{ lastPage }}
-          </span>
-        </button>
-        }
-      </div>
-      <button
-        [disabled]="page === lastPage"
-        (click)="onChangePage('next')"
-        class="flex items-center gap-2 px-6 py-3 font-sans text-xs font-bold text-center text-gray-900 uppercase align-middle transition-all rounded-lg select-none hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-        type="button"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="2"
-          stroke="currentColor"
-          aria-hidden="true"
-          class="w-4 h-4"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
-          ></path>
-        </svg>
-      </button>
-    </div>
-    } @if (catalogItems[0].length < 1 && !loading) {
-    <div class="flex flex-col items-center">
-      <span
-        class="material-symbols-outlined text-5xl group-hover:text-white group-hover:translate-x-2 transition-all duration-200"
-      >
-        sentiment_dissatisfied
-      </span>
-      <h2 class="font-medium">No products found!</h2>
-    </div>
-    }
-  </div>
+				<button
+					(click)="onChangePage(1)"
+					class="relative h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-lg text-center align-middle font-sans text-xs font-medium uppercase text-gray-900 transition-all hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+					type="button"
+				>
+					<span class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+						{{ 1 }}
+					</span>
+				</button>
+				<h3>...</h3>
+				} @for (item of pagination; track $index) {
+				<button
+					(click)="onChangePage(item)"
+					class="relative h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-lg text-center align-middle font-sans text-xs font-medium uppercase disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+					[ngClass]="
+						item === page
+							? 'bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none'
+							: 'text-gray-900  hover:bg-gray-900/10 active:bg-gray-900/20'
+					"
+					type="button"
+				>
+					<span class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+						{{ item }}
+					</span>
+				</button>
+				} @if (lastPage > 3 && lastPage > page + 1) {
+				<h3>...</h3>
+				<button
+					(click)="onChangePage(lastPage)"
+					class="relative h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-lg text-center align-middle font-sans text-xs font-medium uppercase text-gray-900 transition-all hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+					type="button"
+				>
+					<span class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+						{{ lastPage }}
+					</span>
+				</button>
+				}
+			</div>
+			<button
+				[disabled]="page === lastPage"
+				(click)="onChangePage('next')"
+				class="flex items-center gap-2 px-6 py-3 font-sans text-xs font-bold text-center text-gray-900 uppercase align-middle transition-all rounded-lg select-none hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+				type="button"
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke-width="2"
+					stroke="currentColor"
+					aria-hidden="true"
+					class="w-4 h-4"
+				>
+					<path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path>
+				</svg>
+			</button>
+		</div>
+		} @if (catalogItems[0].length < 1 && !loading) {
+		<div class="flex flex-col items-center">
+			<span
+				class="material-symbols-outlined text-5xl group-hover:text-white group-hover:translate-x-2 transition-all duration-200"
+			>
+				sentiment_dissatisfied
+			</span>
+			<h2 class="font-medium">No products found!</h2>
+		</div>
+		}
+	</div>
 </div>
