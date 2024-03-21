@@ -4,20 +4,7 @@
 	<div class="flex flex-row justify-start w-full gap-6 m-3">
 		<div class="border-2 border-gray-900 w-4/6 rounded-xl test flex-col justify-center h-min">
 			@if(loading) { @for (item of cart; track $index) {
-			<div class="flex justify-between w-full gap-4 animate-pulse p-6">
-				<div class="flex gap-4 w-3/5">
-					<div class="bg-gray-400 w-2/5 rounded-xl aspect-square"></div>
-					<div class="flex flex-col w-3/5 gap-4 h-full p-2">
-						<div class="bg-gray-400 w-full h-5 rounded-lg"></div>
-						<div class="bg-gray-400 w-2/3 h-5 rounded-lg"></div>
-						<div class="bg-gray-400 w-1/2 h-5 rounded-lg"></div>
-					</div>
-				</div>
-				<div class="flex flex-col w-1/10 gap-4">
-					<div class="bg-gray-400 w-full h-5 rounded-lg"></div>
-					<div class="bg-gray-400 w-full h-5 rounded-lg"></div>
-				</div>
-			</div>
+			<app-cart-skeleton></app-cart-skeleton>
 			} } @for (item of cartItems; track $index) {
 			<app-cart-item
 				[id]="item.id"

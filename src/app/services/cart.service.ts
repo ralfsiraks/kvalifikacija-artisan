@@ -72,4 +72,9 @@ export class CartService {
 			this.cartCountSubject.next(currentCount - 1);
 		}
 	}
+
+	cartReset() {
+		localStorage.setItem(`cart`, `[]`);
+		this.cartCountSubject.next(0);
+	}
 }

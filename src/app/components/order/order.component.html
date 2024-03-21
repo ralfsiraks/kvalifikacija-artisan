@@ -32,7 +32,9 @@
 			<h3 class="font-bold">Total: ${{ finalPrice | number : "1.2-2" }}</h3>
 		</div>
 	</div>
-	} @else if (loading) { loading } @else {
+	} @else if (loading) {
+	<app-order-skeleton></app-order-skeleton>
+	} @else {
 	<div class="w-full flex flex-col items-center gap-4 my-3">
 		<span class="material-symbols-outlined text-7xl opacity-50 cursor-default"> sentiment_dissatisfied </span>
 		<h2 class="opacity-50">Order not found</h2>

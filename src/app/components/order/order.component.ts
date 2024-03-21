@@ -5,11 +5,12 @@ import { take } from 'rxjs';
 import { Order } from '../../interfaces/order';
 import { DateFormatPipe } from '../../pipes/date-format.pipe';
 import { HistoryService } from '../../services/history.service';
+import { OrderSkeletonComponent } from '../skeletons/order-skeleton/order-skeleton.component';
 
 @Component({
 	selector: 'app-order',
 	standalone: true,
-	imports: [CommonModule, RouterLink, DateFormatPipe],
+	imports: [CommonModule, RouterLink, DateFormatPipe, OrderSkeletonComponent],
 	templateUrl: './order.component.html',
 	styleUrl: './order.component.scss',
 })

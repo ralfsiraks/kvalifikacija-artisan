@@ -6,11 +6,12 @@ import { Pagination } from '../../interfaces/pagination';
 import { Product } from '../../interfaces/product';
 import { ProductService } from '../../services/product.service';
 import { CatalogItemComponent } from '../catalog-item/catalog-item.component';
+import { CatalogSkeletonComponent } from '../skeletons/catalog-skeleton/catalog-skeleton.component';
 
 @Component({
 	selector: 'app-catalog',
 	standalone: true,
-	imports: [CatalogItemComponent, RouterLink, CommonModule],
+	imports: [CatalogItemComponent, RouterLink, CommonModule, CatalogSkeletonComponent],
 	templateUrl: './catalog.component.html',
 	styleUrl: './catalog.component.scss',
 })

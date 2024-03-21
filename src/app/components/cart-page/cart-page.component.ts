@@ -9,11 +9,12 @@ import { CartService } from '../../services/cart.service';
 import { CheckoutService } from '../../services/checkout.service';
 import { ToastService } from '../../services/toast.service';
 import { CartItemComponent } from '../cart-item/cart-item.component';
+import { CartSkeletonComponent } from '../skeletons/cart-skeleton/cart-skeleton.component';
 
 @Component({
 	selector: 'app-cart-page',
 	standalone: true,
-	imports: [CartItemComponent, CommonModule, ReactiveFormsModule, HttpClientModule],
+	imports: [CartItemComponent, CommonModule, ReactiveFormsModule, HttpClientModule, CartSkeletonComponent],
 	templateUrl: './cart-page.component.html',
 	styleUrl: './cart-page.component.scss',
 })
@@ -78,7 +79,7 @@ export class CartPageComponent implements OnInit {
 			.pipe(take(1))
 			.subscribe({
 				next: (value: {}) => {
-					localStorage.setItem(`cart`, `[]`);
+					this.cartService.cartReset();
 					this.cart = [];
 					this.toastService.onShowAlert(`shopping_cart_checkout`, `Checkout successful!`, `#74b816`);
 				},
