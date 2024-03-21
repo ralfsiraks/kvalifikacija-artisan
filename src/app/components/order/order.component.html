@@ -19,12 +19,12 @@
 	<hr class="" />
 	}
 	<div class="flex flex-col items-end p-6 font-medium">
-		<h3>Artwork: ${{ artworkPrice }}</h3>
+		<h3>Artwork: ${{ artworkPrice | number : "1.2-2" }}</h3>
 		<h3>Processing fee: $1.45</h3>
 		@if (discount) {
 		<h3>Discount code: -{{ discount }}%</h3>
 		}
-		<h3 class="font-bold">Total: ${{ finalPrice }}</h3>
+		<h3 class="font-bold">Total: ${{ finalPrice | number : "1.2-2" }}</h3>
 	</div>
 	}
 </div>
