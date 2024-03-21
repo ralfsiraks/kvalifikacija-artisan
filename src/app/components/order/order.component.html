@@ -1,0 +1,30 @@
+<div class="flex flex-col w-full">
+	@if (order) { @for (item of order.ordered_products; track $index) {
+	<div
+		[routerLink]="['/product', item.product_id]"
+		class="flex justify-between items-center w-full gap-4 p-6 cursor-pointer hover:bg-gray-900 hover:text-white transition-all duration-200"
+	>
+		<div class="flex gap-4">
+			<img class="max-w-20vmin max-h-15vmin rounded-lg" [src]="item.product.image_url" alt="" />
+			<div class="flex flex-col h-full">
+				<h3 class="font-medium">{{ item.product.title }}</h3>
+				<h4>{{ item.product.artist }}</h4>
+				<h4 class="opacity-90">Product #{{ item.product.id }}</h4>
+			</div>
+		</div>
+		<div class="h-full">
+			<h3 class="font-medium">${{ item.price | number : "1.2-2" }}</h3>
+		</div>
+	</div>
+	<hr class="" />
+	}
+	<div class="flex flex-col items-end p-6 font-medium">
+		<h3>Artwork: ${{ artworkPrice }}</h3>
+		<h3>Processing fee: $1.45</h3>
+		@if (discount) {
+		<h3>Discount code: -{{ discount }}%</h3>
+		}
+		<h3 class="font-bold">Total: ${{ finalPrice }}</h3>
+	</div>
+	}
+</div>

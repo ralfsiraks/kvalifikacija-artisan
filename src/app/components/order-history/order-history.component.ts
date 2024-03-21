@@ -1,4 +1,6 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { take } from 'rxjs';
 import { OrderHistory } from '../../interfaces/order-history';
 import { DateFormatPipe } from '../../pipes/date-format.pipe';
@@ -7,7 +9,7 @@ import { HistoryService } from '../../services/history.service';
 @Component({
 	selector: 'app-order-history',
 	standalone: true,
-	imports: [DateFormatPipe],
+	imports: [DateFormatPipe, RouterLink, CommonModule],
 	templateUrl: './order-history.component.html',
 	styleUrl: './order-history.component.scss',
 })
@@ -25,7 +27,6 @@ export class OrderHistoryComponent implements OnInit {
 			.pipe(take(1))
 			.subscribe({
 				next: (data: any) => {
-					console.log(data);
 					this.orders = data;
 					this.getOrderPrices(data);
 					this.loading = false;
@@ -48,10 +49,7 @@ export class OrderHistoryComponent implements OnInit {
 				const discount: string = `0.${100 - e.discount_amount}`;
 				const discountedPrice = +(totalPrice * +discount).toFixed(2);
 				this.orderPrices.push(discountedPrice);
-				console.log(`before discount: ${totalPrice}`);
-				console.log(`discounted: ${discountedPrice}`);
 			}
 		});
-		console.log(this.orderPrices);
 	}
 }

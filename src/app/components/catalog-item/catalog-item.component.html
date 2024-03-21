@@ -10,6 +10,6 @@
 		<p class="text-lg font-bold truncate">{{ title }}</p>
 		<p>{{ category }}</p>
 		<p>{{ width }} x {{ height }} px</p>
-		<p class="text-lg font-bold">${{ price }}</p>
+		<p class="text-lg font-bold">${{ price | number : "1.2-2" }}</p>
 	</div>
 </div>

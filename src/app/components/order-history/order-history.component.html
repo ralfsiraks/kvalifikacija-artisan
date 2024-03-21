@@ -7,29 +7,25 @@
 		<th class="px-8 py-4 text-left"></th>
 	</tr>
 
-	@if (loading) {
-	<tr class="border-b animate-pulse">
+	@if (loading) { @for (item of [1,1,1]; track $index) {
+	<tr class="border-b animate-pulse last:border-none">
 		<td class="px-8"><div class="bg-gray-400 rounded-lg w-1/2 h-5"></div></td>
 		<td class="px-8"><div class="bg-gray-400 rounded-lg w-1/2 h-5"></div></td>
 		<td class="px-8"><div class="bg-gray-400 rounded-lg w-1/2 h-5"></div></td>
 		<td class="px-8"><div class="bg-gray-400 rounded-lg w-1/2 h-5"></div></td>
-		<td class="px-8 py-4 text-left"></td>
+		<td class="px-8 py-4 text-left">
+			<button class="material-symbols-outlined text-4xl outline-4" type="submit">trending_flat</button>
+		</td>
 	</tr>
-	<tr class="animate-pulse">
-		<td class="px-8"><div class="bg-gray-400 rounded-lg w-1/2 h-5"></div></td>
-		<td class="px-8"><div class="bg-gray-400 rounded-lg w-1/2 h-5"></div></td>
-		<td class="px-8"><div class="bg-gray-400 rounded-lg w-1/2 h-5"></div></td>
-		<td class="px-8"><div class="bg-gray-400 rounded-lg w-1/2 h-5"></div></td>
-		<td class="px-8 py-4 text-left"></td>
-	</tr>
-	} @for (item of orders; track $index) {
+	} } @for (item of orders; track $index) {
 	<tr
-		class="border-b hover:bg-gray-900 group hover:text-white transition-all duration-200 cursor-pointer last:border-none"
+		[routerLink]="['/user/order', item.id]"
+		class="border-b hover:bg-gray-900 group text-lg font-medium hover:text-white transition-all duration-200 cursor-pointer last:border-none"
 		id="item.id"
 	>
 		<td class="px-8 py-4">#{{ item.id }}</td>
 		<td class="px-8 py-4">{{ item.created_at | dateFormat }}</td>
-		<td class="px-8 py-4">{{ this.orderPrices[$index] }}€</td>
+		<td class="px-8 py-4">${{ this.orderPrices[$index] | number : "1.2-2" }}</td>
 		<td class="px-8 py-4">{{ item.status }}</td>
 		<td class="px-8 py-4">
 			<button

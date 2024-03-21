@@ -39,8 +39,8 @@ export class LoginModalComponent implements OnInit {
 	) {}
 
 	ngOnInit() {
-		this.route.paramMap.subscribe((params) => {
-			this.method = params.get('method');
+		this.route.params.subscribe((params) => {
+			this.method = params[`method`];
 		});
 	}
 

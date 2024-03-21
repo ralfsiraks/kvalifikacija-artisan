@@ -13,7 +13,7 @@ export class CartService {
 	readonly ROOT_URL = environment.apiUrl;
 	private cartSubject = new BehaviorSubject<[]>(null);
 	public cart$ = this.cartSubject.asObservable();
-	private cartCountSubject = new BehaviorSubject<number>(JSON.parse(localStorage.getItem(`cart`))?.length);
+	private cartCountSubject = new BehaviorSubject<number>(JSON.parse(localStorage.getItem(`cart`))?.length || 0);
 	public cartCount$ = this.cartCountSubject.asObservable();
 
 	constructor(private http: HttpClient, private toastService: ToastService) {}

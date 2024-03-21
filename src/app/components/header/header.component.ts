@@ -60,12 +60,6 @@ export class HeaderComponent implements OnInit {
 		}
 	}
 
-	onAllProducts() {
-		this.router.navigate(['/catalog/all/1']).then((): void => {
-			window.location.reload();
-		});
-	}
-
 	onLogOut() {
 		localStorage.removeItem(`token`);
 		localStorage.removeItem(`name`);

@@ -8,34 +8,38 @@ import { ProductPageComponent } from './components/product-page/product-page.com
 import { UserPageComponent } from './components/user-page/user-page.component';
 
 export const routes: Routes = [
-  {
-    path: '',
-    title: 'Artisan - Digital Art and Design',
-    component: HomePageComponent,
-  },
-  { path: 'cart', title: 'My Cart', component: CartPageComponent },
-  {
-    path: 'auth/:method',
-    component: LoginModalComponent,
-    outlet: 'modals',
-  },
-  {
-    path: 'catalog/:category/:page',
-    title: 'Catalog',
-    component: CatalogComponent,
-  },
-  {
-    path: 'product/:id',
-    component: ProductPageComponent,
-  },
-  {
-    path: 'user',
-    component: UserPageComponent,
-  },
-  {
-    path: 'help',
-    title: 'Help',
-    component: HelpPageComponent,
-  },
-  { path: '**', redirectTo: '' },
+	{
+		path: '',
+		title: 'Artisan - Digital Art and Design',
+		component: HomePageComponent,
+	},
+	{ path: 'cart', title: 'My Cart', component: CartPageComponent },
+	{
+		path: 'auth/:method',
+		component: LoginModalComponent,
+		outlet: 'modals',
+	},
+	{
+		path: 'catalog/:category/:page',
+		title: 'Catalog',
+		component: CatalogComponent,
+	},
+	{
+		path: 'product/:id',
+		component: ProductPageComponent,
+	},
+	{
+		path: 'user/:mode',
+		component: UserPageComponent,
+	},
+	{
+		path: 'user/:mode/:id',
+		component: UserPageComponent,
+	},
+	{
+		path: 'help',
+		title: 'Help',
+		component: HelpPageComponent,
+	},
+	{ path: '**', redirectTo: '' },
 ];

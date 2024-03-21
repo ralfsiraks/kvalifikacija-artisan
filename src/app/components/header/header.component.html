@@ -6,7 +6,7 @@
 			ARTISAN
 		</h1>
 		<a
-			(click)="onAllProducts()"
+			routerLink="/catalog/all/1"
 			class="font-bold col-span-2 duration-200 text-gray-900 hover-underline after:bg-gray-900 text-xl whitespace-nowrap"
 			>All Products</a
 		>
@@ -24,7 +24,7 @@
 				{{ userName }}
 				{{ userSurname }}
 				<span
-					routerLink="/user"
+					routerLink="/user/profile"
 					class="material-symbols-outlined black-text-shadow duration-200 text-gray-900 text-3xl"
 				>
 					account_circle
@@ -55,7 +55,7 @@
 			>
 				shopping_cart
 			</span>
-			@if (cartCount) {
+			@if (cartCount > 0 ) {
 			<span
 				class="absolute -top-1 -right-2 bg-gray-900 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs fade-in"
 				>{{ cartCount }}</span

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { take } from 'rxjs';
+import { Subscription, take } from 'rxjs';
 import { Pagination } from '../../interfaces/pagination';
 import { Product } from '../../interfaces/product';
 import { ProductService } from '../../services/product.service';
@@ -14,7 +14,7 @@ import { CatalogItemComponent } from '../catalog-item/catalog-item.component';
 	templateUrl: './catalog.component.html',
 	styleUrl: './catalog.component.scss',
 })
-export class CatalogComponent implements OnInit {
+export class CatalogComponent implements OnInit, OnDestroy {
 	category: string;
 	page: number;
 	lastPage: number;
@@ -24,17 +24,17 @@ export class CatalogComponent implements OnInit {
 	lastPagePagination: boolean;
 	sortBy: string = `id`;
 	sortOrder: string = `desc`;
+	private routeSubscription: Subscription;
 
 	constructor(private productService: ProductService, private router: Router, private route: ActivatedRoute) {}
 
 	ngOnInit(): void {
-		this.route.paramMap.subscribe((params) => {
-			this.category = params.get('category');
-			this.page = +params.get('page');
+		this.routeSubscription = this.route.params.subscribe((params) => {
+			console.log(`new params`);
+			this.category = params['category'];
+			this.page = +params['page'];
+			this.onGetCatalog();
 		});
-		console.log(`page: ${this.page}`);
-
-		this.onGetCatalog();
 	}
 
 	onGetCatalog() {
@@ -123,5 +123,11 @@ export class CatalogComponent implements OnInit {
 
 		console.log(`${this.sortBy}, ${this.sortOrder}`);
 		this.onGetCatalog();
+	}
+
+	ngOnDestroy() {
+		if (this.routeSubscription) {
+			this.routeSubscription.unsubscribe();
+		}
 	}
 }

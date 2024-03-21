@@ -94,10 +94,12 @@ export class CartPageComponent implements OnInit {
 			.pipe(take(1))
 			.subscribe({
 				next: (value: {}) => {
-					console.log(value);
+					localStorage.setItem(`cart`, `[]`);
+					this.cart = [];
+					this.toastService.onShowAlert(`shopping_cart_checkout`, `Checkout successful!`, `#74b816`);
 				},
 				error: (error: any) => {
-					console.log(error);
+					this.toastService.onShowAlert(`login`, `Please log in before checking out!`, `#FF8333`);
 				},
 			});
 	}

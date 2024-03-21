@@ -2,6 +2,7 @@
 	<div class="flex flex-col gap-4 w-1/4">
 		<button
 			(click)="mode = 'profile'"
+			routerLink="/user/profile"
 			class="border-2 border-gray-900 rounded-lg p-0.5 w-full text-2xl font-semibold flex justify-center gap-4 items-center group hover:bg-gray-900 active:bg-gray-900 transition-colors duration-200"
 			[ngClass]="{ 'bg-gray-900': mode === 'profile' }"
 		>
@@ -19,17 +20,18 @@
 		</button>
 		<button
 			(click)="mode = 'history'"
+			routerLink="/user/history"
 			class="border-2 border-gray-900 rounded-lg p-0.5 w-full text-2xl font-semibold flex justify-center gap-4 items-center group hover:bg-gray-900 transition-colors duration-200"
-			[ngClass]="{ 'bg-gray-900': mode === 'history' }"
+			[ngClass]="{ 'bg-gray-900': mode === 'history' || mode === 'order' }"
 		>
 			<span
 				class="group-hover:text-white transition-colors duration-200"
-				[ngClass]="{ 'text-white': mode === 'history' }"
+				[ngClass]="{ 'text-white': mode === 'history' || mode === 'order' }"
 				>Purchase history</span
 			>
 			<span
 				class="material-symbols-outlined text-3xl group-hover:text-white transition-all duration-200"
-				[ngClass]="{ 'text-white': mode === 'history' }"
+				[ngClass]="{ 'text-white': mode === 'history' || mode === 'order' }"
 			>
 				history
 			</span>
@@ -40,8 +42,10 @@
 		<div class="w-full px-8 py-4">
 			@if(mode === "profile") {
 			<h2 class="font-semibold fade-in">My profile</h2>
-			} @else {
+			} @else if (mode === "history") {
 			<h2 class="font-semibold fade-in">Purchase history</h2>
+			} @else if (mode === "order") {
+			<h2 class="font-semibold fade-in">{{ "Order #" + orderId }}</h2>
 			}
 		</div>
 
@@ -50,6 +54,8 @@
 		<app-user-info></app-user-info>
 		} @else if(mode === "history") {
 		<app-order-history></app-order-history>
+		} @else if (mode === "order") {
+		<app-order></app-order>
 		}
 	</div>
 </div>
