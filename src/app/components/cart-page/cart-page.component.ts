@@ -39,28 +39,12 @@ export class CartPageComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.cartService.cart$.subscribe((data: []) => {
+			console.log(`new signal`);
 			this.cart = JSON.parse(localStorage.getItem(`cart`));
+			if (this.cart?.length > 0) {
+				this.onGetCart();
+			}
 		});
-
-		if (this.cart?.length > 0) {
-			this.loading = true;
-			this.cartService
-				.getCart(this.cart)
-				.pipe(take(1))
-				.subscribe({
-					next: (value: Product[]) => {
-						this.loading = false;
-						this.cartItems = value;
-						let arr = [];
-						value.forEach((e) => {
-							arr.push(e.id);
-							this.itemTotal += e.price;
-						});
-						localStorage.setItem(`cart`, JSON.stringify(arr));
-						this.total = this.itemTotal + this.processingFee;
-					},
-				});
-		}
 	}
 
 	onDiscountCodeSubmit(): void {
@@ -100,6 +84,30 @@ export class CartPageComponent implements OnInit {
 				},
 				error: (error: any) => {
 					this.toastService.onShowAlert(`login`, `Please log in before checking out!`, `#FF8333`);
+				},
+			});
+	}
+
+	onGetCart(): void {
+		this.itemTotal = 0;
+		this.cartItems = [];
+		this.discountedPrice = 0;
+		this.discountId = null;
+		this.loading = true;
+		this.cartService
+			.getCart(this.cart)
+			.pipe(take(1))
+			.subscribe({
+				next: (value: Product[]) => {
+					this.loading = false;
+					this.cartItems = value;
+					let arr = [];
+					value.forEach((e) => {
+						arr.push(e.id);
+						this.itemTotal += e.price;
+					});
+					localStorage.setItem(`cart`, JSON.stringify(arr));
+					this.total = this.itemTotal + this.processingFee;
 				},
 			});
 	}
