@@ -24,6 +24,7 @@ export class ProductPageComponent implements OnInit {
 	imageUrl: string;
 	price: number;
 	oldPrice: number;
+	loading: boolean;
 
 	constructor(
 		private route: ActivatedRoute,
@@ -33,6 +34,7 @@ export class ProductPageComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.productId = +this.route.snapshot.paramMap.get('id');
+		this.loading = true;
 		this.productService
 			.getProduct(this.productId)
 			.pipe(take(1))
@@ -48,10 +50,12 @@ export class ProductPageComponent implements OnInit {
 					this.price = value.price;
 					this.oldPrice = value.old_price;
 					window.scrollTo(0, 0);
+					this.loading = false;
 				},
 				error: (err) => {
 					console.log(err.error);
 					this.error = err.error;
+					this.loading = false;
 				},
 			});
 	}

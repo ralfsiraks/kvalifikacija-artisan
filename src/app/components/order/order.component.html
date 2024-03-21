@@ -1,5 +1,5 @@
 <div class="flex flex-col w-full">
-	@if (order) { @for (item of order.ordered_products; track $index) {
+	@if (order && !loading) { @for (item of order.ordered_products; track $index) {
 	<div
 		[routerLink]="['/product', item.product_id]"
 		class="flex justify-between items-center w-full gap-4 p-6 cursor-pointer hover:bg-gray-900 hover:text-white transition-all duration-200"
@@ -18,13 +18,24 @@
 	</div>
 	<hr class="" />
 	}
-	<div class="flex flex-col items-end p-6 font-medium">
-		<h3>Artwork: ${{ artworkPrice | number : "1.2-2" }}</h3>
-		<h3>Processing fee: $1.45</h3>
-		@if (discount) {
-		<h3>Discount code: -{{ discount }}%</h3>
-		}
-		<h3 class="font-bold">Total: ${{ finalPrice | number : "1.2-2" }}</h3>
+	<div class="flex justify-between p-6 font-medium">
+		<div class="h-full">
+			<h3>Created at: {{ order.created_at | dateFormat }}</h3>
+			<h3>Status: {{ order.status }}</h3>
+		</div>
+		<div class="h-full">
+			<h3>Artwork: ${{ artworkPrice | number : "1.2-2" }}</h3>
+			<h3>Processing fee: $1.45</h3>
+			@if (discount) {
+			<h3>Discount code: -{{ discount }}%</h3>
+			}
+			<h3 class="font-bold">Total: ${{ finalPrice | number : "1.2-2" }}</h3>
+		</div>
+	</div>
+	} @else if (loading) { loading } @else {
+	<div class="w-full flex flex-col items-center gap-4 my-3">
+		<span class="material-symbols-outlined text-7xl opacity-50 cursor-default"> sentiment_dissatisfied </span>
+		<h2 class="opacity-50">Order not found</h2>
 	</div>
 	}
 </div>

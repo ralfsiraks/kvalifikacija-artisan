@@ -3,12 +3,13 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { take } from 'rxjs';
 import { Order } from '../../interfaces/order';
+import { DateFormatPipe } from '../../pipes/date-format.pipe';
 import { HistoryService } from '../../services/history.service';
 
 @Component({
 	selector: 'app-order',
 	standalone: true,
-	imports: [CommonModule, RouterLink],
+	imports: [CommonModule, RouterLink, DateFormatPipe],
 	templateUrl: './order.component.html',
 	styleUrl: './order.component.scss',
 })
@@ -18,12 +19,14 @@ export class OrderComponent implements OnInit {
 	artworkPrice: number;
 	discount: number = 0;
 	finalPrice: number;
+	loading: boolean;
 
 	constructor(private historyService: HistoryService, private route: ActivatedRoute) {}
 
 	ngOnInit(): void {
 		this.orderId = +this.route.snapshot.paramMap.get('id');
 
+		this.loading = true;
 		this.historyService
 			.getOrder(localStorage.getItem(`token`), this.orderId)
 			.pipe(take(1))
@@ -31,9 +34,10 @@ export class OrderComponent implements OnInit {
 				next: (value: Order) => {
 					this.order = value;
 					this.getPrices(value);
-					console.log(value);
+					this.loading = false;
 				},
 				error: (error): any => {
+					this.loading = false;
 					console.log(`big error`);
 				},
 			});
