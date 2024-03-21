@@ -41,17 +41,20 @@ export class OrderComponent implements OnInit {
 
 	getPrices(order: Order) {
 		let artwork: number = 0;
-		if (order.discount_id > 0) {
-			this.discount = order.discount_code.amount;
-		}
 
 		order.ordered_products.forEach((e) => {
 			console.log(e.price);
 			artwork += e.price;
 		});
 
+		if (order.discount_id > 0) {
+			this.discount = order.discount_code.amount;
+			const discount: string = `0.${100 - this.discount}`;
+			this.finalPrice = +((artwork + 1.45) * +discount).toFixed(2);
+		} else {
+			this.finalPrice = artwork + 1.45;
+		}
+
 		this.artworkPrice = artwork;
-		const discount: string = `0.${100 - this.discount}`;
-		this.finalPrice = +((artwork + 1.45) * +discount).toFixed(2);
 	}
 }
