@@ -2,7 +2,7 @@
 	@if (order && !loading) { @for (item of order.ordered_products; track $index) {
 	<div
 		[routerLink]="['/product', item.product_id]"
-		class="flex justify-between items-center w-full gap-4 p-6 cursor-pointer hover:bg-gray-900 hover:text-white transition-all duration-200"
+		class="flex justify-between items-center w-full gap-4 p-6 cursor-pointer hover:bg-gray-900 hover:text-white transition-all duration-200 fade-in"
 	>
 		<div class="flex gap-4">
 			<img class="max-w-20vmin max-h-15vmin rounded-lg" [src]="item.product.image_url" alt="" />
@@ -18,7 +18,7 @@
 	</div>
 	<hr class="" />
 	}
-	<div class="flex justify-between p-6 font-medium">
+	<div class="flex justify-between p-6 font-medium fade-in">
 		<div class="h-full">
 			<h3>Created at: {{ order.created_at | dateFormat }}</h3>
 			<h3>Status: {{ order.status }}</h3>
@@ -35,7 +35,7 @@
 	} @else if (loading) {
 	<app-order-skeleton></app-order-skeleton>
 	} @else {
-	<div class="w-full flex flex-col items-center gap-4 my-3">
+	<div class="w-full flex flex-col items-center gap-4 my-3 fade-in">
 		<span class="material-symbols-outlined text-7xl opacity-50 cursor-default"> sentiment_dissatisfied </span>
 		<h2 class="opacity-50">Order not found</h2>
 	</div>

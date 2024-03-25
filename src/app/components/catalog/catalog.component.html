@@ -1,4 +1,5 @@
-<div class="w-full flex justify-end text-gray-900 px-cart-sides my-6">
+<div class="w-full flex justify-between items-center text-gray-900 px-cart-sides my-6">
+	<h1 class="font-semibold">{{ category | categoryFormat }}</h1>
 	<div class="text-lg font-semibold">
 		<label>Sort By</label>
 		<select #sort_by class="outline-none px-2" (change)="onSortChange(sort_by.value)">

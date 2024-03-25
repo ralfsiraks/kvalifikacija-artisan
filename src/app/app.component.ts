@@ -1,3 +1,4 @@
+import { TitleCasePipe } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
@@ -28,7 +29,16 @@ import { ToastService } from './services/toast.service';
 		HttpClientModule,
 		ToastComponent,
 	],
-	providers: [CookieService, CartService, AuthService, ToastService, ProductService, CheckoutService, HistoryService],
+	providers: [
+		CookieService,
+		CartService,
+		AuthService,
+		ToastService,
+		ProductService,
+		CheckoutService,
+		HistoryService,
+		TitleCasePipe,
+	],
 })
 export class AppComponent {
 	title = 'artisan';

@@ -1,4 +1,9 @@
-<div [id]="id" #bagItem class="flex flex-col w-full p-6">
+<div
+	[id]="id"
+	#bagItem
+	class="flex flex-col w-full p-6 cursor-pointer hover:bg-gray-900 hover:text-white transition-all duration-200 fade-in"
+	[routerLink]="['/product', id]"
+>
 	<div class="flex w-full justify-between items-start">
 		<div class="flex h-full gap-4">
 			<img class="max-w-23vmin max-h-23vmin rounded-lg" [src]="imageUrl" alt="" />
@@ -9,7 +14,7 @@
 			</div>
 		</div>
 		<div class="h-full p-2 text-right">
-			<h3 class="font-semibold">${{ price }}</h3>
+			<h3 class="font-semibold">${{ price | number : "1.2-2" }}</h3>
 			<h4 class="underline cursor-pointer" (click)="onItemRemove(bagItem, id)">Remove</h4>
 		</div>
 	</div>

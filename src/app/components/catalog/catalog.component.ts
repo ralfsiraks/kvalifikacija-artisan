@@ -4,6 +4,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Subscription, take } from 'rxjs';
 import { Pagination } from '../../interfaces/pagination';
 import { Product } from '../../interfaces/product';
+import { CategoryFormatPipe } from '../../pipes/category-format.pipe';
 import { ProductService } from '../../services/product.service';
 import { CatalogItemComponent } from '../catalog-item/catalog-item.component';
 import { CatalogSkeletonComponent } from '../skeletons/catalog-skeleton/catalog-skeleton.component';
@@ -11,7 +12,7 @@ import { CatalogSkeletonComponent } from '../skeletons/catalog-skeleton/catalog-
 @Component({
 	selector: 'app-catalog',
 	standalone: true,
-	imports: [CatalogItemComponent, RouterLink, CommonModule, CatalogSkeletonComponent],
+	imports: [CatalogItemComponent, RouterLink, CommonModule, CatalogSkeletonComponent, CategoryFormatPipe],
 	templateUrl: './catalog.component.html',
 	styleUrl: './catalog.component.scss',
 })
@@ -56,7 +57,7 @@ export class CatalogComponent implements OnInit, OnDestroy {
 					} else {
 						console.log(`no product found`);
 					}
-
+					window.scrollTo(0, 0);
 					this.loading = false;
 				},
 			});

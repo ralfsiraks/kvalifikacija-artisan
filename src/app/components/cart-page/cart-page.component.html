@@ -2,7 +2,7 @@
 	<h1 class="font-bold mb-3">MY CART</h1>
 	@if ((cart?.length) > 0) {
 	<div class="flex flex-row justify-start w-full gap-6 m-3">
-		<div class="border-2 border-gray-900 w-4/6 rounded-xl test flex-col justify-center h-min">
+		<div class="border-2 border-gray-900 w-4/6 rounded-xl test flex-col justify-center h-min overflow-hidden">
 			@if(loading) { @for (item of cart; track $index) {
 			<app-cart-skeleton></app-cart-skeleton>
 			} } @for (item of cartItems; track $index) {
@@ -32,7 +32,7 @@
 					<h3>Total</h3>
 					<h3>
 						<span class="line-through decoration-2 text-zinc-600 m-1 text-base" [class.hidden]="!discountedPrice"
-							>{{ total | number : "1.2-2" }} €</span
+							>${{ total | number : "1.2-2" }}</span
 						>${{ discountedPrice || total | number : "1.2-2" }}
 					</h3>
 				</div>
