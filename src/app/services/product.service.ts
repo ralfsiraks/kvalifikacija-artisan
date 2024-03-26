@@ -21,7 +21,6 @@ export class ProductService {
 	): Observable<Pagination> {
 		const authHeaders = new HttpHeaders({
 			'Content-Type': 'application/json',
-			mode: `no-cors`,
 		});
 		let endpoint =
 			this.ROOT_URL + `/catalog/?category=${category}&page=${page}&sort_by=${sortBy}&sort_order=${sortOrder}`;
