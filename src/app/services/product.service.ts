@@ -19,13 +19,12 @@ export class ProductService {
 		sortOrder: string,
 		search?: string
 	): Observable<Pagination> {
-		console.log(`${sortBy}, ${sortOrder}`);
 		let endpoint =
 			this.ROOT_URL + `/catalog/?category=${category}&page=${page}&sort_by=${sortBy}&sort_order=${sortOrder}`;
 		if (search) {
 			endpoint += `&search=${search}`;
-			console.log(endpoint);
 		}
+		console.log(endpoint);
 		return this.http.get<Pagination>(endpoint);
 	}
 
