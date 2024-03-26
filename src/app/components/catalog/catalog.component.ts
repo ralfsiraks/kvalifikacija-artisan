@@ -17,8 +17,8 @@ import { CatalogSkeletonComponent } from '../skeletons/catalog-skeleton/catalog-
 	styleUrl: './catalog.component.scss',
 })
 export class CatalogComponent implements OnInit, OnDestroy {
-	category: string;
-	page: number;
+	category: string = `all`;
+	page: number = 2;
 	lastPage: number;
 	catalogItems: Product[][] = [[], [], [], []];
 	loading: boolean = true;
@@ -26,15 +26,19 @@ export class CatalogComponent implements OnInit, OnDestroy {
 	lastPagePagination: boolean;
 	sortBy: string = `id`;
 	sortOrder: string = `desc`;
+	search: string;
 	private routeSubscription: Subscription;
 
 	constructor(private productService: ProductService, private router: Router, private route: ActivatedRoute) {}
 
 	ngOnInit(): void {
-		this.routeSubscription = this.route.params.subscribe((params) => {
-			console.log(`new params`);
-			this.category = params['category'];
-			this.page = +params['page'];
+		this.routeSubscription = this.route.queryParams.subscribe((params) => {
+			this.category = params['category'] ? params['category'] : `all`;
+			this.page = +params['page'] ? +params['page'] : 1;
+			this.sortBy = params['sort_by'] ? params['sort_by'] : `id`;
+			this.sortOrder = params['sort_order'] ? params['sort_order'] : `desc`;
+			this.search = params['search'];
+			console.log(`search: ${this.search}`);
 			this.onGetCatalog();
 		});
 	}
@@ -43,21 +47,23 @@ export class CatalogComponent implements OnInit, OnDestroy {
 		this.catalogItems = [[], [], [], []];
 		this.loading = true;
 		this.productService
-			.getCatalog(this.category, this.page, this.sortBy, this.sortOrder)
+			.getCatalog(this.category, this.page, this.sortBy, this.sortOrder, this.search)
 			.pipe(take(1))
 			.subscribe({
 				next: (value: Pagination) => {
+					console.log(value);
 					if (value.data.length > 0) {
 						value.data.forEach((item, i) => {
 							const columnIndex = i % 4;
 							this.catalogItems[columnIndex].push(item);
 						});
 						this.onConfigurePagination(value);
-						console.log(`happens`);
-					} else {
-						console.log(`no product found`);
 					}
 					window.scrollTo(0, 0);
+					this.loading = false;
+				},
+				error: (error: any) => {
+					console.log(`no product found`);
 					this.loading = false;
 				},
 			});
@@ -67,21 +73,16 @@ export class CatalogComponent implements OnInit, OnDestroy {
 		if (changeTo === `next`) {
 			if (this.page < this.lastPage) {
 				this.page++;
-				this.router.navigate([`/catalog/${this.category}`, this.page]);
-				this.onGetCatalog();
 			}
 		} else if (changeTo === `previous`) {
 			if (this.page > 1) {
 				this.page--;
-				this.router.navigate([`/catalog/${this.category}`, this.page]);
-				this.onGetCatalog();
 			}
 		} else {
 			this.page = +changeTo;
-			this.router.navigate([`/catalog/${this.category}`, this.page]);
 			this.catalogItems = [[], [], [], []];
-			this.onGetCatalog();
 		}
+		this.onChangeRouteParam([`page`], [this.page]);
 	}
 
 	onConfigurePagination(value: Pagination) {
@@ -101,11 +102,9 @@ export class CatalogComponent implements OnInit, OnDestroy {
 		} else if (this.page > 1 && this.lastPage === this.page) {
 			this.pagination = [this.page - 2, this.page - 1, this.page];
 		}
-
-		console.log(this.pagination);
 	}
 
-	onSortChange(sort: string) {
+	onSortChange(sort: string): void {
 		if (sort === `new`) {
 			this.sortBy = `id`;
 			this.sortOrder = `desc`;
@@ -122,12 +121,26 @@ export class CatalogComponent implements OnInit, OnDestroy {
 			this.sortBy = `price`;
 			this.sortOrder = `desc`;
 		}
-
-		console.log(`${this.sortBy}, ${this.sortOrder}`);
-		this.onGetCatalog();
+		this.onChangeRouteParam([`sort_by`, `sort_order`], [this.sortBy, this.sortOrder]);
+		// this.onChangeRouteParam(`sort_order`, this.sortOrder);
+		// this.onChangeRouteParam(`page`, 1);
+		// this.onGetCatalog();
 	}
 
-	ngOnDestroy() {
+	onChangeRouteParam(param: string[], value: (string | number)[]) {
+		const currentParams = { ...this.route.snapshot.queryParams };
+		param.forEach((e, index) => {
+			currentParams[e] = value[index];
+		});
+		this.router.navigate([], {
+			relativeTo: this.route,
+			queryParams: currentParams,
+			queryParamsHandling: 'merge', // Preserve existing query parameters
+		});
+		console.log(`just set ${param}`);
+	}
+
+	ngOnDestroy(): void {
 		if (this.routeSubscription) {
 			this.routeSubscription.unsubscribe();
 		}

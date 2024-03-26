@@ -20,7 +20,12 @@ export const routes: Routes = [
 		outlet: 'modals',
 	},
 	{
-		path: 'catalog/:category/:page',
+		path: 'catalog',
+		title: 'Catalog',
+		component: CatalogComponent,
+	},
+	{
+		path: 'search/:query',
 		title: 'Catalog',
 		component: CatalogComponent,
 	},

@@ -17,6 +17,7 @@ export class CatalogItemComponent {
 	@Input() imageUrl: string;
 	@Input() id: number;
 	@Input() category: string;
+	@Input() artist: string;
 
 	constructor() {}
 }
