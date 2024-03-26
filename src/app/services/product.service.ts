@@ -19,16 +19,13 @@ export class ProductService {
 		sortOrder: string,
 		search?: string
 	): Observable<Pagination> {
-		const authHeaders = new HttpHeaders({
-			'Content-Type': 'application/json',
-		});
 		let endpoint =
 			this.ROOT_URL + `/catalog/?category=${category}&page=${page}&sort_by=${sortBy}&sort_order=${sortOrder}`;
 		if (search) {
 			endpoint += `&search=${search}`;
 		}
 		console.log(endpoint);
-		return this.http.get<Pagination>(endpoint, { headers: authHeaders });
+		return this.http.get<Pagination>(endpoint);
 	}
 
 	getProduct(id: number): Observable<Product> {
