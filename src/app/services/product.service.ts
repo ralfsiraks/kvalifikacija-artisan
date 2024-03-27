@@ -20,7 +20,7 @@ export class ProductService {
 		search?: string
 	): Observable<Pagination> {
 		let endpoint =
-			this.ROOT_URL + `/catalog/?category=${category}&page=${page}&sort_by=${sortBy}&sort_order=${sortOrder}`;
+			this.ROOT_URL + `/catalog?category=${category}&page=${page}&sort_by=${sortBy}&sort_order=${sortOrder}`;
 		if (search) {
 			endpoint += `&search=${search}`;
 		}
