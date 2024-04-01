@@ -15,7 +15,6 @@ export class CategoryFormatPipe implements PipeTransform {
 		let transformedValue = value.replace(/_/g, ' ');
 
 		transformedValue = this.titleCasePipe.transform(transformedValue);
-		console.log(transformedValue);
 
 		// If value is 'all', return 'all products'
 		if (transformedValue.toLowerCase() === 'all') {

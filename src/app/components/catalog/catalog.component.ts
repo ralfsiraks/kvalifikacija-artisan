@@ -1,11 +1,21 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+	AfterViewInit,
+	Component,
+	ElementRef,
+	OnDestroy,
+	OnInit,
+	QueryList,
+	ViewChild,
+	ViewChildren,
+} from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Subscription, take } from 'rxjs';
 import { Pagination } from '../../interfaces/pagination';
 import { Product } from '../../interfaces/product';
 import { CategoryFormatPipe } from '../../pipes/category-format.pipe';
 import { ProductService } from '../../services/product.service';
+import { ToastService } from '../../services/toast.service';
 import { CatalogItemComponent } from '../catalog-item/catalog-item.component';
 import { CatalogSkeletonComponent } from '../skeletons/catalog-skeleton/catalog-skeleton.component';
 
@@ -16,30 +26,75 @@ import { CatalogSkeletonComponent } from '../skeletons/catalog-skeleton/catalog-
 	templateUrl: './catalog.component.html',
 	styleUrl: './catalog.component.scss',
 })
-export class CatalogComponent implements OnInit, OnDestroy {
+export class CatalogComponent implements OnInit, OnDestroy, AfterViewInit {
 	category: string = `all`;
-	page: number = 2;
+	page: number = 1;
 	lastPage: number;
 	catalogItems: Product[][] = [[], [], [], []];
 	loading: boolean = true;
 	pagination: number[] = [];
 	lastPagePagination: boolean;
-	sortBy: string = `id`;
-	sortOrder: string = `desc`;
+	sortBy: string = `id_desc`;
 	search: string;
+	minP: number;
+	maxP: number;
+	height: string;
+	width: string;
+	@ViewChild('minprice') minPRef: ElementRef;
+	@ViewChild('maxprice') maxPRef: ElementRef;
+	@ViewChild('sort_by') sortByRef: ElementRef;
+	@ViewChildren(`mheight, sheight, lheight, xlheight`) heightRefs: QueryList<ElementRef>;
+	@ViewChildren(`mwidth, swidth, lwidth, xlwidth`) widthRefs: QueryList<ElementRef>;
+
 	private routeSubscription: Subscription;
 
-	constructor(private productService: ProductService, private router: Router, private route: ActivatedRoute) {}
+	constructor(
+		private productService: ProductService,
+		private router: Router,
+		private route: ActivatedRoute,
+		private toastService: ToastService
+	) {}
 
 	ngOnInit(): void {
 		this.routeSubscription = this.route.queryParams.subscribe((params) => {
 			this.category = params['category'] ? params['category'] : `all`;
 			this.page = +params['page'] ? +params['page'] : 1;
-			this.sortBy = params['sort_by'] ? params['sort_by'] : `id`;
-			this.sortOrder = params['sort_order'] ? params['sort_order'] : `desc`;
+			this.sortBy = params['sort'] ? params['sort'] : `id_desc`;
 			this.search = params['search'];
-			console.log(`search: ${this.search}`);
+			if (/^[1-9]\d*$/.test(params[`minP`])) {
+				this.minP = params['minP'];
+			} else if (/^[1-9]\d*$/.test(params[`maxP`])) {
+				this.maxP = params['maxP'];
+			}
+			this.height = params['h'];
+			this.width = params['w'];
 			this.onGetCatalog();
+		});
+	}
+
+	ngAfterViewInit(): void {
+		// Set filter values from URL
+		if (this.minP) {
+			this.minPRef.nativeElement.value = this.minP;
+			this.onPriceParams(`minP`, this.minPRef.nativeElement);
+		}
+		if (this.maxP) {
+			this.maxPRef.nativeElement.value = this.maxP;
+			this.onPriceParams(`maxP`, this.maxPRef.nativeElement);
+		}
+
+		this.onSortChange(this.sortBy);
+
+		this.heightRefs.forEach((e) => {
+			if (e.nativeElement.value === this.height) {
+				e.nativeElement.checked = true;
+			}
+		});
+
+		this.widthRefs.forEach((e) => {
+			if (e.nativeElement.value === this.width) {
+				e.nativeElement.checked = true;
+			}
 		});
 	}
 
@@ -47,11 +102,10 @@ export class CatalogComponent implements OnInit, OnDestroy {
 		this.catalogItems = [[], [], [], []];
 		this.loading = true;
 		this.productService
-			.getCatalog(this.category, this.page, this.sortBy, this.sortOrder, this.search)
+			.getCatalog(this.category, this.page, this.sortBy, this.search, this.minP, this.maxP, this.height, this.width)
 			.pipe(take(1))
 			.subscribe({
 				next: (value: Pagination) => {
-					console.log(value);
 					if (value.data.length > 0) {
 						value.data.forEach((item, i) => {
 							const columnIndex = i % 4;
@@ -63,7 +117,7 @@ export class CatalogComponent implements OnInit, OnDestroy {
 					this.loading = false;
 				},
 				error: (error: any) => {
-					console.log(`no product found`);
+					console.log(`no product found error`);
 					this.loading = false;
 				},
 			});
@@ -105,31 +159,14 @@ export class CatalogComponent implements OnInit, OnDestroy {
 	}
 
 	onSortChange(sort: string): void {
-		if (sort === `new`) {
-			this.sortBy = `id`;
-			this.sortOrder = `desc`;
-		} else if (sort === `a-z`) {
-			this.sortBy = `title`;
-			this.sortOrder = `asc`;
-		} else if (sort === `z-a`) {
-			this.sortBy = `title`;
-			this.sortOrder = `desc`;
-		} else if (sort === `low-high`) {
-			this.sortBy = `price`;
-			this.sortOrder = `asc`;
-		} else if (sort === `high-low`) {
-			this.sortBy = `price`;
-			this.sortOrder = `desc`;
-		}
-		this.onChangeRouteParam([`sort_by`, `sort_order`], [this.sortBy, this.sortOrder]);
-		// this.onChangeRouteParam(`sort_order`, this.sortOrder);
-		// this.onChangeRouteParam(`page`, 1);
-		// this.onGetCatalog();
+		this.sortBy = sort;
+		this.sortByRef.nativeElement.value = sort;
+		this.onChangeRouteParam([`sort`], [this.sortBy]);
 	}
 
-	onChangeRouteParam(param: string[], value: (string | number)[]) {
+	onChangeRouteParam(params: string[], value: (string | number)[]) {
 		const currentParams = { ...this.route.snapshot.queryParams };
-		param.forEach((e, index) => {
+		params.forEach((e, index) => {
 			currentParams[e] = value[index];
 		});
 		this.router.navigate([], {
@@ -137,7 +174,57 @@ export class CatalogComponent implements OnInit, OnDestroy {
 			queryParams: currentParams,
 			queryParamsHandling: 'merge', // Preserve existing query parameters
 		});
-		console.log(`just set ${param}`);
+	}
+
+	onDeleteRouteParam(params: string[]) {
+		const currentParams = { ...this.route.snapshot.queryParams };
+		params.forEach((e) => {
+			delete currentParams[e];
+		});
+
+		this.router.navigate([], {
+			relativeTo: this.route,
+			queryParams: currentParams,
+			queryParamsHandling: '',
+		});
+	}
+
+	onPriceParams(param: string, input: HTMLInputElement): void {
+		const val = input.value;
+
+		if (!/^[1-9]\d*$/.test(val)) {
+			input.value = '';
+			this.toastService.onShowAlert(`error`, `Invalid number entered!`, `#FF8333`);
+			this.onDeleteRouteParam([param]);
+			this[param] = 0;
+			return;
+		}
+
+		if (+val !== this[param]) {
+			this[param] = +val;
+			this.onChangeRouteParam([param], [this[param]]);
+			input.value = val;
+		}
+	}
+
+	onChangeSize(param: string, input: HTMLInputElement) {
+		const val = input.value;
+
+		if (val === `off`) {
+			this.onDeleteRouteParam([param]);
+		} else {
+			if (param === `h`) {
+				if (val !== this.height) {
+					this.height = val;
+					this.onChangeRouteParam([param], [this.height]);
+				}
+			} else if (param === `w`) {
+				if (val !== this.width) {
+					this.width = val;
+					this.onChangeRouteParam([param], [this.width]);
+				}
+			}
+		}
 	}
 
 	ngOnDestroy(): void {

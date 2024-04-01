@@ -40,7 +40,6 @@ export class CartPageComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.cartService.cart$.subscribe((data: []) => {
-			console.log(`new signal`);
 			this.cart = JSON.parse(localStorage.getItem(`cart`));
 			if (this.cart?.length > 0) {
 				this.onGetCart();

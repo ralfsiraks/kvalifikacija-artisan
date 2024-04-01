@@ -39,7 +39,6 @@ export class OrderComponent implements OnInit {
 				},
 				error: (error): any => {
 					this.loading = false;
-					console.log(`big error`);
 				},
 			});
 	}
@@ -48,7 +47,6 @@ export class OrderComponent implements OnInit {
 		let artwork: number = 0;
 
 		order.ordered_products.forEach((e) => {
-			console.log(e.price);
 			artwork += e.price;
 		});
 

@@ -39,7 +39,6 @@ export class HeaderComponent implements OnInit {
 	ngOnInit(): void {
 		this.cartService.cartCount$.subscribe((data: number) => {
 			this.cartCount = data;
-			console.log(this.cartCount);
 		});
 		this.token = localStorage.getItem(`token`);
 		this.authService.token.subscribe((data: AuthObject) => {
@@ -73,7 +72,6 @@ export class HeaderComponent implements OnInit {
 	}
 
 	onSearchSubmit(): void {
-		console.log(`submitted`);
 		const form = this.searchForm;
 		if (form.get('search').value.trim() === ``) {
 			this.toastService.onShowAlert(`error`, `Please enter a query!`, `#FF8333`);

@@ -18,9 +18,9 @@ export class UserInfoComponent implements OnInit {
 	userSurname: string;
 	userEmail: string;
 	userForm: FormGroup = new FormGroup({
-		name: new FormControl(`loading`, [Validators.required]),
-		surname: new FormControl(`loading`, [Validators.required]),
-		email: new FormControl(`loading`, [Validators.required, Validators.email]),
+		name: new FormControl(`loading...`, [Validators.required]),
+		surname: new FormControl(`loading...`, [Validators.required]),
+		email: new FormControl(`loading...`, [Validators.required, Validators.email]),
 	});
 
 	constructor(private authService: AuthService) {}
@@ -36,7 +36,6 @@ export class UserInfoComponent implements OnInit {
 						this.userName = data.user_data.name;
 						this.userSurname = data.user_data.surname;
 						this.userEmail = data.email;
-						console.log(`happens`);
 						this.onSetFormValues(data);
 					}
 				},
@@ -51,7 +50,6 @@ export class UserInfoComponent implements OnInit {
 	}
 
 	onSetFormValues(data: any): void {
-		console.log(data);
 		this.userForm.setValue({
 			name: data.user_data.name,
 			surname: data.user_data.surname,

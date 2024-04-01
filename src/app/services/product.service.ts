@@ -16,15 +16,20 @@ export class ProductService {
 		category: string,
 		page: number,
 		sortBy: string,
-		sortOrder: string,
-		search?: string
+		search: string,
+		minP: number,
+		maxP: number,
+		h: string,
+		w: string
 	): Observable<Pagination> {
-		let endpoint =
-			this.ROOT_URL + `/catalog?category=${category}&page=${page}&sort_by=${sortBy}&sort_order=${sortOrder}`;
-		if (search) {
-			endpoint += `&search=${search}`;
-		}
-		console.log(endpoint);
+		const paramObj = { search, minP, maxP, h, w };
+
+		let endpoint = this.ROOT_URL + `/catalog?category=${category}&page=${page}&sort=${sortBy}`;
+		Object.entries(paramObj).forEach(([paramName, paramValue]) => {
+			if (paramValue) {
+				endpoint += `&${paramName}=${paramValue}`;
+			}
+		});
 		return this.http.get<Pagination>(endpoint);
 	}
 
