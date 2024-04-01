@@ -30,6 +30,7 @@ export class ProductService {
 				endpoint += `&${paramName}=${paramValue}`;
 			}
 		});
+		console.log(endpoint);
 		return this.http.get<Pagination>(endpoint);
 	}
 
