@@ -81,8 +81,7 @@ export class HeaderComponent implements OnInit {
 			queryParams: {
 				category: `all`,
 				page: 1,
-				sort_by: `id`,
-				sort_order: `desc`,
+				sort: `id_desc`,
 				search: form.get(`search`).value,
 			},
 		});
