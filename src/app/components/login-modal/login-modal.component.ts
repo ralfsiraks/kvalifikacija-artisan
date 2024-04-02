@@ -18,15 +18,15 @@ export class LoginModalComponent implements OnInit {
 	method: string = ``;
 
 	registerForm: FormGroup = new FormGroup({
-		name: new FormControl('John', [Validators.required]),
-		surname: new FormControl('Doe', [Validators.required]),
-		email: new FormControl('random@email.com', [Validators.required, Validators.email]),
-		password: new FormControl('randompass123', [Validators.required, Validators.minLength(8)]),
+		name: new FormControl('', [Validators.required]),
+		surname: new FormControl('', [Validators.required]),
+		email: new FormControl('', [Validators.required, Validators.email]),
+		password: new FormControl('', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/)]),
 	});
 
 	loginForm: FormGroup = new FormGroup({
-		email: new FormControl('random@email.com', [Validators.required, Validators.email]),
-		password: new FormControl('randompass123', [Validators.required, Validators.minLength(8)]),
+		email: new FormControl('', [Validators.required, Validators.email]),
+		password: new FormControl('', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/)]),
 	});
 
 	@ViewChild('modalContainer') modalContainer: ElementRef;

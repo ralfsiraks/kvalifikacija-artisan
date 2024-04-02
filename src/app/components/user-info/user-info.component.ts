@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { take } from 'rxjs';
 import { User } from '../../interfaces/user';
+import { UserInit } from '../../interfaces/user-init';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -22,10 +23,25 @@ export class UserInfoComponent implements OnInit {
 		surname: new FormControl(`loading...`, [Validators.required]),
 		email: new FormControl(`loading...`, [Validators.required, Validators.email]),
 	});
+	initValues: UserInit;
 
 	constructor(private authService: AuthService) {}
 
 	ngOnInit(): void {
+		this.getUserInfo();
+	}
+
+	onSetFormValues(data: any): void {
+		this.userForm.setValue({
+			name: data.user_data.name,
+			surname: data.user_data.surname,
+			email: data.email,
+		});
+
+		this.initValues = { name: data.user_data.name, surname: data.user_data.surname, email: data.email };
+	}
+
+	getUserInfo() {
 		this.authService
 			.getUser(this.userToken)
 			.pipe(take(1))
@@ -47,14 +63,6 @@ export class UserInfoComponent implements OnInit {
 					this.userToken = '';
 				},
 			});
-	}
-
-	onSetFormValues(data: any): void {
-		this.userForm.setValue({
-			name: data.user_data.name,
-			surname: data.user_data.surname,
-			email: data.email,
-		});
 	}
 
 	onUserFormSubmit() {}

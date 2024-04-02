@@ -2,8 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { AuthObject } from '../interfaces/auth-object';
 import { User } from '../interfaces/user';
-import { UserEssential } from '../interfaces/user-essential';
 import { CartService } from './cart.service';
 
 @Injectable({
@@ -19,14 +19,14 @@ export class AuthService {
 
 	constructor(private http: HttpClient, private cartService: CartService) {}
 
-	onLogin(email: string, password: string): Observable<UserEssential> {
+	onLogin(email: string, password: string): Observable<AuthObject> {
 		return this.http
 			.post<any>(`${this.ROOT_URL}/login`, {
 				email: email,
 				password: password,
 			})
 			.pipe(
-				tap((res: UserEssential) => {
+				tap((res: AuthObject) => {
 					if (res.token) {
 						localStorage.setItem('token', res.token);
 						localStorage.setItem('name', res.name);
@@ -39,9 +39,9 @@ export class AuthService {
 			);
 	}
 
-	onRegister(name: string, surname: string, email: string, password: string): Observable<UserEssential> {
+	onRegister(name: string, surname: string, email: string, password: string): Observable<AuthObject> {
 		return this.http
-			.post<UserEssential>(`${this.ROOT_URL}/register`, {
+			.post<AuthObject>(`${this.ROOT_URL}/register`, {
 				name: name,
 				surname: surname,
 				email: email,

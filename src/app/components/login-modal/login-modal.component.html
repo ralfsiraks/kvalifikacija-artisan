@@ -14,11 +14,12 @@
 			</div>
 			<div class="flex w-full justify-between font-bold p-2 bg-gray-900 rounded-xl my-4">
 				<div
-					class="w-full flex justify-center rounded-lg cursor-pointer"
+					class="w-full flex justify-center rounded-lg cursor-pointer transition-all duration-300"
 					[ngClass]="{ 'bg-white': method === 'login' }"
 					(click)="onChangeMethod('login')"
 				>
 					<h2
+						class="transition-all duration-300"
 						[ngClass]="{
 							'text-gray-900': method === 'login',
 							'text-white': method !== 'login'
@@ -28,11 +29,12 @@
 					</h2>
 				</div>
 				<div
-					class="w-full flex justify-center rounded-lg cursor-pointer"
+					class="w-full flex justify-center rounded-lg cursor-pointer transition-all duration-300"
 					[ngClass]="{ 'bg-white': method === 'register' }"
 					(click)="onChangeMethod('register')"
 				>
 					<h2
+						class="transition-all duration-300"
 						[ngClass]="{
 							'text-gray-900': method === 'register',
 							'text-white': method !== 'register'
@@ -47,36 +49,113 @@
 		<form
 			(ngSubmit)="onRegisterSubmit()"
 			[formGroup]="registerForm"
-			class="w-full flex justify-center items-start flex-col text-2xl gap-4 fade-in"
+			class="w-full flex justify-center items-center flex-col text-2xl gap-4 fade-in"
 		>
-			<div name="input" class="flex justify-start items-center gap-3 border-2 border-gray-900 p-2 rounded-xl w-full">
+			<div
+				[ngClass]="{
+					'border-red-500':
+						registerForm.get('name').invalid && (registerForm.get('name').dirty || registerForm.get('name').touched)
+				}"
+				name="input"
+				class="flex justify-start items-center gap-3 border-2 border-gray-900 p-2 rounded-xl w-full transition-all duration-300"
+			>
 				<div class="w-1/10 flex justify-center items-center">
-					<span class="material-symbols-outlined cursor-default text-4xl icon-shadow"> person </span>
+					<span
+						[ngClass]="{
+							'text-red-500':
+								registerForm.get('name').invalid && (registerForm.get('name').dirty || registerForm.get('name').touched)
+						}"
+						class="material-symbols-outlined cursor-default text-4xl transition-all duration-300"
+					>
+						person
+					</span>
 				</div>
 
 				<input formControlName="name" type="text" placeholder="Name" class="bg-transparent w-full" />
 			</div>
-			<div name="input" class="flex justify-start items-center gap-3 border-2 border-gray-900 p-2 rounded-xl w-full">
+			<div
+				[ngClass]="{
+					'border-red-500':
+						registerForm.get('surname').invalid &&
+						(registerForm.get('surname').dirty || registerForm.get('surname').touched)
+				}"
+				name="input"
+				class="flex justify-start items-center gap-3 border-2 border-gray-900 p-2 rounded-xl w-full transition-all duration-300"
+			>
 				<div class="w-1/10 flex justify-center items-center">
-					<span class="material-symbols-outlined cursor-default text-4xl icon-shadow"> person </span>
+					<span
+						[ngClass]="{
+							'text-red-500':
+								registerForm.get('surname').invalid &&
+								(registerForm.get('surname').dirty || registerForm.get('surname').touched)
+						}"
+						class="material-symbols-outlined cursor-default text-4xl transition-all duration-300"
+					>
+						person
+					</span>
 				</div>
 
 				<input formControlName="surname" type="text" placeholder="Surname" class="bg-transparent w-full" />
 			</div>
-			<div name="input" class="flex justify-start items-center gap-3 border-2 border-gray-900 p-2 rounded-xl w-full">
+			<div
+				[ngClass]="{
+					'border-red-500':
+						registerForm.get('email').invalid && (registerForm.get('email').dirty || registerForm.get('email').touched)
+				}"
+				name="input"
+				class="flex justify-start items-center gap-3 border-2 border-gray-900 p-2 rounded-xl w-full transition-all duration-300"
+			>
 				<div class="w-1/10 flex justify-center items-center">
-					<span class="material-symbols-outlined cursor-default text-3xl icon-shadow"> alternate_email </span>
+					<span
+						[ngClass]="{
+							'text-red-500':
+								registerForm.get('email').invalid &&
+								(registerForm.get('email').dirty || registerForm.get('email').touched)
+						}"
+						class="material-symbols-outlined cursor-default text-3xl transition-all duration-300"
+					>
+						alternate_email
+					</span>
 				</div>
 
 				<input formControlName="email" type="email" placeholder="Email" class="bg-transparent w-full" />
 			</div>
-			<div name="input" class="flex justify-start items-center gap-3 border-2 border-gray-900 p-2 rounded-xl w-full">
+			<h6
+				class="-mt-3 text-red-500"
+				*ngIf="registerForm.get('email').invalid && registerForm.get('email').errors['email']"
+			>
+				Invalid email!
+			</h6>
+			<div
+				[ngClass]="{
+					'border-red-500':
+						registerForm.get('password').invalid &&
+						(registerForm.get('password').dirty || registerForm.get('password').touched)
+				}"
+				name="input"
+				class="flex justify-start items-center gap-3 border-2 border-gray-900 p-2 rounded-xl w-full transition-all duration-300"
+			>
 				<div class="w-1/10 flex justify-center items-center">
-					<span class="material-symbols-outlined cursor-default text-3xl icon-shadow"> lock </span>
+					<span
+						[ngClass]="{
+							'text-red-500':
+								registerForm.get('password').invalid &&
+								(registerForm.get('password').dirty || registerForm.get('password').touched)
+						}"
+						class="material-symbols-outlined cursor-default text-3xl transition-all duration-300"
+					>
+						lock
+					</span>
 				</div>
 
 				<input formControlName="password" type="password" placeholder="Password" class="bg-transparent w-full" />
 			</div>
+			<h6
+				class="-mt-3 text-red-500"
+				*ngIf="registerForm.get('password').invalid && registerForm.get('password').errors['pattern']"
+			>
+				Password must contain lower and upper case characters, numbers and be at least 8 digits!
+			</h6>
 			<button
 				class="border-2 border-gray-900 rounded-lg h-5vmin p-3 w-full text-slate-800 text-2xl font-bold flex justify-center items-center group hover:bg-gray-900 transition-colors duration-200"
 			>
@@ -90,20 +169,60 @@
 			[formGroup]="loginForm"
 			class="w-full flex justify-center items-center flex-col text-2xl gap-4 fade-in"
 		>
-			<div name="input" class="flex justify-start items-center gap-3 border-2 border-gray-900 p-2 rounded-xl w-full">
+			<div
+				[ngClass]="{
+					'border-red-500':
+						loginForm.get('email').invalid && (loginForm.get('email').dirty || loginForm.get('email').touched)
+				}"
+				name="input"
+				class="flex justify-start items-center gap-3 border-2 border-gray-900 p-2 rounded-xl w-full transition-all duration-300"
+			>
 				<div class="w-1/10 flex justify-center items-center">
-					<span class="material-symbols-outlined cursor-default text-3xl icon-shadow"> alternate_email </span>
+					<span
+						[ngClass]="{
+							'text-red-500':
+								loginForm.get('email').invalid && (loginForm.get('email').dirty || loginForm.get('email').touched)
+						}"
+						class="material-symbols-outlined cursor-default text-3xl transition-all duration-300"
+					>
+						alternate_email
+					</span>
 				</div>
-
 				<input formControlName="email" type="email" placeholder="Email" class="bg-transparent w-full" />
 			</div>
-			<div name="input" class="flex justify-start items-center gap-3 border-2 border-gray-900 p-2 rounded-xl w-full">
+			<h6 class="-mt-3 text-red-500" *ngIf="loginForm.get('email').invalid && loginForm.get('email').errors['email']">
+				Invalid email!
+			</h6>
+			<div
+				[ngClass]="{
+					'border-red-500':
+						loginForm.get('password').invalid && (loginForm.get('password').dirty || loginForm.get('password').touched)
+				}"
+				password
+				name="input"
+				class="flex justify-start items-center gap-3 border-2 border-gray-900 p-2 rounded-xl w-full transition-all duration-300"
+			>
 				<div class="w-1/10 flex justify-center items-center">
-					<span class="material-symbols-outlined cursor-default text-3xl icon-shadow"> lock </span>
+					<span
+						[ngClass]="{
+							'text-red-500':
+								loginForm.get('password').invalid &&
+								(loginForm.get('password').dirty || loginForm.get('password').touched)
+						}"
+						class="material-symbols-outlined cursor-default text-3xl transition-all duration-300"
+					>
+						lock
+					</span>
 				</div>
 
 				<input formControlName="password" type="password" placeholder="Password" class="bg-transparent w-full" />
 			</div>
+			<h6
+				class="-mt-3 text-red-500"
+				*ngIf="loginForm.get('password').invalid && loginForm.get('password').errors['pattern']"
+			>
+				Password must contain lower and upper case characters, numbers and be at least 8 digits!
+			</h6>
 			<button
 				class="border-2 border-gray-900 rounded-lg h-5vmin p-3 w-full text-2xl font-semibold flex justify-center items-center group hover:bg-gray-900 transition-colors duration-200"
 			>
