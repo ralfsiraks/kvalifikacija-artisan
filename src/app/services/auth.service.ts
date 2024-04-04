@@ -1,10 +1,10 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { AuthObject } from '../interfaces/auth-object';
 import { User } from '../interfaces/user';
-import { CartService } from './cart.service';
+import { HttpHeadersService } from './http-headers.service';
 
 @Injectable({
 	providedIn: 'root',
@@ -13,11 +13,8 @@ export class AuthService {
 	readonly ROOT_URL = environment.apiUrl;
 	private tokenSubject = new BehaviorSubject<object>(null);
 	public token = this.tokenSubject.asObservable();
-	headers = new HttpHeaders({
-		'Content-Type': 'application/json',
-	});
 
-	constructor(private http: HttpClient, private cartService: CartService) {}
+	constructor(private http: HttpClient, private httpHeadersService: HttpHeadersService) {}
 
 	onLogin(email: string, password: string): Observable<AuthObject> {
 		return this.http
@@ -61,13 +58,28 @@ export class AuthService {
 			);
 	}
 
-	getUser(token: string): Observable<User> {
-		const authHeaders = new HttpHeaders({
-			'Content-Type': 'application/json',
-			Authorization: `Bearer ${token}`,
-		});
+	getUser(): Observable<User> {
+		const headers = this.httpHeadersService.getHeaders();
 		return this.http.get<User>(`${this.ROOT_URL}/user`, {
-			headers: authHeaders,
+			headers,
 		});
+	}
+
+	updateUser(patches: any): Observable<any> {
+		const headers = this.httpHeadersService.getHeaders();
+		return this.http.patch<any>(`${this.ROOT_URL}/user`, patches, { headers }).pipe(
+			tap((res: any) => {
+				if (res.id) {
+					this.tokenSubject.next({
+						token: localStorage.getItem(`token`),
+						name: res.name,
+						surname: res.surname,
+					});
+
+					localStorage.setItem(`name`, res.name);
+					localStorage.setItem(`surname`, res.surname);
+				}
+			})
+		);
 	}
 }

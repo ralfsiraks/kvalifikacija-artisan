@@ -27,8 +27,8 @@
 		<div class="font-bold col-span-3 text-gray-900 text-xl">
 			@if (token) {
 			<div class="flex items-center gap-4">
-				{{ userName }}
-				{{ userSurname }}
+				<h4 class="text-xl truncate max-w-xs">{{ userName }} {{ userSurname }}</h4>
+
 				<span
 					routerLink="/user/profile"
 					class="material-symbols-outlined black-text-shadow duration-200 text-gray-900 text-3xl"
@@ -36,7 +36,7 @@
 					account_circle
 				</span>
 
-				<a (click)="onLogOut()">Logout</a>
+				<a class="hover-underline after:bg-gray-900" (click)="onLogOut()">Logout</a>
 			</div>
 			} @else {
 			<span class="whitespace-nowrap font-semibold">

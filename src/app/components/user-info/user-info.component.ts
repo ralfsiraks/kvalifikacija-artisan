@@ -1,14 +1,19 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { take } from 'rxjs';
 import { User } from '../../interfaces/user';
 import { UserInit } from '../../interfaces/user-init';
 import { AuthService } from '../../services/auth.service';
+import { ToastService } from '../../services/toast.service';
+import { ValidationService } from '../../services/validation.service';
+import { UserInfoSkeletonComponent } from '../skeletons/user-info-skeleton/user-info-skeleton.component';
 
 @Component({
 	selector: 'app-user-info',
 	standalone: true,
-	imports: [ReactiveFormsModule],
+	imports: [ReactiveFormsModule, CommonModule, UserInfoSkeletonComponent],
 	templateUrl: './user-info.component.html',
 	styleUrl: './user-info.component.scss',
 })
@@ -19,13 +24,14 @@ export class UserInfoComponent implements OnInit {
 	userSurname: string;
 	userEmail: string;
 	userForm: FormGroup = new FormGroup({
-		name: new FormControl(`loading...`, [Validators.required]),
-		surname: new FormControl(`loading...`, [Validators.required]),
-		email: new FormControl(`loading...`, [Validators.required, Validators.email]),
+		name: new FormControl(``, [Validators.required, ValidationService.notOnlyWhitespace]),
+		surname: new FormControl(``, [Validators.required, ValidationService.notOnlyWhitespace]),
+		email: new FormControl(``, [Validators.required, Validators.email, ValidationService.notOnlyWhitespace]),
 	});
 	initValues: UserInit;
+	loading: boolean = false;
 
-	constructor(private authService: AuthService) {}
+	constructor(private authService: AuthService, private router: Router, private toastService: ToastService) {}
 
 	ngOnInit(): void {
 		this.getUserInfo();
@@ -42,8 +48,9 @@ export class UserInfoComponent implements OnInit {
 	}
 
 	getUserInfo() {
+		this.loading = true;
 		this.authService
-			.getUser(this.userToken)
+			.getUser()
 			.pipe(take(1))
 			.subscribe({
 				next: (data: User) => {
@@ -54,16 +61,58 @@ export class UserInfoComponent implements OnInit {
 						this.userEmail = data.email;
 						this.onSetFormValues(data);
 					}
+					this.loading = false;
 				},
 				error: (err) => {
-					console.log(err.error);
+					console.log(err.error.status);
 					localStorage.removeItem(`token`);
 					localStorage.removeItem(`name`);
 					localStorage.removeItem(`surname`);
 					this.userToken = '';
+					if (err.status === 401) {
+						this.router.navigate(['/']);
+						this.toastService.onShowAlert(`error`, `Please log in!`, `#FF8333`);
+					}
+					this.loading = false;
 				},
 			});
 	}
 
-	onUserFormSubmit() {}
+	onUserFormSubmit() {
+		if (this.userForm.valid) {
+			const currentValues: UserInit = {
+				name: this.userForm.get(`name`).value.trim(),
+				surname: this.userForm.get(`surname`).value.trim(),
+				email: this.userForm.get(`email`).value.trim(),
+			};
+			// Check if submitted values are different from initial ones
+			if (JSON.stringify(currentValues) !== JSON.stringify(this.initValues)) {
+				const patches: any = {};
+				Object.entries(currentValues).forEach(([paramName, paramValue]) => {
+					if (paramValue !== this.initValues[paramName]) {
+						patches[paramName] = paramValue;
+					}
+				});
+
+				this.authService
+					.updateUser(patches)
+					.pipe(take(1))
+					.subscribe({
+						next: (data: any) => {
+							console.log(data);
+						},
+						error: (err) => {
+							console.log(err.error);
+							this.userToken = '';
+							if (err.status === 401) {
+								this.router.navigate(['/']);
+								this.toastService.onShowAlert(`error`, `Please log in!`, `#FF8333`);
+							} else if (err.error.message.includes(`SQLSTATE[23000]`)) {
+								this.toastService.onShowAlert(`error`, `This email is already registered!`, `#FF8333`);
+							}
+						},
+					});
+			}
+		}
+	}
 }

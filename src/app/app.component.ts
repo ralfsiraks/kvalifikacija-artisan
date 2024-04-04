@@ -11,8 +11,10 @@ import { AuthService } from './services/auth.service';
 import { CartService } from './services/cart.service';
 import { CheckoutService } from './services/checkout.service';
 import { HistoryService } from './services/history.service';
+import { HttpHeadersService } from './services/http-headers.service';
 import { ProductService } from './services/product.service';
 import { ToastService } from './services/toast.service';
+import { ValidationService } from './services/validation.service';
 
 @Component({
 	selector: 'app-root',
@@ -38,6 +40,8 @@ import { ToastService } from './services/toast.service';
 		CheckoutService,
 		HistoryService,
 		TitleCasePipe,
+		ValidationService,
+		HttpHeadersService,
 	],
 })
 export class AppComponent {

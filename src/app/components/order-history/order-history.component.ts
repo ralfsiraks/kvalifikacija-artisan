@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { take } from 'rxjs';
 import { OrderHistory } from '../../interfaces/order-history';
 import { DateFormatPipe } from '../../pipes/date-format.pipe';
 import { HistoryService } from '../../services/history.service';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
 	selector: 'app-order-history',
@@ -18,7 +19,7 @@ export class OrderHistoryComponent implements OnInit {
 	orderPrices: number[] = [];
 	loading: boolean;
 
-	constructor(private historyService: HistoryService) {}
+	constructor(private historyService: HistoryService, private toastService: ToastService, private router: Router) {}
 
 	ngOnInit(): void {
 		this.loading = true;
@@ -31,7 +32,11 @@ export class OrderHistoryComponent implements OnInit {
 					this.getOrderPrices(data);
 					this.loading = false;
 				},
-				error: (error: any) => {
+				error: (err: any) => {
+					if (err.status === 401) {
+						this.router.navigate(['/']);
+						this.toastService.onShowAlert(`error`, `Please log in!`, `#FF8333`);
+					}
 					this.loading = false;
 				},
 			});

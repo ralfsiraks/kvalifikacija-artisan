@@ -32,8 +32,7 @@ export class HeaderComponent implements OnInit {
 		private authService: AuthService,
 		private router: Router,
 		private cartService: CartService,
-		private toastService: ToastService,
-		private productService: ProductService
+		private toastService: ToastService
 	) {}
 
 	ngOnInit(): void {
@@ -50,7 +49,7 @@ export class HeaderComponent implements OnInit {
 		});
 		if (this.token) {
 			this.authService
-				.getUser(this.token)
+				.getUser()
 				.pipe(take(1))
 				.subscribe({
 					next: (data: User) => {

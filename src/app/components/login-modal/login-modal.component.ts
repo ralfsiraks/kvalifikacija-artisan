@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { take } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 import { ToastService } from '../../services/toast.service';
+import { ValidationService } from '../../services/validation.service';
 
 @Component({
 	selector: 'app-login-modal',
@@ -18,15 +19,23 @@ export class LoginModalComponent implements OnInit {
 	method: string = ``;
 
 	registerForm: FormGroup = new FormGroup({
-		name: new FormControl('', [Validators.required]),
-		surname: new FormControl('', [Validators.required]),
-		email: new FormControl('', [Validators.required, Validators.email]),
-		password: new FormControl('', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/)]),
+		name: new FormControl('', [Validators.required, ValidationService.notOnlyWhitespace]),
+		surname: new FormControl('', [Validators.required, ValidationService.notOnlyWhitespace]),
+		email: new FormControl('', [Validators.required, Validators.email, ValidationService.notOnlyWhitespace]),
+		password: new FormControl('', [
+			Validators.required,
+			ValidationService.notOnlyWhitespace,
+			ValidationService.passwordPattern,
+		]),
 	});
 
 	loginForm: FormGroup = new FormGroup({
-		email: new FormControl('', [Validators.required, Validators.email]),
-		password: new FormControl('', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/)]),
+		email: new FormControl('', [Validators.required, Validators.email, ValidationService.notOnlyWhitespace]),
+		password: new FormControl('', [
+			Validators.required,
+			ValidationService.notOnlyWhitespace,
+			ValidationService.passwordPattern,
+		]),
 	});
 
 	@ViewChild('modalContainer') modalContainer: ElementRef;
@@ -70,10 +79,10 @@ export class LoginModalComponent implements OnInit {
 	onRegisterSubmit(): void {
 		this.authService
 			.onRegister(
-				this.registerForm.get('name')?.value,
-				this.registerForm.get('surname')?.value,
-				this.registerForm.get('email')?.value,
-				this.registerForm.get('password')?.value
+				this.registerForm.get('name')?.value.trim(),
+				this.registerForm.get('surname')?.value.trim(),
+				this.registerForm.get('email')?.value.trim(),
+				this.registerForm.get('password')?.value.trim()
 			)
 			.pipe(take(1))
 			.subscribe({
@@ -97,7 +106,7 @@ export class LoginModalComponent implements OnInit {
 	onLoginSubmit() {
 		if (this.loginForm.valid) {
 			this.authService
-				.onLogin(this.loginForm.get('email')?.value, this.loginForm.get('password')?.value)
+				.onLogin(this.loginForm.get('email')?.value.trim(), this.loginForm.get('password')?.value.trim())
 				.pipe(take(1))
 				.subscribe({
 					next: (res: any) => {
@@ -116,5 +125,12 @@ export class LoginModalComponent implements OnInit {
 					},
 				});
 		}
+	}
+
+	notOnlyWhitespace(control: AbstractControl): { [key: string]: boolean } | null {
+		if (control.value && control.value.trim().length === 0) {
+			return { whitespace: true };
+		}
+		return null;
 	}
 }

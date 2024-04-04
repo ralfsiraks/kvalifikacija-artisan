@@ -1,8 +1,8 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { ToastService } from './toast.service';
+import { HttpHeadersService } from './http-headers.service';
 
 @Injectable({
 	providedIn: 'root',
@@ -10,13 +10,10 @@ import { ToastService } from './toast.service';
 export class CheckoutService {
 	readonly ROOT_URL = environment.apiUrl;
 
-	constructor(private http: HttpClient, private toastService: ToastService) {}
+	constructor(private http: HttpClient, private httpHeadersService: HttpHeadersService) {}
 
 	onCheckout(cart: number[], discountId: number): Observable<number> {
-		const authHeaders = new HttpHeaders({
-			'Content-Type': 'application/json',
-			Authorization: `Bearer ${localStorage.getItem(`token`)}`,
-		});
+		const headers = this.httpHeadersService.getHeaders();
 
 		return this.http.post<number>(
 			`${this.ROOT_URL}/checkout`,
@@ -25,7 +22,7 @@ export class CheckoutService {
 				discountId,
 			},
 			{
-				headers: authHeaders,
+				headers,
 			}
 		);
 	}
