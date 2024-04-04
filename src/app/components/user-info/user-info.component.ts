@@ -99,7 +99,7 @@ export class UserInfoComponent implements OnInit {
 					.pipe(take(1))
 					.subscribe({
 						next: (data: any) => {
-							console.log(data);
+							this.toastService.onShowAlert(`check_circle`, `Profile updated!`, `#74b816`);
 						},
 						error: (err) => {
 							console.log(err.error);
