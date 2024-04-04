@@ -100,6 +100,11 @@ export class UserInfoComponent implements OnInit {
 					.subscribe({
 						next: (data: any) => {
 							this.toastService.onShowAlert(`check_circle`, `Profile updated!`, `#74b816`);
+							this.initValues = {
+								name: currentValues.name,
+								surname: currentValues.surname,
+								email: currentValues.email,
+							};
 						},
 						error: (err) => {
 							console.log(err.error);
