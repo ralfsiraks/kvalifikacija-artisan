@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { take } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
@@ -53,7 +53,7 @@ export class LoginModalComponent implements OnInit {
 		});
 	}
 
-	onCloseModal(container: HTMLDivElement) {
+	onCloseModal(container: HTMLDivElement): void {
 		container.classList.add(`fade-out`);
 		setTimeout(() => {
 			const urlTree = this.router.parseUrl(this.router.url);
@@ -82,7 +82,7 @@ export class LoginModalComponent implements OnInit {
 				this.registerForm.get('name')?.value.trim(),
 				this.registerForm.get('surname')?.value.trim(),
 				this.registerForm.get('email')?.value.trim(),
-				this.registerForm.get('password')?.value.trim()
+				this.registerForm.get('password')?.value
 			)
 			.pipe(take(1))
 			.subscribe({
@@ -103,10 +103,10 @@ export class LoginModalComponent implements OnInit {
 			});
 	}
 
-	onLoginSubmit() {
+	onLoginSubmit(): void {
 		if (this.loginForm.valid) {
 			this.authService
-				.onLogin(this.loginForm.get('email')?.value.trim(), this.loginForm.get('password')?.value.trim())
+				.onLogin(this.loginForm.get('email')?.value.trim(), this.loginForm.get('password')?.value)
 				.pipe(take(1))
 				.subscribe({
 					next: (res: any) => {
@@ -125,12 +125,5 @@ export class LoginModalComponent implements OnInit {
 					},
 				});
 		}
-	}
-
-	notOnlyWhitespace(control: AbstractControl): { [key: string]: boolean } | null {
-		if (control.value && control.value.trim().length === 0) {
-			return { whitespace: true };
-		}
-		return null;
 	}
 }

@@ -1,19 +1,20 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { take } from 'rxjs';
 import { User } from '../../interfaces/user';
 import { UserInit } from '../../interfaces/user-init';
 import { AuthService } from '../../services/auth.service';
 import { ToastService } from '../../services/toast.service';
 import { ValidationService } from '../../services/validation.service';
+import { LoginModalComponent } from '../login-modal/login-modal.component';
 import { UserInfoSkeletonComponent } from '../skeletons/user-info-skeleton/user-info-skeleton.component';
 
 @Component({
 	selector: 'app-user-info',
 	standalone: true,
-	imports: [ReactiveFormsModule, CommonModule, UserInfoSkeletonComponent],
+	imports: [ReactiveFormsModule, CommonModule, UserInfoSkeletonComponent, RouterLink, LoginModalComponent],
 	templateUrl: './user-info.component.html',
 	styleUrl: './user-info.component.scss',
 })

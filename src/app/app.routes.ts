@@ -4,6 +4,7 @@ import { CatalogComponent } from './components/catalog/catalog.component';
 import { HelpPageComponent } from './components/help-page/help-page.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { LoginModalComponent } from './components/login-modal/login-modal.component';
+import { PasswordModalComponent } from './components/password-modal/password-modal.component';
 import { ProductPageComponent } from './components/product-page/product-page.component';
 import { UserPageComponent } from './components/user-page/user-page.component';
 
@@ -17,6 +18,11 @@ export const routes: Routes = [
 	{
 		path: 'auth/:method',
 		component: LoginModalComponent,
+		outlet: 'modals',
+	},
+	{
+		path: 'password',
+		component: PasswordModalComponent,
 		outlet: 'modals',
 	},
 	{

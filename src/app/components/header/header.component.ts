@@ -7,14 +7,12 @@ import { AuthObject } from '../../interfaces/auth-object';
 import { User } from '../../interfaces/user';
 import { AuthService } from '../../services/auth.service';
 import { CartService } from '../../services/cart.service';
-import { ProductService } from '../../services/product.service';
 import { ToastService } from '../../services/toast.service';
-import { LoginModalComponent } from '../login-modal/login-modal.component';
 
 @Component({
 	selector: 'app-header',
 	standalone: true,
-	imports: [RouterLink, LoginModalComponent, CommonModule, ReactiveFormsModule],
+	imports: [RouterLink, CommonModule, ReactiveFormsModule],
 	templateUrl: './header.component.html',
 	styleUrl: './header.component.scss',
 })

@@ -65,10 +65,10 @@ export class AuthService {
 		});
 	}
 
-	updateUser(patches: any): Observable<any> {
+	updateUser(patches: any): Observable<User['user_data']> {
 		const headers = this.httpHeadersService.getHeaders();
-		return this.http.patch<any>(`${this.ROOT_URL}/user`, patches, { headers }).pipe(
-			tap((res: any) => {
+		return this.http.patch<User['user_data']>(`${this.ROOT_URL}/user`, patches, { headers }).pipe(
+			tap((res: User['user_data']) => {
 				if (res.id) {
 					this.tokenSubject.next({
 						token: localStorage.getItem(`token`),
@@ -79,6 +79,23 @@ export class AuthService {
 					localStorage.setItem(`name`, res.name);
 					localStorage.setItem(`surname`, res.surname);
 				}
+			})
+		);
+	}
+
+	onChangePassword(oldPassword: string, newPassword: string): Observable<any> {
+		const headers = this.httpHeadersService.getHeaders();
+		return this.http.patch<any>(`${this.ROOT_URL}/password`, { oldPassword, newPassword }, { headers }).pipe(
+			tap((res: any) => {
+				// if (res.id) {
+				// 	this.tokenSubject.next({
+				// 		token: localStorage.getItem(`token`),
+				// 		name: res.name,
+				// 		surname: res.surname,
+				// 	});
+				// 	localStorage.setItem(`name`, res.name);
+				// 	localStorage.setItem(`surname`, res.surname);
+				// }
 			})
 		);
 	}

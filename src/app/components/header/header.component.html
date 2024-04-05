@@ -42,13 +42,13 @@
 			<span class="whitespace-nowrap font-semibold">
 				<a
 					class="font-bold duration-200 hover-underline after:bg-gray-900"
-					[routerLink]="[{ outlets: { modals: ['auth', 'login'] } }]"
+					[routerLink]="['/', { outlets: { modals: ['auth', 'login'] } }]"
 					>LOGIN</a
 				>
 				OR
 				<a
 					class="font-bold duration-200 hover-underline after:bg-gray-900"
-					[routerLink]="[{ outlets: { modals: ['auth', 'register'] } }]"
+					[routerLink]="['/', { outlets: { modals: ['auth', 'register'] } }]"
 					>REGISTER</a
 				></span
 			>

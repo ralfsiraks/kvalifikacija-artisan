@@ -5,7 +5,6 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
-import { LoginModalComponent } from './components/login-modal/login-modal.component';
 import { ToastComponent } from './components/toast/toast.component';
 import { AuthService } from './services/auth.service';
 import { CartService } from './services/cart.service';
@@ -22,15 +21,7 @@ import { ValidationService } from './services/validation.service';
 	templateUrl: './app.component.html',
 	styleUrl: './app.component.scss',
 	encapsulation: ViewEncapsulation.Emulated,
-	imports: [
-		RouterOutlet,
-		RouterLink,
-		HeaderComponent,
-		FooterComponent,
-		LoginModalComponent,
-		HttpClientModule,
-		ToastComponent,
-	],
+	imports: [RouterOutlet, RouterLink, HeaderComponent, FooterComponent, HttpClientModule, ToastComponent],
 	providers: [
 		CookieService,
 		CartService,
