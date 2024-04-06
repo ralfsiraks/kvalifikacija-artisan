@@ -85,18 +85,11 @@ export class AuthService {
 
 	onChangePassword(oldPassword: string, newPassword: string): Observable<any> {
 		const headers = this.httpHeadersService.getHeaders();
-		return this.http.patch<any>(`${this.ROOT_URL}/password`, { oldPassword, newPassword }, { headers }).pipe(
-			tap((res: any) => {
-				// if (res.id) {
-				// 	this.tokenSubject.next({
-				// 		token: localStorage.getItem(`token`),
-				// 		name: res.name,
-				// 		surname: res.surname,
-				// 	});
-				// 	localStorage.setItem(`name`, res.name);
-				// 	localStorage.setItem(`surname`, res.surname);
-				// }
-			})
-		);
+		return this.http.patch<any>(`${this.ROOT_URL}/password`, { oldPassword, newPassword }, { headers });
+	}
+
+	onDeleteAccount(password: string): Observable<any> {
+		const headers = this.httpHeadersService.getHeaders();
+		return this.http.delete<any>(`${this.ROOT_URL}/delete?password=${password}`, { headers });
 	}
 }

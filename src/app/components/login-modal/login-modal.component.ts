@@ -31,11 +31,7 @@ export class LoginModalComponent implements OnInit {
 
 	loginForm: FormGroup = new FormGroup({
 		email: new FormControl('', [Validators.required, Validators.email, ValidationService.notOnlyWhitespace]),
-		password: new FormControl('', [
-			Validators.required,
-			ValidationService.notOnlyWhitespace,
-			ValidationService.passwordPattern,
-		]),
+		password: new FormControl('', [Validators.required, ValidationService.notOnlyWhitespace]),
 	});
 
 	@ViewChild('modalContainer') modalContainer: ElementRef;

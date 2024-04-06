@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { CartPageComponent } from './components/cart-page/cart-page.component';
 import { CatalogComponent } from './components/catalog/catalog.component';
+import { DeleteModalComponent } from './components/delete-modal/delete-modal.component';
 import { HelpPageComponent } from './components/help-page/help-page.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { LoginModalComponent } from './components/login-modal/login-modal.component';
@@ -23,6 +24,11 @@ export const routes: Routes = [
 	{
 		path: 'password',
 		component: PasswordModalComponent,
+		outlet: 'modals',
+	},
+	{
+		path: 'delete',
+		component: DeleteModalComponent,
 		outlet: 'modals',
 	},
 	{

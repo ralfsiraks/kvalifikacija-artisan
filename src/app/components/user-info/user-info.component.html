@@ -104,7 +104,8 @@
 			<span class="group-hover:text-white transition-colors duration-200"> Change password </span>
 		</button>
 		<button
-			class="border-2 border-red-600 rounded-lg p-0.5 w-full text-red-600 text-2xl font-semibold flex justify-center gap-4 items-center group hover:bg-red-600 transition-colors duration-200"
+			[routerLink]="['/', { outlets: { modals: 'delete' } }]"
+			class="border-2 border-red-500 rounded-lg p-0.5 w-full text-red-500 text-2xl font-semibold flex justify-center gap-4 items-center group hover:bg-red-500 transition-colors duration-200"
 		>
 			<span class="group-hover:text-white transition-colors duration-200"> Delete account </span>
 		</button>
