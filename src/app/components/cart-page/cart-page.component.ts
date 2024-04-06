@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { take } from 'rxjs';
 import { DiscountCode } from '../../interfaces/discount-code';
 import { Product } from '../../interfaces/product';
@@ -35,7 +36,8 @@ export class CartPageComponent implements OnInit {
 	constructor(
 		private cartService: CartService,
 		private toastService: ToastService,
-		private checkoutService: CheckoutService
+		private checkoutService: CheckoutService,
+		private router: Router
 	) {}
 
 	ngOnInit(): void {
@@ -77,12 +79,15 @@ export class CartPageComponent implements OnInit {
 			.onCheckout(JSON.parse(localStorage.getItem(`cart`)), this.discountId)
 			.pipe(take(1))
 			.subscribe({
-				next: (value: {}) => {
-					this.cartService.cartReset();
-					this.cart = [];
-					this.toastService.onShowAlert(`shopping_cart_checkout`, `Checkout successful!`, `#74b816`);
+				next: (value: any) => {
+					console.log(value);
+					window.location.href = value;
+					// this.cartService.cartReset();
+					// this.cart = [];
+					// this.toastService.onShowAlert(`shopping_cart_checkout`, `Checkout successful!`, `#74b816`);
 				},
 				error: (error: any) => {
+					console.log(error);
 					this.toastService.onShowAlert(`login`, `Please log in before checking out!`, `#FF8333`);
 				},
 			});

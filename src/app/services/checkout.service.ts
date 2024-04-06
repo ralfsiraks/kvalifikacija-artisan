@@ -12,10 +12,10 @@ export class CheckoutService {
 
 	constructor(private http: HttpClient, private httpHeadersService: HttpHeadersService) {}
 
-	onCheckout(cart: number[], discountId: number): Observable<number> {
+	onCheckout(cart: number[], discountId: number): Observable<any> {
 		const headers = this.httpHeadersService.getHeaders();
 
-		return this.http.post<number>(
+		return this.http.post<any>(
 			`${this.ROOT_URL}/checkout`,
 			{
 				cart,
