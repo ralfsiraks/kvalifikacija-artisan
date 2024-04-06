@@ -90,6 +90,19 @@ export class AuthService {
 
 	onDeleteAccount(password: string): Observable<any> {
 		const headers = this.httpHeadersService.getHeaders();
-		return this.http.delete<any>(`${this.ROOT_URL}/delete?password=${password}`, { headers });
+		return this.http.delete<any>(`${this.ROOT_URL}/delete?password=${password}`, { headers }).pipe(
+			tap((res: any) => {
+				if (res.message === `deleted`) {
+					this.tokenSubject.next({
+						token: null,
+						name: null,
+						surname: null,
+					});
+					localStorage.removeItem(`name`);
+					localStorage.removeItem(`surname`);
+					localStorage.removeItem(`token`);
+				}
+			})
+		);
 	}
 }

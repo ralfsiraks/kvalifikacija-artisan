@@ -47,8 +47,9 @@ export class DeleteModalComponent {
 				.subscribe({
 					next: (data: any) => {
 						console.log(data);
-						// this.toastService.onShowAlert(`check_circle`, `Account deleted`, `#74b816`);
-						// this.onCloseModal(this.modalContainer.nativeElement);
+						this.toastService.onShowAlert(`check_circle`, `Account deleted!`, `#74b816`);
+						this.onCloseModal(this.modalContainer.nativeElement);
+						this.router.navigate(['/']);
 					},
 					error: (err) => {
 						console.log(err.error);
