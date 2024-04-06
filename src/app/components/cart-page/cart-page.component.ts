@@ -88,7 +88,11 @@ export class CartPageComponent implements OnInit {
 				},
 				error: (error: any) => {
 					console.log(error);
-					this.toastService.onShowAlert(`login`, `Please log in before checking out!`, `#FF8333`);
+					if (error.status === 401) {
+						this.toastService.onShowAlert(`login`, `Please log in before checking out!`, `#FF8333`);
+					} else if (error.status === 500) {
+						this.toastService.onShowAlert(`dns`, `There's been a server error!`, `red`);
+					}
 				},
 			});
 	}
