@@ -7,56 +7,21 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 import { LoginModalComponent } from './components/login-modal/login-modal.component';
 import { PasswordModalComponent } from './components/password-modal/password-modal.component';
 import { ProductPageComponent } from './components/product-page/product-page.component';
+import { SuccessComponent } from './components/success/success.component';
 import { UserPageComponent } from './components/user-page/user-page.component';
 
 export const routes: Routes = [
-	{
-		path: '',
-		title: 'Artisan - Digital Art and Design',
-		component: HomePageComponent,
-	},
+	{ path: '', title: 'Artisan - Digital Art and Design', component: HomePageComponent },
 	{ path: 'cart', title: 'My Cart', component: CartPageComponent },
-	{
-		path: 'auth/:method',
-		component: LoginModalComponent,
-		outlet: 'modals',
-	},
-	{
-		path: 'password',
-		component: PasswordModalComponent,
-		outlet: 'modals',
-	},
-	{
-		path: 'delete',
-		component: DeleteModalComponent,
-		outlet: 'modals',
-	},
-	{
-		path: 'catalog',
-		title: 'Catalog',
-		component: CatalogComponent,
-	},
-	{
-		path: 'search/:query',
-		title: 'Catalog',
-		component: CatalogComponent,
-	},
-	{
-		path: 'product/:id',
-		component: ProductPageComponent,
-	},
-	{
-		path: 'user/:mode',
-		component: UserPageComponent,
-	},
-	{
-		path: 'user/:mode/:id',
-		component: UserPageComponent,
-	},
-	{
-		path: 'help',
-		title: 'Help',
-		component: HelpPageComponent,
-	},
+	{ path: 'success', title: 'Thank you!', component: SuccessComponent },
+	{ path: 'auth/:method', component: LoginModalComponent, outlet: 'modals' },
+	{ path: 'password', component: PasswordModalComponent, outlet: 'modals' },
+	{ path: 'delete', component: DeleteModalComponent, outlet: 'modals' },
+	{ path: 'catalog', title: 'Catalog', component: CatalogComponent },
+	{ path: 'search/:query', title: 'Catalog', component: CatalogComponent },
+	{ path: 'product/:id', component: ProductPageComponent },
+	{ path: 'user/:mode', component: UserPageComponent },
+	{ path: 'user/:mode/:id', component: UserPageComponent },
+	{ path: 'help', title: 'Help', component: HelpPageComponent },
 	{ path: '**', redirectTo: '' },
 ];

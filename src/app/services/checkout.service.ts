@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { StripeSession } from '../interfaces/stripe-session';
 import { HttpHeadersService } from './http-headers.service';
 
 @Injectable({
@@ -25,5 +26,12 @@ export class CheckoutService {
 				headers,
 			}
 		);
+	}
+
+	onGetSession(id: string): Observable<StripeSession> {
+		const headers = this.httpHeadersService.getHeaders();
+		return this.http.get<StripeSession>(`${this.ROOT_URL}/stripe-session?session=${id}`, {
+			headers,
+		});
 	}
 }

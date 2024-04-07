@@ -82,9 +82,6 @@ export class CartPageComponent implements OnInit {
 				next: (value: any) => {
 					console.log(value);
 					window.location.href = value;
-					// this.cartService.cartReset();
-					// this.cart = [];
-					// this.toastService.onShowAlert(`shopping_cart_checkout`, `Checkout successful!`, `#74b816`);
 				},
 				error: (error: any) => {
 					console.log(error);

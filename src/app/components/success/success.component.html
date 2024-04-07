@@ -1,0 +1,20 @@
+<div
+	[ngClass]="{ 'animate-pulse': loading === true }"
+	class="w-full flex flex-col items-center px-cart-sides text-gray-900"
+>
+	<span class="material-symbols-outlined text-8xl"> task_alt </span>
+	<h1 class="font-bold text-center">Thank you {{ session.session.customer_details.name }}!</h1>
+	<h2 class="font-medium text-center">
+		Your order has been confirmed and you can now access it from your purchase history.
+	</h2>
+	<div class="border-4 border-gray-900 rounded-md py-6 px-20 mt-5">
+		<h2 class="font-semibold text-center mb-3">Order summary</h2>
+		<h3 class="font-medium">Payment status: {{ session.session.payment_status | titlecase }}</h3>
+		<h3 class="font-medium">Country: {{ session.session.customer_details.address.country }}</h3>
+		<h3 class="font-medium">Order price: ${{ session.session.amount_total | price }}</h3>
+		<h3 class="font-medium">
+			Payment method: {{ session.session.payment_method_details.card.brand | uppercase }} card ending with
+			{{ session.session.payment_method_details.card.last4 }}
+		</h3>
+	</div>
+</div>
