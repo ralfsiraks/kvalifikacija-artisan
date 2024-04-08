@@ -21,7 +21,7 @@
 	<div class="flex justify-between p-6 font-medium fade-in">
 		<div class="h-full">
 			<h3>Created at: {{ order.created_at | dateFormat }}</h3>
-			<h3>Status: {{ order.status }}</h3>
+			<h3>Status: {{ order.status | titlecase }}</h3>
 		</div>
 		<div class="h-full">
 			<h3>Artwork: ${{ artworkPrice | number : "1.2-2" }}</h3>
