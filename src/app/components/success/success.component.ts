@@ -1,16 +1,17 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { take } from 'rxjs';
 import { StripeSession } from '../../interfaces/stripe-session';
 import { PricePipe } from '../../pipes/price.pipe';
 import { CartService } from '../../services/cart.service';
 import { CheckoutService } from '../../services/checkout.service';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
 	selector: 'app-success',
 	standalone: true,
-	imports: [CommonModule, PricePipe],
+	imports: [CommonModule, PricePipe, RouterLink],
 	templateUrl: './success.component.html',
 	styleUrl: './success.component.scss',
 })
@@ -23,7 +24,8 @@ export class SuccessComponent implements OnInit {
 		private checkoutService: CheckoutService,
 		private route: ActivatedRoute,
 		private router: Router,
-		private cartService: CartService
+		private cartService: CartService,
+		private toastService: ToastService
 	) {}
 
 	ngOnInit() {
@@ -48,7 +50,12 @@ export class SuccessComponent implements OnInit {
 					this.cartService.cartReset();
 				},
 				error: (err) => {
-					console.log(err.error.status);
+					if (err.status === 401) {
+						this.toastService.onShowAlert(`error`, `Please log in!`, `#FF8333`);
+					} else if (err.status === 500) {
+						this.toastService.onShowAlert(`dns`, `There's been a server error!`, `red`);
+					}
+					console.log(err.error);
 					this.loading = false;
 				},
 			});

@@ -3,18 +3,36 @@
 	class="w-full flex flex-col items-center px-cart-sides text-gray-900"
 >
 	<span class="material-symbols-outlined text-8xl"> task_alt </span>
-	<h1 class="font-bold text-center">Thank you {{ session.session.customer_details.name }}!</h1>
-	<h2 class="font-medium text-center">
-		Your order has been confirmed and you can now access it from your purchase history.
-	</h2>
-	<div class="border-4 border-gray-900 rounded-md py-6 px-20 mt-5">
-		<h2 class="font-semibold text-center mb-3">Order summary</h2>
-		<h3 class="font-medium">Payment status: {{ session.session.payment_status | titlecase }}</h3>
-		<h3 class="font-medium">Country: {{ session.session.customer_details.address.country }}</h3>
-		<h3 class="font-medium">Order price: ${{ session.session.amount_total | price }}</h3>
-		<h3 class="font-medium">
-			Payment method: {{ session.session.payment_method_details.card.brand | uppercase }} card ending with
-			{{ session.session.payment_method_details.card.last4 }}
-		</h3>
+
+	<div class="w-full flex flex-col items-center">
+		@if (session) {
+		<h1 class="font-bold text-center fade-in">Thank you {{ session.session.customer_details.name }}!</h1>
+		<h2 class="font-medium text-center fade-in">
+			Your order has been confirmed and you can now access it from your purchase history.
+		</h2>
+		<div class="w-1/2 border-4 border-gray-900 rounded-lg py-6 px-20 mt-5 fade-in">
+			<h2 class="font-semibold text-center mb-3">Order summary</h2>
+			<h3 class="font-medium">Payment status: {{ session.session.payment_status | titlecase }}</h3>
+			<h3 class="font-medium">Country: {{ session.session.customer_details.address.country }}</h3>
+			<h3 class="font-medium">Order price: ${{ session.session.amount_total | price }}</h3>
+			<h3 class="font-medium">
+				Payment method: {{ session.session.payment_method_details.card.brand | uppercase }} card ending with
+				{{ session.session.payment_method_details.card.last4 }}
+			</h3>
+		</div>
+		}
+		<div class="w-1/2 my-5">
+			<button
+				[routerLink]="['/']"
+				class="border-4 border-gray-900 rounded-lg h-5vmin p-3 w-full text-2xl font-semibold flex justify-center items-center group hover:bg-gray-900 transition-colors duration-200"
+			>
+				<span class="group-hover:text-white transition-colors duration-200">Back to shopping</span>
+				<span
+					class="material-symbols-outlined text-4xl group-hover:text-white group-hover:translate-x-2 transition-all duration-200"
+				>
+					trending_flat
+				</span>
+			</button>
+		</div>
 	</div>
 </div>
