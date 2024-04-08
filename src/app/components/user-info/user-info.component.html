@@ -12,7 +12,7 @@
 					'border-red-500': userForm.get('name').invalid && (userForm.get('name').dirty || userForm.get('name').touched)
 				}"
 				name="input"
-				class="flex justify-start items-center gap-3 border-2 border-gray-900 p-2 rounded-xl w-full"
+				class="flex justify-start items-center gap-3 border-2 border-dark p-2 rounded-xl w-full"
 			>
 				<div class="w-1/10 flex justify-center items-center">
 					<span
@@ -34,7 +34,7 @@
 						userForm.get('surname').invalid && (userForm.get('surname').dirty || userForm.get('surname').touched)
 				}"
 				name="input"
-				class="flex justify-start items-center gap-3 border-2 border-gray-900 p-2 rounded-xl w-full"
+				class="flex justify-start items-center gap-3 border-2 border-dark p-2 rounded-xl w-full"
 			>
 				<div class="w-1/10 flex justify-center items-center">
 					<span
@@ -62,7 +62,7 @@
 						userForm.get('email').invalid && (userForm.get('email').dirty || userForm.get('email').touched)
 				}"
 				name="input"
-				class="flex justify-start items-center gap-3 border-2 border-gray-900 p-2 rounded-xl w-full"
+				class="flex justify-start items-center gap-3 border-2 border-dark p-2 rounded-xl w-full"
 			>
 				<div class="w-1/10 flex justify-center items-center">
 					<span
@@ -86,7 +86,7 @@
 			</h6>
 			<button
 				[disabled]="userForm.invalid"
-				class="border-2 border-gray-900 rounded-lg p-0.5 w-full text-2xl font-semibold flex justify-center items-center group hover:bg-gray-900 transition-all duration-200 disabled:opacity-50"
+				class="border-2 border-dark rounded-lg p-0.5 w-full text-2xl font-semibold flex justify-center items-center group hover:bg-dark transition-all duration-200 disabled:opacity-50"
 			>
 				<span class="group-hover:text-white transition-colors duration-200 select-none"> Save changes </span>
 			</button>
@@ -99,7 +99,7 @@
 		<h3 class="font-medium">Other options</h3>
 		<button
 			[routerLink]="['/', { outlets: { modals: 'password' } }]"
-			class="border-2 border-gray-900 rounded-lg p-0.5 w-full text-2xl font-semibold flex justify-center gap-4 items-center group hover:bg-gray-900 transition-colors duration-200"
+			class="border-2 border-dark rounded-lg p-0.5 w-full text-2xl font-semibold flex justify-center gap-4 items-center group hover:bg-dark transition-colors duration-200"
 		>
 			<span class="group-hover:text-white transition-colors duration-200"> Change password </span>
 		</button>

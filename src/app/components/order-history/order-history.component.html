@@ -20,7 +20,7 @@
 	} } @for (item of orders; track $index) {
 	<tr
 		[routerLink]="['/user/order', item.id]"
-		class="border-b hover:bg-gray-900 group text-lg font-medium hover:text-white transition-all duration-200 cursor-pointer last:border-none fade-in"
+		class="border-b hover:bg-dark group text-lg font-medium hover:text-white transition-all duration-200 cursor-pointer last:border-none fade-in"
 		id="item.id"
 	>
 		<td class="px-8 py-4">#{{ item.id }}</td>

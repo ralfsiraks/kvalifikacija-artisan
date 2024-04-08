@@ -1,4 +1,4 @@
-<div class="w-full flex justify-between items-center gap-4 text-gray-900 px-cart-sides my-6">
+<div class="w-full flex justify-between items-center gap-4 text-dark px-cart-sides my-6">
 	@if (search) {
 	<h2 class="font-semibold truncate fade-in">{{ 'Search for: "' + search + '"' }}</h2>
 	} @else {
@@ -15,8 +15,8 @@
 		</select>
 	</div>
 </div>
-<div class="flex flex-row gap-6 justify-start items-start text-gray-900 w-full px-cart-sides fade-in">
-	<div class="border-2 border-gray-900 rounded-lg flex flex-col max-w-xs">
+<div class="flex flex-row gap-6 justify-start items-start text-dark w-full px-cart-sides fade-in">
+	<div class="border-2 border-dark rounded-lg flex flex-col max-w-xs">
 		<div class="flex flex-col p-4 w-full">
 			<div class="flex justify-between items-center mb-4">
 				<h2 class="font-medium">Price</h2>
@@ -26,14 +26,14 @@
 					#minprice
 					(blur)="onPriceParams('minP', minprice)"
 					type="number"
-					class="font-semibold border-2 border-gray-900 rounded-md w-full text-center overflow-hidden"
+					class="font-semibold border-2 border-dark rounded-md w-full text-center overflow-hidden"
 				/>
 				to
 				<input
 					#maxprice
 					(blur)="onPriceParams('maxP', maxprice)"
 					type="number"
-					class="font-semibold border-2 border-gray-900 rounded-md w-full text-center overflow-hidden"
+					class="font-semibold border-2 border-dark rounded-md w-full text-center overflow-hidden"
 				/>
 			</div>
 		</div>
@@ -50,7 +50,7 @@
 				<label
 					(click)="onChangeSize('h', sheight)"
 					for="sheight"
-					class="flex justify-center items-center border-2 border-gray-900 rounded-md w-8 h-8 hover:bg-gray-900 hover:text-white transition-all duration-200 cursor-pointer peer-checked/s:bg-gray-900 peer-checked/s:text-white text-lg"
+					class="flex justify-center items-center border-2 border-dark rounded-md w-8 h-8 hover:bg-dark hover:text-white transition-all duration-200 cursor-pointer peer-checked/s:bg-dark peer-checked/s:text-white text-lg"
 				>
 					S
 				</label>
@@ -58,7 +58,7 @@
 				<label
 					(click)="onChangeSize('h', mheight)"
 					for="mheight"
-					class="flex justify-center items-center border-2 border-gray-900 rounded-md w-10 h-10 hover:bg-gray-900 hover:text-white transition-all duration-200 cursor-pointer peer-checked/m:bg-gray-900 peer-checked/m:text-white text-lg"
+					class="flex justify-center items-center border-2 border-dark rounded-md w-10 h-10 hover:bg-dark hover:text-white transition-all duration-200 cursor-pointer peer-checked/m:bg-dark peer-checked/m:text-white text-lg"
 				>
 					M
 				</label>
@@ -67,7 +67,7 @@
 					#div
 					(click)="onChangeSize('h', lheight)"
 					for="lheight"
-					class="flex justify-center items-center border-2 border-gray-900 rounded-md w-12 h-12 hover:bg-gray-900 hover:text-white transition-all duration-200 cursor-pointer peer-checked/l:bg-gray-900 peer-checked/l:text-white text-2xl"
+					class="flex justify-center items-center border-2 border-dark rounded-md w-12 h-12 hover:bg-dark hover:text-white transition-all duration-200 cursor-pointer peer-checked/l:bg-dark peer-checked/l:text-white text-2xl"
 				>
 					L
 				</label>
@@ -75,7 +75,7 @@
 				<label
 					(click)="onChangeSize('h', xlheight)"
 					for="xlheight"
-					class="flex justify-center items-center border-2 border-gray-900 rounded-md w-14 h-14 hover:bg-gray-900 hover:text-white transition-all duration-200 cursor-pointer peer-checked/xl:bg-gray-900 peer-checked/xl:text-white text-2xl"
+					class="flex justify-center items-center border-2 border-dark rounded-md w-14 h-14 hover:bg-dark hover:text-white transition-all duration-200 cursor-pointer peer-checked/xl:bg-dark peer-checked/xl:text-white text-2xl"
 				>
 					XL
 				</label>
@@ -94,7 +94,7 @@
 				<label
 					(click)="onChangeSize('w', swidth)"
 					for="swidth"
-					class="flex justify-center items-center border-2 border-gray-900 rounded-md w-8 h-8 hover:bg-gray-900 hover:text-white transition-all duration-200 cursor-pointer peer-checked/s:bg-gray-900 peer-checked/s:text-white text-lg"
+					class="flex justify-center items-center border-2 border-dark rounded-md w-8 h-8 hover:bg-dark hover:text-white transition-all duration-200 cursor-pointer peer-checked/s:bg-dark peer-checked/s:text-white text-lg"
 				>
 					S
 				</label>
@@ -102,7 +102,7 @@
 				<label
 					(click)="onChangeSize('w', mwidth)"
 					for="mwidth"
-					class="flex justify-center items-center border-2 border-gray-900 rounded-md w-10 h-10 hover:bg-gray-900 hover:text-white transition-all duration-200 cursor-pointer peer-checked/m:bg-gray-900 peer-checked/m:text-white text-lg"
+					class="flex justify-center items-center border-2 border-dark rounded-md w-10 h-10 hover:bg-dark hover:text-white transition-all duration-200 cursor-pointer peer-checked/m:bg-dark peer-checked/m:text-white text-lg"
 				>
 					M
 				</label>
@@ -110,7 +110,7 @@
 				<label
 					(click)="onChangeSize('w', lwidth)"
 					for="lwidth"
-					class="flex justify-center items-center border-2 border-gray-900 rounded-md w-12 h-12 hover:bg-gray-900 hover:text-white transition-all duration-200 cursor-pointer peer-checked/l:bg-gray-900 peer-checked/l:text-white text-2xl"
+					class="flex justify-center items-center border-2 border-dark rounded-md w-12 h-12 hover:bg-dark hover:text-white transition-all duration-200 cursor-pointer peer-checked/l:bg-dark peer-checked/l:text-white text-2xl"
 				>
 					L
 				</label>
@@ -118,7 +118,7 @@
 				<label
 					(click)="onChangeSize('w', xlwidth)"
 					for="xlwidth"
-					class="flex justify-center items-center border-2 border-gray-900 rounded-md w-14 h-14 hover:bg-gray-900 hover:text-white transition-all duration-200 cursor-pointer peer-checked/xl:bg-gray-900 peer-checked/xl:text-white text-2xl"
+					class="flex justify-center items-center border-2 border-dark rounded-md w-14 h-14 hover:bg-dark hover:text-white transition-all duration-200 cursor-pointer peer-checked/xl:bg-dark peer-checked/xl:text-white text-2xl"
 				>
 					XL
 				</label>
@@ -159,7 +159,7 @@
 			<button
 				[disabled]="page === 1"
 				(click)="onChangePage('previous')"
-				class="flex items-center gap-2 px-6 py-3 font-sans text-xs font-bold text-center text-gray-900 uppercase align-middle transition-all rounded-lg select-none hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+				class="flex items-center gap-2 px-6 py-3 font-sans text-xs font-bold text-center text-dark uppercase align-middle transition-all rounded-lg select-none hover:bg-dark/10 active:bg-dark/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
 				type="button"
 			>
 				<svg
@@ -179,7 +179,7 @@
 
 				<button
 					(click)="onChangePage(1)"
-					class="relative h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-lg text-center align-middle font-sans text-xs font-medium uppercase text-gray-900 transition-all hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+					class="relative h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-lg text-center align-middle font-sans text-xs font-medium uppercase text-dark transition-all hover:bg-dark/10 active:bg-dark/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
 					type="button"
 				>
 					<span class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
@@ -193,8 +193,8 @@
 					class="relative h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-lg text-center align-middle font-sans text-xs font-medium uppercase disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
 					[ngClass]="
 						item === page
-							? 'bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none'
-							: 'text-gray-900  hover:bg-gray-900/10 active:bg-gray-900/20'
+							? 'bg-dark text-white shadow-md shadow-dark/10 hover:shadow-lg hover:shadow-dark/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none'
+							: 'text-dark  hover:bg-dark/10 active:bg-dark/20'
 					"
 					type="button"
 				>
@@ -206,7 +206,7 @@
 				<h3>...</h3>
 				<button
 					(click)="onChangePage(lastPage)"
-					class="relative h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-lg text-center align-middle font-sans text-xs font-medium uppercase text-gray-900 transition-all hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+					class="relative h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-lg text-center align-middle font-sans text-xs font-medium uppercase text-dark transition-all hover:bg-dark/10 active:bg-dark/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
 					type="button"
 				>
 					<span class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
@@ -218,7 +218,7 @@
 			<button
 				[disabled]="page === lastPage"
 				(click)="onChangePage('next')"
-				class="flex items-center gap-2 px-6 py-3 font-sans text-xs font-bold text-center text-gray-900 uppercase align-middle transition-all rounded-lg select-none hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+				class="flex items-center gap-2 px-6 py-3 font-sans text-xs font-bold text-center text-dark uppercase align-middle transition-all rounded-lg select-none hover:bg-dark/10 active:bg-dark/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
 				type="button"
 			>
 				<svg

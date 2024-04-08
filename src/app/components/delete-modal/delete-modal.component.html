@@ -1,12 +1,12 @@
 <div class="flex fixed z-20 justify-center items-center w-screen h-screen fade-in" #modalContainer>
-	<div class="fixed z-20 bg-gray-900 bg-opacity-60 w-screen h-screen" (click)="onCloseModal(modalContainer)"></div>
+	<div class="fixed z-20 bg-dark bg-opacity-60 w-screen h-screen" (click)="onCloseModal(modalContainer)"></div>
 	<div
-		class="z-30 justify-center items-center flex-col bg-white border-red-500 border-4 w-min scale-up text-gray-900 rounded-2xl p-10 transition-all duration-1000"
+		class="z-30 justify-center items-center flex-col bg-white border-red-500 border-4 w-min scale-up text-dark rounded-2xl p-10 transition-all duration-1000"
 	>
 		<div class="flex w-full items-center flex-col mb-2">
 			<div class="w-full flex justify-end">
 				<span
-					class="material-symbols-outlined black-text-shadow duration-200 text-gray-900 text-5xl -mt-5 -mr-5"
+					class="material-symbols-outlined black-text-shadow duration-200 text-dark text-5xl -mt-5 -mr-5"
 					(click)="onCloseModal(modalContainer)"
 				>
 					close
@@ -32,7 +32,7 @@
 							(deleteForm.get('password').dirty || deleteForm.get('password').touched)
 					}"
 					name="input"
-					class="flex justify-start items-center gap-3 max-w-lg border-2 border-gray-900 p-2 rounded-xl w-full transition-all duration-300"
+					class="flex justify-start items-center gap-3 max-w-lg border-2 border-dark p-2 rounded-xl w-full transition-all duration-300"
 				>
 					<div class="w-1/10 flex justify-center items-center">
 						<span

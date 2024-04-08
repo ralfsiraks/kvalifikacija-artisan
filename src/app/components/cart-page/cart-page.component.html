@@ -1,8 +1,8 @@
-<div class="flex justify-center items-center flex-col text-gray-900 w-full px-cart-sides fade-in">
+<div class="flex justify-center items-center flex-col text-dark w-full px-cart-sides fade-in">
 	<h1 class="font-bold mb-3">MY CART</h1>
 	@if ((cart?.length) > 0) {
 	<div class="flex flex-row justify-start w-full gap-6 m-3">
-		<div class="border-2 border-gray-900 w-4/6 rounded-xl test flex-col justify-center h-min overflow-hidden">
+		<div class="border-2 border-dark w-4/6 rounded-xl test flex-col justify-center h-min overflow-hidden">
 			@if(loading) { @for (item of cart; track $index) {
 			<app-cart-skeleton></app-cart-skeleton>
 			} } @for (item of cartItems; track $index) {
@@ -17,7 +17,7 @@
 			<hr />
 			}
 		</div>
-		<div class="border-2 border-gray-900 w-2/6 rounded-xl p-4 flex flex-col items-center gap-2 overflow-hidden h-min">
+		<div class="border-2 border-dark w-2/6 rounded-xl p-4 flex flex-col items-center gap-2 overflow-hidden h-min">
 			<h2 class="font-semibold text-left w-full">Order summary</h2>
 			<div class="w-full flex flex-col gap-2 mb-2">
 				<div class="w-full flex justify-between mt-4">
@@ -40,7 +40,7 @@
 
 			<button
 				(click)="onCheckout()"
-				class="border-2 border-gray-900 rounded-lg h-5vmin p-3 w-full text-2xl font-semibold flex justify-center items-center group hover:bg-gray-900 transition-colors duration-200"
+				class="border-2 border-dark rounded-lg h-5vmin p-3 w-full text-2xl font-semibold flex justify-center items-center group hover:bg-dark transition-colors duration-200"
 			>
 				<span class="group-hover:text-white transition-colors duration-200">Checkout</span>
 				<span
@@ -52,7 +52,7 @@
 			<form
 				(ngSubmit)="onDiscountCodeSubmit()"
 				[formGroup]="discountCodeForm"
-				class="border-2 border-gray-900 rounded-lg w-full h-5vmin flex justify-between items-center p-3"
+				class="border-2 border-dark rounded-lg w-full h-5vmin flex justify-between items-center p-3"
 			>
 				<input
 					formControlName="code"
