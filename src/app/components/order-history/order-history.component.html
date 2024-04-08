@@ -26,7 +26,7 @@
 		<td class="px-8 py-4">#{{ item.id }}</td>
 		<td class="px-8 py-4">{{ item.created_at | dateFormat }}</td>
 		<td class="px-8 py-4">${{ this.orderPrices[$index] | number : "1.2-2" }}</td>
-		<td class="px-8 py-4">{{ item.status }}</td>
+		<td class="px-8 py-4">{{ item.status | titlecase }}</td>
 		<td class="px-8 py-4">
 			<button
 				class="material-symbols-outlined text-4xl group-hover:translate-x-2 transition-all outline-4"
