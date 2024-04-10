@@ -16,6 +16,7 @@ export class AuthService {
 
 	constructor(private http: HttpClient, private httpHeadersService: HttpHeadersService) {}
 
+	// Nosūta pieprasījumu veikt lietotāja autentifikāciju uz back-end
 	onLogin(email: string, password: string): Observable<AuthObject> {
 		return this.http
 			.post<any>(`${this.ROOT_URL}/login`, {
@@ -36,6 +37,7 @@ export class AuthService {
 			);
 	}
 
+	// Nosūta pieprasījumu veikt lietotāja reģistrāciju uz back-end
 	onRegister(name: string, surname: string, email: string, password: string): Observable<AuthObject> {
 		return this.http
 			.post<AuthObject>(`${this.ROOT_URL}/register`, {
@@ -58,6 +60,7 @@ export class AuthService {
 			);
 	}
 
+	// Nosūta pieprasījumu iegūt konkrēta lietotāja profila datus uz back-end
 	getUser(): Observable<User> {
 		const headers = this.httpHeadersService.getHeaders();
 		return this.http.get<User>(`${this.ROOT_URL}/user`, {
@@ -65,6 +68,7 @@ export class AuthService {
 		});
 	}
 
+	// Nosūta pieprsījumu mainīt lietotāja datus uz back-end
 	updateUser(patches: any): Observable<User['user_data']> {
 		const headers = this.httpHeadersService.getHeaders();
 		return this.http.patch<User['user_data']>(`${this.ROOT_URL}/user`, patches, { headers }).pipe(
@@ -83,11 +87,13 @@ export class AuthService {
 		);
 	}
 
+	// Nosūta abas paroles uz back-end, lai mainītu lietotāja paroli
 	onChangePassword(oldPassword: string, newPassword: string): Observable<any> {
 		const headers = this.httpHeadersService.getHeaders();
 		return this.http.patch<any>(`${this.ROOT_URL}/password`, { oldPassword, newPassword }, { headers });
 	}
 
+	// Veic pārbaudi un nosūta pieprasījumu dzēst lietotāja kontu uz back-end
 	onDeleteAccount(password: string): Observable<any> {
 		const headers = this.httpHeadersService.getHeaders();
 		return this.http.delete<any>(`${this.ROOT_URL}/delete?password=${password}`, { headers }).pipe(

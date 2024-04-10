@@ -33,12 +33,7 @@ export class CartPageComponent implements OnInit {
 	loading: boolean = true;
 	discountId: number = null;
 
-	constructor(
-		private cartService: CartService,
-		private toastService: ToastService,
-		private checkoutService: CheckoutService,
-		private router: Router
-	) {}
+	constructor(private cartService: CartService, private toastService: ToastService, private checkoutService: CheckoutService, private router: Router) {}
 
 	ngOnInit(): void {
 		this.cartService.cart$.subscribe((data: []) => {
@@ -49,6 +44,7 @@ export class CartPageComponent implements OnInit {
 		});
 	}
 
+	// Nosūta ievadīto atlaižu kodu uz back-end uz pārbaudi un piešķir atlaidi, ja tas ir derīgs
 	onDiscountCodeSubmit(): void {
 		const form = this.discountCodeForm;
 		if (form.get('code')?.value.trim() === ``) {
@@ -74,6 +70,7 @@ export class CartPageComponent implements OnInit {
 			});
 	}
 
+	// Nosūta pasūtījuma informāciju uz back-end un uzsāk apmaksas procesu atverot Stripe apmaksas lapu
 	onCheckout(): void {
 		this.checkoutService
 			.onCheckout(JSON.parse(localStorage.getItem(`cart`)), this.discountId)
@@ -94,6 +91,7 @@ export class CartPageComponent implements OnInit {
 			});
 	}
 
+	// Iegūst visu groza preču informāciju no datubāzes
 	onGetCart(): void {
 		this.itemTotal = 0;
 		this.cartItems = [];

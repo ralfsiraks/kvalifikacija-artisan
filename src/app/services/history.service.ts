@@ -14,6 +14,7 @@ export class HistoryService {
 
 	constructor(private http: HttpClient, private httpHeadersService: HttpHeadersService) {}
 
+	//Pieprasa konkrēta lietotāja pasūtījumu vēsturi no back-end
 	getOrderHistory(token: string): Observable<OrderHistory[]> {
 		const headers = this.httpHeadersService.getHeaders();
 
@@ -22,6 +23,7 @@ export class HistoryService {
 		});
 	}
 
+	//Pieprasa konkrēta pasūtījuma informāciju no back-end
 	getOrder(token: string, orderId: number): Observable<Order> {
 		const headers = this.httpHeadersService.getHeaders();
 

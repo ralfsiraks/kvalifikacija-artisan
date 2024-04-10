@@ -26,7 +26,6 @@ export class OrderComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.orderId = +this.route.snapshot.paramMap.get('id');
-
 		this.loading = true;
 		this.historyService
 			.getOrder(localStorage.getItem(`token`), this.orderId)
@@ -45,11 +44,9 @@ export class OrderComponent implements OnInit {
 
 	getPrices(order: Order): void {
 		let artwork: number = 0;
-
 		order.ordered_products.forEach((e) => {
 			artwork += e.price;
 		});
-
 		if (order.discount_id > 0) {
 			this.discount = order.discount_code.amount;
 			const discount: string = `0.${100 - this.discount}`;
@@ -57,7 +54,6 @@ export class OrderComponent implements OnInit {
 		} else {
 			this.finalPrice = artwork + 1.45;
 		}
-
 		this.artworkPrice = artwork;
 	}
 }

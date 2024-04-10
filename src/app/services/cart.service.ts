@@ -18,6 +18,7 @@ export class CartService {
 
 	constructor(private http: HttpClient, private toastService: ToastService) {}
 
+	// Pārbauda ievadīto atlaides kodu no datubāzes
 	checkCode(code: string): Observable<DiscountCode[]> {
 		return this.http.get<DiscountCode[]>(this.ROOT_URL + '/code', {
 			headers: new HttpHeaders({
@@ -26,6 +27,7 @@ export class CartService {
 		});
 	}
 
+	// Iegūst visu groza preču informāciju no datubāzes
 	getCart(cart: number[]): Observable<Product[]> {
 		return this.http.get<Product[]>(this.ROOT_URL + '/cart', {
 			headers: new HttpHeaders({
@@ -34,13 +36,15 @@ export class CartService {
 		});
 	}
 
+	// Pievieno preces identifikatoru iepirkumu grozam
 	addItem(id: number): void {
 		let cart = JSON.parse(localStorage.getItem(`cart`));
 		if (cart === null) {
 			cart = [];
 		}
-		// komentars
+
 		const index = cart.indexOf(id);
+
 		if (index === -1) {
 			cart.push(id);
 			localStorage.setItem(`cart`, JSON.stringify(cart));
@@ -51,6 +55,7 @@ export class CartService {
 		}
 	}
 
+	// Izņem konkrētu preci no pirkumu groza
 	removeItem(id: number): void {
 		const idArr = JSON.parse(localStorage.getItem(`cart`));
 		const index = idArr.indexOf(id);
@@ -61,11 +66,13 @@ export class CartService {
 		this.cartSubject.next([]);
 	}
 
+	// Palielina pirkumu groza preču skaitu par 1
 	incrementCartCount(): void {
 		const currentCount = this.cartCountSubject.getValue();
 		this.cartCountSubject.next(currentCount + 1);
 	}
 
+	// Samazina pirkumu groza preču skaitu par 1
 	decrementCartCount(): void {
 		const currentCount = this.cartCountSubject.getValue();
 		if (currentCount > 0) {
@@ -73,6 +80,7 @@ export class CartService {
 		}
 	}
 
+	// Izņem visu no pirkumu groza
 	cartReset() {
 		localStorage.setItem(`cart`, `[]`);
 		this.cartCountSubject.next(0);

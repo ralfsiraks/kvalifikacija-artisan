@@ -17,25 +17,14 @@ import { ValidationService } from '../../services/validation.service';
 export class PasswordModalComponent {
 	@ViewChild('modalContainer') modalContainer: ElementRef;
 	passwordForm: FormGroup = new FormGroup({
-		oldPassword: new FormControl('', [
-			Validators.required,
-			ValidationService.notOnlyWhitespace,
-			ValidationService.passwordPattern,
-		]),
-		newPassword: new FormControl('', [
-			Validators.required,
-			ValidationService.notOnlyWhitespace,
-			ValidationService.passwordPattern,
-		]),
-		newPasswordAgain: new FormControl('', [
-			Validators.required,
-			ValidationService.notOnlyWhitespace,
-			ValidationService.passwordPattern,
-		]),
+		oldPassword: new FormControl('', [Validators.required, ValidationService.notOnlyWhitespace, ValidationService.passwordPattern]),
+		newPassword: new FormControl('', [Validators.required, ValidationService.notOnlyWhitespace, ValidationService.passwordPattern]),
+		newPasswordAgain: new FormControl('', [Validators.required, ValidationService.notOnlyWhitespace, ValidationService.passwordPattern]),
 	});
 
 	constructor(private router: Router, private authService: AuthService, private toastService: ToastService) {}
 
+	// Aizver dialoga kasti
 	onCloseModal(container: HTMLDivElement): void {
 		container.classList.add(`fade-out`);
 		setTimeout(() => {
@@ -52,6 +41,7 @@ export class PasswordModalComponent {
 		}, 400);
 	}
 
+	// Veic pārbaudes un nosūta abas ievadītās paroles uz back-end pārbaudīšanai un/vai paroles maiņai
 	onPasswordSubmit(): void {
 		if (this.passwordForm.valid) {
 			const oldPassword = this.passwordForm.get(`oldPassword`).value;

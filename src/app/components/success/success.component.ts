@@ -20,14 +20,9 @@ export class SuccessComponent implements OnInit {
 	loading: boolean = false;
 	session: StripeSession;
 
-	constructor(
-		private checkoutService: CheckoutService,
-		private route: ActivatedRoute,
-		private router: Router,
-		private cartService: CartService,
-		private toastService: ToastService
-	) {}
+	constructor(private checkoutService: CheckoutService, private route: ActivatedRoute, private router: Router, private cartService: CartService, private toastService: ToastService) {}
 
+	// Ja apmaksas sesija netiek atgriezta, tiek atvērts bāzes logs
 	ngOnInit(): void {
 		this.sessionId = this.route.snapshot.queryParams['session'];
 		if (!this.sessionId) {
@@ -37,6 +32,7 @@ export class SuccessComponent implements OnInit {
 		}
 	}
 
+	// Iegūst apmaksas sesiju izmantojot back-end
 	getSession(): void {
 		this.loading = true;
 		this.checkoutService

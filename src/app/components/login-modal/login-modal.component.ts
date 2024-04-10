@@ -22,11 +22,7 @@ export class LoginModalComponent implements OnInit {
 		name: new FormControl('', [Validators.required, ValidationService.notOnlyWhitespace]),
 		surname: new FormControl('', [Validators.required, ValidationService.notOnlyWhitespace]),
 		email: new FormControl('', [Validators.required, Validators.email, ValidationService.notOnlyWhitespace]),
-		password: new FormControl('', [
-			Validators.required,
-			ValidationService.notOnlyWhitespace,
-			ValidationService.passwordPattern,
-		]),
+		password: new FormControl('', [Validators.required, ValidationService.notOnlyWhitespace, ValidationService.passwordPattern]),
 	});
 
 	loginForm: FormGroup = new FormGroup({
@@ -36,12 +32,7 @@ export class LoginModalComponent implements OnInit {
 
 	@ViewChild('modalContainer') modalContainer: ElementRef;
 
-	constructor(
-		private router: Router,
-		private route: ActivatedRoute,
-		private authService: AuthService,
-		private toastService: ToastService
-	) {}
+	constructor(private router: Router, private route: ActivatedRoute, private authService: AuthService, private toastService: ToastService) {}
 
 	ngOnInit(): void {
 		this.route.params.subscribe((params) => {
@@ -49,22 +40,18 @@ export class LoginModalComponent implements OnInit {
 		});
 	}
 
+	// Aizver dialoga kasti
 	onCloseModal(container: HTMLDivElement): void {
 		container.classList.add(`fade-out`);
 		setTimeout(() => {
 			const urlTree = this.router.parseUrl(this.router.url);
-
-			// Remove the named outlet segment from the URL tree
 			delete urlTree.root.children['modals'];
-
-			// Serialize the modified URL tree back to a string URL
 			const url = this.router.serializeUrl(urlTree);
-
-			// Navigate to the modified URL
 			this.router.navigateByUrl(url);
 		}, 400);
 	}
 
+	// Maina režīmu no reģistrēšanās uz pierakstīšanos un otrādi
 	onChangeMethod(method: string): void {
 		const urlTree = this.router.parseUrl(this.router.url);
 		delete urlTree.root.children['modals'];
@@ -72,14 +59,10 @@ export class LoginModalComponent implements OnInit {
 		this.router.navigateByUrl(url);
 	}
 
+	// Veic lietotāja reģistrāciju balstoties uz ievadformas informāciju
 	onRegisterSubmit(): void {
 		this.authService
-			.onRegister(
-				this.registerForm.get('name')?.value.trim(),
-				this.registerForm.get('surname')?.value.trim(),
-				this.registerForm.get('email')?.value.trim(),
-				this.registerForm.get('password')?.value
-			)
+			.onRegister(this.registerForm.get('name')?.value.trim(), this.registerForm.get('surname')?.value.trim(), this.registerForm.get('email')?.value.trim(), this.registerForm.get('password')?.value)
 			.pipe(take(1))
 			.subscribe({
 				next: (res: any) => {
@@ -99,6 +82,7 @@ export class LoginModalComponent implements OnInit {
 			});
 	}
 
+	// Veic lietotāja pierakstīšanu balstoties uz ievadformas informāciju
 	onLoginSubmit(): void {
 		if (this.loginForm.valid) {
 			this.authService

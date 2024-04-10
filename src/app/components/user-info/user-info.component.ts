@@ -38,16 +38,17 @@ export class UserInfoComponent implements OnInit {
 		this.getUserInfo();
 	}
 
+	// Ievada lietotāja informāciju ievadformā
 	onSetFormValues(data: any): void {
 		this.userForm.setValue({
 			name: data.user_data.name,
 			surname: data.user_data.surname,
 			email: data.email,
 		});
-
 		this.initValues = { name: data.user_data.name, surname: data.user_data.surname, email: data.email };
 	}
 
+	// Iegūst lietotāja informāciju no datubāzes
 	getUserInfo(): void {
 		this.loading = true;
 		this.authService
@@ -79,6 +80,7 @@ export class UserInfoComponent implements OnInit {
 			});
 	}
 
+	//Pārbaude ievadlaukus un nosūta informācju uz back-end tālākām pārbaudēm un izmaiņām
 	onUserFormSubmit(): void {
 		if (this.userForm.valid) {
 			const currentValues: UserInit = {

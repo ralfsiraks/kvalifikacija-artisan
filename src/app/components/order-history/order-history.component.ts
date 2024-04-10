@@ -21,6 +21,7 @@ export class OrderHistoryComponent implements OnInit {
 
 	constructor(private historyService: HistoryService, private toastService: ToastService, private router: Router) {}
 
+	// Iegūst lietotāja pasūtījumus no datubāzes
 	ngOnInit(): void {
 		this.loading = true;
 		this.historyService
@@ -42,6 +43,7 @@ export class OrderHistoryComponent implements OnInit {
 			});
 	}
 
+	// Iegūst visu pasūtījumu cenas
 	getOrderPrices(orders: OrderHistory[]): void {
 		orders.forEach((e) => {
 			let totalPrice: number = 1.45;

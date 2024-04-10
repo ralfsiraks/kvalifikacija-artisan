@@ -18,6 +18,7 @@ export class ToastComponent implements OnInit {
 
 	constructor(private toastService: ToastService) {}
 
+	//
 	ngOnInit(): void {
 		this.toastService.toast.subscribe((toastArray) => {
 			this.icon = toastArray[0];
