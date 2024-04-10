@@ -161,8 +161,8 @@ export class CatalogComponent implements OnInit, OnDestroy, AfterViewInit {
 	onSortChange(sort: string): void {
 		this.sortBy = sort;
 		this.sortByRef.nativeElement.value = sort;
-		this.onChangeRouteParam([`sort`], [this.sortBy]);
-		this.onChangeRouteParam([`page`], [1]);
+		console.log(this.sortBy);
+		this.onChangeRouteParam([`sort`, `page`], [this.sortBy, 1]);
 	}
 
 	onChangeRouteParam(params: string[], value: (string | number)[]): void {
