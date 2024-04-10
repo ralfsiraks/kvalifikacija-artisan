@@ -28,7 +28,7 @@ export class SuccessComponent implements OnInit {
 		private toastService: ToastService
 	) {}
 
-	ngOnInit() {
+	ngOnInit(): void {
 		this.sessionId = this.route.snapshot.queryParams['session'];
 		if (!this.sessionId) {
 			this.router.navigate(['/']);
@@ -37,7 +37,7 @@ export class SuccessComponent implements OnInit {
 		}
 	}
 
-	getSession() {
+	getSession(): void {
 		this.loading = true;
 		this.checkoutService
 			.onGetSession(this.sessionId)

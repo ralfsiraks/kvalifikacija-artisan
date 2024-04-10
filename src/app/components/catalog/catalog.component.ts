@@ -98,7 +98,7 @@ export class CatalogComponent implements OnInit, OnDestroy, AfterViewInit {
 		});
 	}
 
-	onGetCatalog() {
+	onGetCatalog(): void {
 		this.catalogItems = [[], [], [], []];
 		this.loading = true;
 		this.productService
@@ -139,7 +139,7 @@ export class CatalogComponent implements OnInit, OnDestroy, AfterViewInit {
 		this.onChangeRouteParam([`page`], [this.page]);
 	}
 
-	onConfigurePagination(value: Pagination) {
+	onConfigurePagination(value: Pagination): void {
 		this.page = value.current_page;
 		this.lastPage = value.last_page;
 
@@ -162,9 +162,10 @@ export class CatalogComponent implements OnInit, OnDestroy, AfterViewInit {
 		this.sortBy = sort;
 		this.sortByRef.nativeElement.value = sort;
 		this.onChangeRouteParam([`sort`], [this.sortBy]);
+		this.page = 1;
 	}
 
-	onChangeRouteParam(params: string[], value: (string | number)[]) {
+	onChangeRouteParam(params: string[], value: (string | number)[]): void {
 		const currentParams = { ...this.route.snapshot.queryParams };
 		params.forEach((e, index) => {
 			currentParams[e] = value[index];
@@ -176,7 +177,7 @@ export class CatalogComponent implements OnInit, OnDestroy, AfterViewInit {
 		});
 	}
 
-	onDeleteRouteParam(params: string[]) {
+	onDeleteRouteParam(params: string[]): void {
 		const currentParams = { ...this.route.snapshot.queryParams };
 		params.forEach((e) => {
 			delete currentParams[e];
@@ -207,7 +208,7 @@ export class CatalogComponent implements OnInit, OnDestroy, AfterViewInit {
 		}
 	}
 
-	onChangeSize(param: string, input: HTMLInputElement) {
+	onChangeSize(param: string, input: HTMLInputElement): void {
 		const val = input.value;
 
 		if (val === `off`) {

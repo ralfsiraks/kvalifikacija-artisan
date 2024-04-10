@@ -18,7 +18,7 @@ export class ToastComponent implements OnInit {
 
 	constructor(private toastService: ToastService) {}
 
-	ngOnInit() {
+	ngOnInit(): void {
 		this.toastService.toast.subscribe((toastArray) => {
 			this.icon = toastArray[0];
 			this.message = toastArray[1];
@@ -29,7 +29,7 @@ export class ToastComponent implements OnInit {
 		});
 	}
 
-	onPlayAlert() {
+	onPlayAlert(): void {
 		const classes: Array<string> = [...this.toastElement.nativeElement.classList];
 		if (classes.includes(`toast-fade`)) {
 			this.toastElement.nativeElement.classList.add(`text-${this.color}`);

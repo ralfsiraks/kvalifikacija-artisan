@@ -48,7 +48,7 @@ export class UserInfoComponent implements OnInit {
 		this.initValues = { name: data.user_data.name, surname: data.user_data.surname, email: data.email };
 	}
 
-	getUserInfo() {
+	getUserInfo(): void {
 		this.loading = true;
 		this.authService
 			.getUser()
@@ -79,7 +79,7 @@ export class UserInfoComponent implements OnInit {
 			});
 	}
 
-	onUserFormSubmit() {
+	onUserFormSubmit(): void {
 		if (this.userForm.valid) {
 			const currentValues: UserInit = {
 				name: this.userForm.get(`name`).value.trim(),

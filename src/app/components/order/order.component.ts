@@ -43,7 +43,7 @@ export class OrderComponent implements OnInit {
 			});
 	}
 
-	getPrices(order: Order) {
+	getPrices(order: Order): void {
 		let artwork: number = 0;
 
 		order.ordered_products.forEach((e) => {

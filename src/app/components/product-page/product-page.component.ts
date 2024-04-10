@@ -60,7 +60,7 @@ export class ProductPageComponent implements OnInit {
 			});
 	}
 
-	onAddToCart() {
+	onAddToCart(): void {
 		this.cartService.addItem(this.productId);
 	}
 }

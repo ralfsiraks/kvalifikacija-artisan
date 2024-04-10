@@ -38,7 +38,7 @@ export class DeleteModalComponent {
 		}, 400);
 	}
 
-	onDeleteSubmit() {
+	onDeleteSubmit(): void {
 		if (this.deleteForm.valid) {
 			const password = this.deleteForm.get(`password`).value;
 			this.authService

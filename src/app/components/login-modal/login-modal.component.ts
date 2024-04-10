@@ -43,7 +43,7 @@ export class LoginModalComponent implements OnInit {
 		private toastService: ToastService
 	) {}
 
-	ngOnInit() {
+	ngOnInit(): void {
 		this.route.params.subscribe((params) => {
 			this.method = params[`method`];
 		});
