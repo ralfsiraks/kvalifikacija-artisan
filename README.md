@@ -1,5 +1,5 @@
 # Kvalifikācijas projekts
-Hosted: https://kvalifikacija-artisan.vercel.app
+Hosted: https://artisanstore.vercel.app/
 
 # Artisan
 
