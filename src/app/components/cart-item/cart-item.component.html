@@ -1,19 +1,14 @@
-<div
-	[id]="id"
-	#bagItem
-	class="flex flex-col w-full p-6 cursor-pointer hover:bg-dark hover:text-white transition-all duration-200 fade-in"
-	[routerLink]="['/product', id]"
->
+<div [id]="id" #bagItem class="flex flex-col w-full p-6 cursor-pointer hover:bg-dark hover:text-white transition-all duration-200 fade-in" [routerLink]="['/product', id]">
 	<div class="flex w-full justify-between items-start">
-		<div class="flex h-full gap-4">
+		<div class="flex w-full h-full gap-4">
 			<img class="max-w-23vmin max-h-23vmin rounded-lg" [src]="imageUrl" alt="" />
-			<div>
-				<h3 class="font-semibold">{{ artworkName }}</h3>
+			<div class="max-w-xl">
+				<h3 class="font-semibold truncate">{{ artworkName }}</h3>
 				<h3>{{ size }} px</h3>
-				<h3>{{ artistName }}</h3>
+				<h3 class="truncate">{{ artistName }}</h3>
 			</div>
 		</div>
-		<div class="h-full p-2 text-right">
+		<div class="h-full w-full p-2 text-right">
 			<h3 class="font-semibold">${{ price | number : "1.2-2" }}</h3>
 			<h4 class="underline cursor-pointer" (click)="onItemRemove(bagItem, id)">Remove</h4>
 		</div>

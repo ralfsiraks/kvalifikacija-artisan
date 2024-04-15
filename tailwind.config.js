@@ -5,7 +5,7 @@ module.exports = {
 	theme: {
 		extend: {
 			colors: {
-				dark: colors.gray[900],
+				dark: colors.zinc[950],
 			},
 			fontFamily: {
 				crima: ['Crima'],

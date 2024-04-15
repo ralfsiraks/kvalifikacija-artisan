@@ -12,7 +12,7 @@
 
 			<div class="bg-gray-400 w-4/5 h-4/5 rounded-lg mb-10 self-center animate-pulse"></div>
 			} @else {
-			<img class="max-w-lg w-full object-contain mb-10 self-center fade-in" [src]="imageUrl" alt="" />
+			<img class="max-w-lg w-full object-contain mb-10 self-center fade-in shadow-xl" [src]="imageUrl" alt="" />
 			<h3 class="font-semibold mb-4 fade-in">Description:</h3>
 			<h4 class="fade-in">{{ desc }}</h4>
 			}
@@ -45,26 +45,20 @@
 				class="border-2 border-dark rounded-lg h-5vmin p-3 my-8 w-full text-2xl font-semibold flex gap-4 justify-center items-center group hover:bg-dark transition-colors duration-200"
 			>
 				<span class="group-hover:text-white transition-colors duration-200">Add to cart</span>
-				<span
-					class="material-symbols-outlined text-3xl group-hover:text-white group-hover:translate-x-2 transition-all duration-200"
-				>
-					shopping_cart
-				</span>
+				<span class="material-symbols-outlined text-3xl group-hover:text-white group-hover:translate-x-2 transition-all duration-200"> shopping_cart </span>
 			</button>
 			<hr />
 			<div class="flex flex-col py-5">
 				<h3 class="font-semibold mb-4">Delivery:</h3>
 				<p class="text-lg">
-					Instant digital delivery - you will receive your item in your email inbox as soon as the purchase is completed
-					succesffuly. Make sure to check your spam folders if needed!
+					Instant digital delivery - you will receive your item in your email inbox as soon as the purchase is completed succesffuly. Make sure to check your spam folders if needed!
 				</p>
 			</div>
 			<hr />
 			<div class="flex flex-col py-5">
 				<h3 class="font-semibold mb-4">Returns and refunds:</h3>
 				<p class="text-lg">
-					Since all items are digital, to prevent fraudulent purchases, refunds are not possible. Please be sure to
-					double check before making a purchase if needed!<br />
+					Since all items are digital, to prevent fraudulent purchases, refunds are not possible. Please be sure to double check before making a purchase if needed!<br />
 					If however, you're having trouble getting to your purchased items please be sure to contact our
 					<a class="underline" routerLink="/help">support</a> and they will quickly assist you!
 				</p>

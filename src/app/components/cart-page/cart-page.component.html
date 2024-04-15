@@ -7,6 +7,7 @@
 			<app-cart-skeleton></app-cart-skeleton>
 			} } @for (item of cartItems; track $index) {
 			<app-cart-item
+				class="w-full"
 				[id]="item.id"
 				[imageUrl]="item.image_url"
 				[artworkName]="item.title"
@@ -31,8 +32,7 @@
 				<div class="w-full flex justify-between font-semibold">
 					<h3>Total</h3>
 					<h3>
-						<span class="line-through decoration-2 text-zinc-600 m-1 text-base" [class.hidden]="!discountedPrice"
-							>${{ total | number : "1.2-2" }}</span
+						<span class="line-through decoration-2 text-zinc-600 m-1 text-base" [class.hidden]="!discountedPrice">${{ total | number : "1.2-2" }}</span
 						>${{ discountedPrice || total | number : "1.2-2" }}
 					</h3>
 				</div>
@@ -43,29 +43,11 @@
 				class="border-2 border-dark rounded-lg h-5vmin p-3 w-full text-2xl font-semibold flex justify-center items-center group hover:bg-dark transition-colors duration-200"
 			>
 				<span class="group-hover:text-white transition-colors duration-200">Checkout</span>
-				<span
-					class="material-symbols-outlined text-4xl group-hover:text-white group-hover:translate-x-2 transition-all duration-200"
-				>
-					trending_flat
-				</span>
+				<span class="material-symbols-outlined text-4xl group-hover:text-white group-hover:translate-x-2 transition-all duration-200"> trending_flat </span>
 			</button>
-			<form
-				(ngSubmit)="onDiscountCodeSubmit()"
-				[formGroup]="discountCodeForm"
-				class="border-2 border-dark rounded-lg w-full h-5vmin flex justify-between items-center p-3"
-			>
-				<input
-					formControlName="code"
-					placeholder="Discount code"
-					class="bg-transparent focus:outline-none w-full font-semibold"
-					type="text"
-				/>
-				<button
-					class="material-symbols-outlined text-4xl group-hover:text-white hover:translate-x-2 transition-all duration-200 outline-4"
-					type="submit"
-				>
-					trending_flat
-				</button>
+			<form (ngSubmit)="onDiscountCodeSubmit()" [formGroup]="discountCodeForm" class="border-2 border-dark rounded-lg w-full h-5vmin flex justify-between items-center p-3">
+				<input formControlName="code" placeholder="Discount code" class="bg-transparent focus:outline-none w-full font-semibold" type="text" />
+				<button class="material-symbols-outlined text-4xl group-hover:text-white hover:translate-x-2 transition-all duration-200 outline-4" type="submit">trending_flat</button>
 			</form>
 		</div>
 	</div>

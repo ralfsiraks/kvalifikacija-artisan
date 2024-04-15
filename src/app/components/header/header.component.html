@@ -1,10 +1,6 @@
 <header class="px-sides mb-8 bg-white/90 backdrop-blur-sm bottom-shadow">
-	<div
-		class="w-full flex justify-evenly grid-cols-16 grid-rows-1 items-center justify-items-center p-1 gap-4 rounded-2xl"
-	>
-		<h1 class="font-crima text-5xl text-dark select-none cursor-pointer col-span-4 translate-y-1.5" routerLink="/">
-			ARTISAN
-		</h1>
+	<div class="w-full flex justify-evenly grid-cols-16 grid-rows-1 items-center justify-items-center p-1 gap-4 rounded-2xl">
+		<h1 class="font-crima text-5xl text-dark select-none cursor-pointer col-span-4 translate-y-1.5" routerLink="/">ARTISAN</h1>
 		<a
 			[routerLink]="['/catalog']"
 			[queryParams]="{ category: 'all', page: '1', sort: 'id_desc' }"
@@ -13,15 +9,8 @@
 		>
 		<form (ngSubmit)="onSearchSubmit()" [formGroup]="searchForm">
 			<div class="flex items-center gap-1 col-span-6">
-				<input
-					formControlName="search"
-					type="text"
-					class="border-dark text-dark border-2 opacity-50 focus:opacity-100 rounded-md h-10 w-96 p-3 transition-all duration-300"
-					placeholder="Search"
-				/>
-				<button class="material-symbols-outlined black-text-shadow duration-200 text-dark text-3xl" type="submit">
-					search
-				</button>
+				<input formControlName="search" type="text" class="border-dark text-dark border-2 opacity-50 focus:opacity-100 rounded-md h-10 w-96 p-3 transition-all duration-300" placeholder="Search" />
+				<button class="material-symbols-outlined black-text-shadow duration-200 text-dark text-3xl" type="submit">search</button>
 			</div>
 		</form>
 		<div class="font-bold col-span-3 text-dark text-xl">
@@ -29,43 +18,22 @@
 			<div class="flex items-center gap-4">
 				<h4 class="text-xl truncate max-w-xs">{{ userName }} {{ userSurname }}</h4>
 
-				<span
-					routerLink="/user/profile"
-					class="material-symbols-outlined black-text-shadow duration-200 text-dark text-3xl"
-				>
-					account_circle
-				</span>
+				<span routerLink="/user/profile" class="material-symbols-outlined black-text-shadow duration-200 text-dark text-3xl"> account_circle </span>
 
 				<a class="hover-underline after:bg-dark" (click)="onLogOut()">Logout</a>
 			</div>
 			} @else {
 			<span class="whitespace-nowrap font-semibold">
-				<a
-					class="font-bold duration-200 hover-underline after:bg-dark"
-					[routerLink]="['/', { outlets: { modals: ['auth', 'login'] } }]"
-					>LOGIN</a
-				>
+				<a class="font-bold duration-200 hover-underline after:bg-dark" [routerLink]="['/', { outlets: { modals: ['auth', 'login'] } }]">LOGIN</a>
 				OR
-				<a
-					class="font-bold duration-200 hover-underline after:bg-dark"
-					[routerLink]="['/', { outlets: { modals: ['auth', 'register'] } }]"
-					>REGISTER</a
-				></span
+				<a class="font-bold duration-200 hover-underline after:bg-dark" [routerLink]="['/', { outlets: { modals: ['auth', 'register'] } }]">REGISTER</a></span
 			>
 			}
 		</div>
 		<div class="relative">
-			<span
-				class="material-symbols-outlined black-text-shadow duration-200 text-dark text-3xl translate-y-0.5"
-				routerLink="/cart"
-			>
-				shopping_cart
-			</span>
+			<span class="material-symbols-outlined black-text-shadow duration-200 text-dark text-3xl translate-y-0.5" routerLink="/cart"> shopping_cart </span>
 			@if (cartCount > 0 ) {
-			<span
-				class="absolute -top-1 -right-2 bg-dark text-white rounded-full w-5 h-5 flex items-center justify-center text-xs fade-in"
-				>{{ cartCount }}</span
-			>
+			<span class="absolute -top-1 -right-2 bg-dark text-white rounded-full w-5 h-5 flex items-center justify-center text-xs fade-in">{{ cartCount }}</span>
 			}
 		</div>
 	</div>
