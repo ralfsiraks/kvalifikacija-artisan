@@ -7,18 +7,18 @@
 			<a
 				[routerLink]="['/catalog']"
 				[queryParams]="{ category: 'all', page: '1', sort: 'id_desc' }"
-				class="font-bold col-span-2 duration-200 rounded-xl px-4 py-4 text-dark hover:bg-zinc-300 text-xl whitespace-nowrap"
+				class="font-bold duration-200 rounded-xl px-4 py-4 text-dark hover:bg-zinc-300 text-xl whitespace-nowrap"
 				>All Products</a
 			>
 		</div>
 		<form (ngSubmit)="onSearchSubmit()" [formGroup]="searchForm" class="w-full flex justify-center">
-			<div class="flex items-center gap-1 col-span-6">
+			<div class="flex items-center gap-1">
 				<input formControlName="search" type="text" class="border-dark text-dark border-2 opacity-50 focus:opacity-100 rounded-md h-10 w-96 p-3 transition-all duration-300" placeholder="Search" />
 				<button class="material-symbols-outlined black-text-shadow duration-200 text-dark text-3xl" type="submit">search</button>
 			</div>
 		</form>
 		<div class="w-full flex justify-between items-center">
-			<div class="font-bold col-span-3 text-dark text-xl pl-20">
+			<div class="font-bold text-dark text-xl pl-20">
 				@if (token) {
 				<div class="flex items-center gap-4">
 					<h4 class="text-xl truncate max-w-xs">{{ userName }} {{ userSurname }}</h4>
@@ -35,7 +35,7 @@
 				>
 				}
 			</div>
-			<div routerLink="/cart" class="hover:bg-zinc-300 px-5 py-3 rounded-xl cursor-pointer duration-200 flex justify-end">
+			<div routerLink="/cart" class="hover:bg-zinc-300 px-5 py-3 rounded-xl cursor-pointer duration-200 flex items-center justify-end">
 				<div class="relative">
 					<span class="material-symbols-outlined black-text-shadow duration-200 text-dark text-3xl translate-y-0.5"> shopping_cart </span>
 					@if (cartCount > 0 ) {
