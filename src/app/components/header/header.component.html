@@ -1,13 +1,10 @@
-<header class="px-sides mb-8 bg-transparent fade-in">
+<header class="px-sides w-full mb-8 bg-transparent fade-in">
 	<div class="w-full bg-white/90 backdrop-blur-sm shadow-md flex justify-between items-center p-0.5 gap-4 rounded-2xl overflow-hidden">
 		<div class="w-full flex justify-between">
 			<div class="pl-8 py-3">
-				<img src="../../../assets/pictures/ARTISAN.png" routerLink="/" class="w-48 cursor-pointer" alt="" />
+				<img src="../../../assets/pictures/ARTISAN.png" routerLink="/" class="w-32 cursor-pointer select-none" alt="" />
 			</div>
-			<a
-				[routerLink]="['/catalog']"
-				[queryParams]="{ category: 'all', page: '1', sort: 'id_desc' }"
-				class="font-bold duration-200 rounded-xl px-4 py-4 text-dark hover:bg-zinc-300 text-xl whitespace-nowrap"
+			<a [routerLink]="['/catalog']" [queryParams]="{ category: 'all', page: '1', sort: 'id_desc' }" class="font-bold duration-200 rounded-xl px-4 py-4 text-dark hover:bg-zinc-300 whitespace-nowrap"
 				>All Products</a
 			>
 		</div>
@@ -18,10 +15,10 @@
 			</div>
 		</form>
 		<div class="w-full flex justify-between items-center">
-			<div class="font-bold text-dark text-xl pl-20">
+			<div class="font-bold text-dark pl-20">
 				@if (token) {
 				<div class="flex items-center gap-4">
-					<h4 class="text-xl truncate max-w-xs">{{ userName }} {{ userSurname }}</h4>
+					<h4 class="truncate max-w-xs">{{ userName }} {{ userSurname }}</h4>
 					<div routerLink="/user/profile" class="hover:bg-zinc-300 px-4 py-3 rounded-xl flex items-center justify-center cursor-pointer duration-200">
 						<span class="material-symbols-outlined black-text-shadow duration-200 text-dark text-3xl"> account_circle </span>
 					</div>
@@ -37,9 +34,9 @@
 			</div>
 			<div routerLink="/cart" class="hover:bg-zinc-300 px-5 py-3 rounded-xl cursor-pointer duration-200 flex items-center justify-end">
 				<div class="relative">
-					<span class="material-symbols-outlined black-text-shadow duration-200 text-dark text-3xl translate-y-0.5"> shopping_cart </span>
+					<span class="material-symbols-outlined black-text-shadow duration-200 text-dark text-2xl translate-y-0.5"> shopping_cart </span>
 					@if (cartCount > 0 ) {
-					<span class="absolute -top-1 -right-2 bg-dark text-white rounded-full w-5 h-5 flex items-center justify-center text-xs fade-in">{{ cartCount }}</span>
+					<span class="absolute -top-1 -right-2 bg-dark text-white rounded-full w-4 h-4 flex items-center justify-center text-xxs fade-in">{{ cartCount }}</span>
 					}
 				</div>
 			</div>
