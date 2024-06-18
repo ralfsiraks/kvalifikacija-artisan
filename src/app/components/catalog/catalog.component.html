@@ -114,6 +114,17 @@
 				</label>
 			</div>
 		</div>
+		<hr />
+		<div class="flex flex-col p-4 w-full">
+			<input #uncheckw type="radio" id="uncheckw" name="width" value="off" class="hidden peer/uncheckw" />
+			<div class="flex justify-between items-center w-full mb-4">
+				<h2 class="font-medium">Sizing guide</h2>
+			</div>
+
+			<div class="flex w-full justify-around items-end gap-6 font-medium">
+				<p class="text-left w-full"><strong>S:</strong> <=1200 <br /><strong>M:</strong> 1200-2400<br /><strong> L:</strong> 2400-3600<br /><strong>XL: </strong>>=3600</p>
+			</div>
+		</div>
 	</div>
 	<div class="flex flex-col items-center gap-10 w-full">
 		@if(loading) {
