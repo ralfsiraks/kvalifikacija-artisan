@@ -1,9 +1,6 @@
 <div class="flex flex-col w-full">
 	@if (order && !loading) { @for (item of order.ordered_products; track $index) {
-	<div
-		[routerLink]="['/product', item.product_id]"
-		class="flex justify-between items-center w-full gap-4 p-6 cursor-pointer hover:bg-dark hover:text-white transition-all duration-200 fade-in"
-	>
+	<div [routerLink]="['/product', item.product_id]" class="flex justify-between items-center w-full gap-4 p-6 cursor-pointer hover:bg-dark hover:text-white transition-all duration-200 fade-in">
 		<div class="flex gap-4">
 			<img class="max-w-20vmin max-h-15vmin rounded-lg" [src]="item.product.image_url" alt="" />
 			<div class="flex flex-col h-full">
